@@ -10,21 +10,10 @@ public class TestController {
 	@RequestMapping(value = "/test")
 	public ModelAndView test() {
 		
-		Abc abc = new Abc();
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("test");
-		mav.addObject("sex", abc);
 		
 		return mav;
-	}
-	
-	class Abc {
-		String s = "sex2";
-		
-		public String getS() {
-			return this.s;
-		}
 	}
 	
 }
