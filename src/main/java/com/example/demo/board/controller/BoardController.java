@@ -10,6 +10,6 @@ public class BoardController {
 	@RequestMapping(value = "board")
 	public String goFreeBoard() {
 		
-		return "";
+		return "board/free_board";
 	}
 }
