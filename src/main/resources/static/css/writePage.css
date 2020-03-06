@@ -1,0 +1,20 @@
+.col-sm-8{
+  padding-left: 10%;
+  padding-right: 10%;
+  width: 100%;
+}
+.blog-single-post{
+  padding-left: 10%;
+  padding-right: 10%;
+  
+  /* margin-left: 5%;
+  margin-right: 5%; */
+}
+
+#content{
+  padding: 10px;
+}
+
+#save-btn{
+  text-align: center;
+}
