@@ -1,0 +1,29 @@
+.section .container:first-child h1{
+  display: inline;
+}
+
+.post-more {
+  text-align: right;
+  padding: 0;
+  /* display: inline; */
+}
+
+.col-md-12 > a{
+  position: absolute;
+  right: 5%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  */
