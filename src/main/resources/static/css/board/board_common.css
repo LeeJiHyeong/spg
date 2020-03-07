@@ -1,0 +1,26 @@
+.post_wrap {
+	min-height:55vh;
+}
+
+.post_list {
+	width: 100%;
+}
+
+.post_list th {
+	font-size: 1.2em;
+	text-align: left;
+	padding: 10px 0;
+}
+.post_list td {
+	padding: 5px 20px 5px 0;
+	border-top: 1px solid #E6E6E6;
+}
+.post_list tr:last-child td {
+	border-bottom: 1px solid #E6E6E6;
+}
+
+.footer_container {
+	left:0px; 
+	bottom:0px; 
+	width:100%
+}

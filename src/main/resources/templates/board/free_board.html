@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -10,8 +11,9 @@
         <link rel="stylesheet" href="css/icomoon-social.css">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
 
-        <link rel="stylesheet" href="css/leaflet.css" />
+        <link rel="stylesheet" href="css/leaflet.css">
 		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/board/board_common.css">
 
         <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
@@ -128,7 +130,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<h1>Open Vacancies</h1>
+						<h1>자유게시판</h1>
 					</div>
 				</div>
 			</div>
@@ -138,101 +140,31 @@
 	    	<div class="container">
 	    		<div class="row">
 	    			<!-- Open Vacancies List -->
-	    			<div class="col-md-8">
-	    				<table class="jobs-list">
+	    			<div class="post_wrap">
+	    				<table class="post_list">
 	    					<tr>
-	    						<th>Position</th>
-	    						<th>Location</th>
-	    						<th>Type</th>
+	    						<th>No</th>
+	    						<th>제목</th>
+	    						<th>작성자</th>
+	    						<th>작성일</th>
+	    						<th>조회</th>
 	    					</tr>
 	    					<tr>
-	    						<!-- Position -->
-	    						<td class="job-position">
-	    							<a href="page-job-details.html">Front End Developer</a> <span class="label label-danger">New</span>
-	    						</td>
-	    						<!-- Location -->
-	    						<td class="job-location">
-	    							<div class="job-country">United Kingdom</div>
-	    							<div class="job-city">London</div>
-	    						</td>
-	    						<!-- Job Type -->
-	    						<td class="job-type hidden-phone">FULL-TIME</td>
-	    					</tr>
-	    					<tr>
-	    						<td class="job-position">
-	    							<a href="page-job-details.html">Back-end Developer</a> <span class="label label-danger">New</span>
-	    						</td>
-	    						<td class="job-location">
-	    							<div class="job-country">United Kingdom</div>
-	    							<div class="job-city">Manchester</div>
-	    						</td>
-	    						<td class="job-type hidden-phone">PART-TIME</td>
-	    					</tr>
-	    					<tr>
-	    						<td class="job-position">
-	    							<a href="page-job-details.html">Creative Director</a>
-	    						</td>
-	    						<td class="job-location">
-	    							<div class="job-country">United Kingdom</div>
-	    							<div class="job-city">Manchester</div>
-	    						</td>
-	    						<td class="job-type hidden-phone">PART-TIME</td>
-	    					</tr>
-	    					<tr>
-	    						<td class="job-position">
-	    							<a href="page-job-details.html">Interactive Developer</a> <span class="label label-danger">New</span>
-	    						</td>
-	    						<td class="job-location">
-	    							<div class="job-country">United Kingdom</div>
-	    							<div class="job-city">Manchester</div>
-	    						</td>
-	    						<td class="job-type hidden-phone">PART-TIME</td>
-	    					</tr>
-	    					<tr>
-	    						<td class="job-position">
-	    							<a href="page-job-details.html">Lead Designer</a>
-	    						</td>
-	    						<td class="job-location">
-	    							<div class="job-country">United Kingdom</div>
-	    							<div class="job-city">Manchester</div>
-	    						</td>
-	    						<td class="job-type hidden-phone">PART-TIME</td>
-	    					</tr>
-	    					<tr>
-	    						<td class="job-position">
-	    							<a href="page-job-details.html">Ruby on Rails Developer</a>
-	    						</td>
-	    						<td class="job-location">
-	    							<div class="job-country">United Kingdom</div>
-	    							<div class="job-city">Manchester</div>
-	    						</td>
-	    						<td class="job-type hidden-phone">PART-TIME</td>
+	    						<!-- No -->
+	    						<!-- <td class="job-position"> -->
+	    						<td class="job-position">1</td>
+	    						<!-- 제목 -->
+	    						<td class="job-position">최대 몇글자 까지 들어갈것인가</td>
+	    						<!-- 작성자 -->
+	    						<td class="job-position">권오범</td>
+	    						<!-- 작성일 -->
+	    						<td class="job-position">2020.01.01</td>
+	    						<!-- 조회 -->
+	    						<td class="job-position">123</td>
 	    					</tr>
 	    				</table>
 	    			</div>
 	    			<!-- End Open Vacancies List -->
-	    			<!-- Sidebar -->
-	    			<div class="col-md-4 col-sm-6">
-	    				<div class="join-us-promo">
-	    					<!-- Quote -->
-							<div class="join-us-bubble">
-								<blockquote>
-									<p class="quote">
-			                            "You are very welcome in our team! Ut enim ad minim veniam, quis nostrud exercitation."
-	                        		</p>
-	                        		<cite class="author-info">
-	                        			- Name Surname,<br>Managing Director
-	                        		</cite>
-	                        	</blockquote>
-	                        	<div class="sprite arrow-speech-bubble"></div>
-	                        </div>
-	                        <!-- Team Member Photo -->
-	                        <div class="author-photo">
-								<img src="img/user2.jpg" alt="Name Surname">
-							</div>
-	    				</div>
-	    			</div>
-	    			<!-- End Sidebar -->
 	    		</div>
 			</div>
 		</div>
