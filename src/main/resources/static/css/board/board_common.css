@@ -1,3 +1,6 @@
+.temp {
+	background-color: white;
+}
 .post_wrap {
 	min-height:45vh;
 }
@@ -26,7 +29,7 @@
 }
 
 /* Paging */	
-.paging{padding:15px;text-aligdn:center;}
+.paging{padding:15px;text-align:center;}
 
 .paging a{display:inline-block;width:23px;height:23px;padding-top:2px;vertical-align:middle;}
 
@@ -69,3 +72,4 @@
 	position: relative;
 	text-align: right;
 }
+
