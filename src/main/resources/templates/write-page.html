@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>SPG_Gallery</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/icomoon-social.css">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="css/leaflet.css" />
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/writePage.css">
+
+  <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
+<body>
+
+  <div class="mainmenu-wrapper">
+    <div class="container">
+      <div class="menuextras">
+        <div class="extras">
+          <ul>
+            <li class="shopping-cart-items"><i class="glyphicon glyphicon-shopping-cart icon-white"></i> <a href="page-shopping-cart.html"><b>3 items</b></a></li>
+            <li>
+              <div class="dropdown choose-country">
+                <a class="#" data-toggle="dropdown" href="#"><img src="img/flags/gb.png" alt="Great Britain"> UK</a>
+                <ul class="dropdown-menu" role="menu">
+                  <li role="menuitem"><a href="#"><img src="img/flags/us.png" alt="United States"> US</a></li>
+                  <li role="menuitem"><a href="#"><img src="img/flags/de.png" alt="Germany"> DE</a></li>
+                  <li role="menuitem"><a href="#"><img src="img/flags/es.png" alt="Spain"> ES</a></li>
+                </ul>
+              </div>
+            </li>
+            <li><a href="page-login.html">Login</a></li>
+          </ul>
+        </div>
+      </div>
+      <nav id="mainmenu" class="mainmenu">
+        <ul>
+          <li class="logo-wrapper"><a href="index.html"><img src="img/mPurpose-logo.png" alt="Multipurpose Twitter Bootstrap Template"></a></li>
+          <li class="active">
+            <a href="index.html">소개</a>
+          </li>
+          <li>
+            <a href="features.html">자유개시판</a>
+          </li>
+          <li class="has-submenu">
+            <a href="#">교육자료</a>
+            <!-- <ul>
+            <li class='has-sub'><a href='#'>지란지교 예약</a>
+          </li>
+          <li class='has-sub'><a href='classreserv.html'>강의실 예약</a>
+        </li>
+      </ul> -->
+    </li>
+    <li>
+      <a href="credits.html">스터디</a>
+    </li>
+    <li>
+      <a href="credits.html">비밀족보</a>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+
+<!-- Post -->
+<div class="col-sm-8">
+  <div class="blog-post blog-single-post">
+    <h1>앙 갸꿀</h1>
+    <hr>
+    <div class="single-post-title">
+      <!-- <h3>Post Title</h3> -->
+      <b>★Title</b>
+      <input type="text" class="form-control" placeholder="글 제목을 입력하세요.">
+    </div>
+    <hr>
+    <input type="file">
+    <br>
+    <div class="form-group">
+      <label for="comment-name"><i class="glyphicon glyphicon-user"></i> <b>Your name</b></label>
+      <input class="form-control" id="comment-name" type="text" placeholder="">
+    </div>
+    <div class="form-group">
+      <label for="comment-message"><i class="glyphicon glyphicon-comment"></i> <b>Content</b></label>
+      <textarea class="form-control" rows="20" id="comment-message"></textarea>
+    </div>
+
+    <div class="post-more" id="save-btn">
+      <a href="page-blog-posts.html" class="btn btn-small"> 저어어어장 </a>
+    </div>
+
+  </div>
+</div>
+<!-- End Post -->
+
+</body>
+</html>

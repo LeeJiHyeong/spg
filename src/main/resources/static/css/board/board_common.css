@@ -1,0 +1,75 @@
+.temp {
+	background-color: white;
+}
+.post_wrap {
+	min-height:45vh;
+}
+
+.post_list {
+	width: 100%;
+}
+
+.post_list th {
+	font-size: 1.2em;
+	text-align: left;
+	padding: 10px 0;
+}
+.post_list td {
+	padding: 5px 20px 5px 0;
+	border-top: 1px solid #E6E6E6;
+}
+.post_list tr:last-child td {
+	border-bottom: 1px solid #E6E6E6;
+}
+
+.footer_container {
+	left:0px; 
+	bottom:0px; 
+	width:100%
+}
+
+/* Paging */	
+.paging{padding:15px;text-align:center;}
+
+.paging a{display:inline-block;width:23px;height:23px;padding-top:2px;vertical-align:middle;}
+
+.paging a:hover{text-decoration:underline;}
+
+.paging .btn_arr{text-decoration:none;}
+
+.paging .btn_arr, .paging .on{margin:0 3px;padding-top:0;border:1px solid #ddd;}
+
+/* Search */
+.search {
+	text-align:center;	
+}
+
+.search_text {
+	border: 1px solid #4f8db3;
+	-webkit-border-radius: 2px;
+	-webkit-background-clip: padding-box;
+	-moz-border-radius: 2px;
+	-moz-background-clip: padding;
+	border-radius: 2px;
+	background-clip: padding-box;
+	display: inline-block;
+	text-transform: none;
+	-webkit-transition: all .25s ease;
+	-moz-transition: all .25s ease;
+	-o-transition: all .25s ease;
+	-ms-transition: all .25s ease;
+	transition: all .25s ease;
+	text-align: center;
+	text-shadow: none;
+	box-shadow: none;
+	white-space: nowrap;
+	font-size: 1.5rem;
+	height: 2.95rem;
+}
+
+.write_button {
+	padding: 5px;
+	position: relative;
+	text-align: right;
+}
+

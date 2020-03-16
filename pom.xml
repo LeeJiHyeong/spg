@@ -53,6 +53,7 @@
             <artifactId>jquery</artifactId>
             <version>3.3.1</version>
         </dependency>
+        
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -66,6 +67,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+        
         <!-- hibernate jpa -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

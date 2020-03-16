@@ -2,7 +2,8 @@
 	General Style
 --------------------------------------------------------------------------*/
 body {
-  background: url(../img/page-background.png);
+  /* background: url(../img/page-background.png); */
+  background-color: white;
 }
 .section {
   padding: 30px 0;
