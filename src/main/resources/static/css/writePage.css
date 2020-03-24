@@ -18,3 +18,7 @@
 #save-btn{
   text-align: center;
 }
+
+input[type="text"]:disabled {
+  background: white;
+}

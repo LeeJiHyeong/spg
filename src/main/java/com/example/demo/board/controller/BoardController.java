@@ -13,6 +13,12 @@ public class BoardController {
 		return "board/free_board";
 	}
 	
+	@RequestMapping(value = "go_board_detail")
+	public String goFreeBoardDetail() {
+		
+		return "/board/free_board_detail";
+	}
+	
 	// 교육게시판
 	@RequestMapping(value = "go_edu_board")
 	public String goEducationBoard() {
