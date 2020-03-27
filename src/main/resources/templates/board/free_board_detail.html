@@ -154,10 +154,38 @@
 						<label for="comment-message"><i class="glyphicon glyphicon-comment"></i> <b>Content</b></label>
 						<textarea class="form-control" rows="20" id="comment-message" disabled="disabled">내용내용내용</textarea>
 					</div>
-					<div class="post-more" id="save-btn">
-					<a href="page-blog-posts.html" class="btn btn-small"> 저어어어장 </a>
+					<!-- comment -->
+					<div id="form-commentInfo"> 
+						<div id="comment-count">댓글 <span id="count">0</span></div>
+						<input id="comment-input" type="text" placeholder="댓글을 입력해 주세요.">
+						<div class="right_button">
+							<input type="button" class="btn" value="등록" id="comment_submit">
+						</div>
+					</div> 
+					<div id=comments> 
+						<div class="eachComment">
+							<div class="name">
+								<span>포마드권오범</span>
+								<input type="button" class="btn" value="삭제" style="background: none repeat scroll 0 0 #DA1111;">
+							</div>
+							<div class="inputValue">
+								<span>댓글내용</span>
+							</div>
+						</div>
+						<div class="eachComment">
+							<div class="name">
+								<span>포마드신동환</span>
+								<input type="button" class="btn" value="삭제" style="background: none repeat scroll 0 0 #DA1111;">
+							</div>
+							<div class="inputValue">
+								<span>댓글내용</span>
+							</div>
+						</div>
 					</div>
 	        	</div>
+	        	<div class="right_button">
+					<a href="page-blog-posts.html" class="btn"> 목록 </a>
+				</div>
 	        </div>
 	    </div>
 	    <!-- Footer -->

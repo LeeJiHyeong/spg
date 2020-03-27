@@ -1,24 +1,25 @@
 .col-sm-8{
-  padding-left: 10%;
-  padding-right: 10%;
-  width: 100%;
+	padding-left: 10%;
+	padding-right: 10%;
+	width: 100%;
 }
 .blog-single-post{
-  padding-left: 10%;
-  padding-right: 10%;
-  
-  /* margin-left: 5%;
-  margin-right: 5%; */
+	padding-left: 10%;
+	padding-right: 10%;
+	
+	/* margin-left: 5%;
+	margin-right: 5%; */
 }
 
 #content{
-  padding: 10px;
+	padding: 10px;
 }
 
 #save-btn{
-  text-align: center;
+	text-align: center;
 }
 
 input[type="text"]:disabled {
-  background: white;
+	background: white;
 }
+
