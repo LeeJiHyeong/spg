@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>SPG_Gallery</title>
+  <title>SPG - 게시글 작성</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
 
@@ -24,17 +24,6 @@
       <div class="menuextras">
         <div class="extras">
           <ul>
-            <li class="shopping-cart-items"><i class="glyphicon glyphicon-shopping-cart icon-white"></i> <a href="page-shopping-cart.html"><b>3 items</b></a></li>
-            <li>
-              <div class="dropdown choose-country">
-                <a class="#" data-toggle="dropdown" href="#"><img src="img/flags/gb.png" alt="Great Britain"> UK</a>
-                <ul class="dropdown-menu" role="menu">
-                  <li role="menuitem"><a href="#"><img src="img/flags/us.png" alt="United States"> US</a></li>
-                  <li role="menuitem"><a href="#"><img src="img/flags/de.png" alt="Germany"> DE</a></li>
-                  <li role="menuitem"><a href="#"><img src="img/flags/es.png" alt="Spain"> ES</a></li>
-                </ul>
-              </div>
-            </li>
             <li><a href="page-login.html">Login</a></li>
           </ul>
         </div>
@@ -46,7 +35,7 @@
             <a href="index.html">소개</a>
           </li>
           <li>
-            <a href="features.html">자유개시판</a>
+            <a href="features.html">자유게시판</a>
           </li>
           <li class="has-submenu">
             <a href="#">교육자료</a>
@@ -67,36 +56,37 @@
 </nav>
 </div>
 </div>
-
-<!-- Post -->
-<div class="col-sm-8">
-  <div class="blog-post blog-single-post">
-    <h1>앙 갸꿀</h1>
-    <hr>
-    <div class="single-post-title">
-      <!-- <h3>Post Title</h3> -->
-      <b>★Title</b>
-      <input type="text" class="form-control" placeholder="글 제목을 입력하세요.">
-    </div>
-    <hr>
-    <input type="file">
-    <br>
-    <div class="form-group">
-      <label for="comment-name"><i class="glyphicon glyphicon-user"></i> <b>Your name</b></label>
-      <input class="form-control" id="comment-name" type="text" placeholder="">
-    </div>
-    <div class="form-group">
-      <label for="comment-message"><i class="glyphicon glyphicon-comment"></i> <b>Content</b></label>
-      <textarea class="form-control" rows="20" id="comment-message"></textarea>
-    </div>
-
-    <div class="post-more" id="save-btn">
-      <a href="page-blog-posts.html" class="btn btn-small"> 저어어어장 </a>
-    </div>
-
-  </div>
-</div>
-<!-- End Post -->
+	<form action="@{/do_write}" method="post">
+		<!-- Post -->
+		<div class="col-sm-8">
+		  <div class="blog-post blog-single-post">
+		    <h1>게시글 작성</h1>
+		    <hr>
+		    <!-- 글작성 데이터 -->
+		    <div class="single-post-title">
+		      <b>★Title</b>
+		      <input type="text" name="contentTitle" class="form-control" placeholder="글 제목을 입력하세요.">
+		    </div>
+		    <hr>
+		    <input type="file">
+		    <br>
+		    <div class="form-group">
+		      <label for="comment-name"><i class="glyphicon glyphicon-user"></i> <b>Your name</b></label>
+		      <input class="form-control" id="content_writer" type="text" placeholder="" th:value="${content_writer}" readonly="readonly">
+		    </div>
+		    <div class="form-group">
+		      <label for="comment-message"><i class="glyphicon glyphicon-comment"></i> <b>Content</b></label>
+		      <textarea class="form-control" name="contents" rows="20" id="comment-message"></textarea>
+		    </div>
+		
+		    <div class="post-more" id="save-btn">
+		      <a href="page-blog-posts.html" class="btn btn-small"> 저장 </a>
+		    </div>
+		    <!-- 글작성 데이터 끝-->
+		  </div>
+		</div>
+	</form>
+	<!-- End Post -->
 
 </body>
 </html>

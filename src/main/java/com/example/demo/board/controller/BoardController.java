@@ -1,10 +1,16 @@
 package com.example.demo.board.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.method.annotation.ModelMethodProcessor;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class BoardController {
+	
+	private Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	// 자유게시판
 	@RequestMapping(value = "go_board")
@@ -42,8 +48,21 @@ public class BoardController {
 	
 	// 글작성
 	@RequestMapping(value = "go_write")
-	public String goWrite() {
+	public ModelAndView goWrite() {
 		
-		return "write-page";
+		String contentWriter = "서강준"; // 임시 작성자 데이터, 로그인 세션에서 데이터 따와야함
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("write-page");
+		mav.addObject("content_writer", contentWriter);
+
+		return mav;
+	}
+	
+	@RequestMapping(value="do_write")
+	public String doWrite() {
+		logger.info("*** 게시글 저장 프로세스");
+		
+		return "#";
 	}
 }
