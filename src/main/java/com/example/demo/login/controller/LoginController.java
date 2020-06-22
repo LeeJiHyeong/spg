@@ -11,22 +11,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/login")
 public class LoginController {
 	
 	private Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
-	@RequestMapping(value = "login_test")
+	@RequestMapping(value = "SignInPage")
 	public String goTestLogin() {
 		
-		return "login_test.html";
+		return "login-test.html";
 	}
 	
-	@RequestMapping(value = "do_login_test", method=RequestMethod.POST)
+	@RequestMapping(value = "authenticateTheUser", method=RequestMethod.POST)
 	public String doTestLogin(@RequestParam("user_id") String userId, @RequestParam("user_password") String userPwd) {
 
 		logger.info("*** test id : " + userId);
 		logger.info("*** test pwd : " + userPwd);
 		
-		return "login_test.html";
+		return "login-test.html";
 	}
 }
