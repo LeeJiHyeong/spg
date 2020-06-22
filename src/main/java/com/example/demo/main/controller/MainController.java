@@ -14,4 +14,9 @@ public class MainController {
 		mav.setViewName("index");
 		return mav;
 	}
+
+	@RequestMapping(value = "/accessDenied")
+	public String accessDenied(){
+		return "access-deny.html";
+	}
 }
