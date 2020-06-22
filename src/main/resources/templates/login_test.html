@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<th:block th:fragment="commonFooter">
+		<head>
+		<title>로그인 테스트 페이지</title>
+		</head>
+		<body>
+			<form th:action="@{/do_login_test}" method="post">
+				<div>
+					아이디<input type="text" name="user_id" value="">
+					비밀번호<input type="text" name="user_password" value="">
+					<input type="submit">				
+				</div>
+			</form>
+		</body>
+	</th:block>
+</html>
