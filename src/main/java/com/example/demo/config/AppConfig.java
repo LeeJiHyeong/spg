@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
         "com.example.demo.admin",
         "com.example.demo.main",
         "com.example.demo.board",
+        "com.example.demo"
 })
 public class AppConfig {
 }
