@@ -40,10 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .disable()
                 .authorizeRequests()
                 .antMatchers("/")
+                .permitAll()
+                .antMatchers("/SignUpPage")
                 .permitAll()
                 .antMatchers("/admin/**")
                 .hasRole("ADMIN")
@@ -52,6 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login/SignInPage")
+                .loginProcessingUrl("/authenticateTheUser")
                 .successHandler((httpServletRequest, httpServletResponse, authentication) -> {
                     RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
                     redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/");
