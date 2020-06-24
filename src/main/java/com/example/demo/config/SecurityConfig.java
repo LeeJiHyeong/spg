@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import com.example.demo.handler.UserAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Qualifier("loginService")
     private UserDetailsService userDetailsService; // register servic class
+
+    @Autowired
+    UserAuthenticationSuccessHandler userAuthenticationSuccessHandler;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -53,10 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login/SignInPage")
                 .loginProcessingUrl("/authenticateTheUser")
-                .successHandler((httpServletRequest, httpServletResponse, authentication) -> {
-                    RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-                    redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/");
-                })
+                .successHandler(this.userAuthenticationSuccessHandler)
                 .failureHandler((httpServletRequest, httpServletResponse, e) -> {
                     httpServletRequest.setAttribute("username", httpServletRequest.getParameter("username"));
                     httpServletRequest.getRequestDispatcher("/login/SignInPage").forward(httpServletRequest, httpServletResponse);
