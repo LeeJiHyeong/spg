@@ -13,7 +13,7 @@ public class LoginController {
 
     @RequestMapping(value = "SignInPage")
     public String goTestLogin() {
-
+    	
         return "login-test.html";
     }
 
