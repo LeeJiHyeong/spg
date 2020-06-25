@@ -16,18 +16,4 @@ public class LoginController {
     	
         return "login-test.html";
     }
-
-//    @RequestMapping(value = "signin", method = RequestMethod.POST)
-//    public String doTestLogin(@Valid @RequestBody LoginRequest loginRequest) {
-//        Authentication authentication = this.authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(
-//                        loginRequest.getUsername(),
-//                        loginRequest.getPassword()
-//                )
-//        );
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//        String jwt = this.tokenProvider.makeToken(authentication);
-//        // jwt 를 main page에 넘기기
-//        return "redirect:/..";
-//    }
 }
