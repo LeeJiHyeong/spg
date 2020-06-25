@@ -1,6 +1,8 @@
 package com.example.demo.handler;
 
 import com.example.demo.login.domain.User;
+import com.example.demo.login.service.UserPrincipal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Component
 public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
@@ -34,11 +37,13 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
         System.out.println("userName=" + userName);
 
-        UserDetails userDetails = this.userSerivce.loadUserByUsername(userName);
+        UserPrincipal userPrincipal = (UserPrincipal) this.userSerivce.loadUserByUsername(userName);
 
         // now place in the session
         HttpSession session = request.getSession();
-        session.setAttribute("user", userDetails);
+        session.setAttribute("user", userPrincipal);
+        session.setAttribute("userName", userPrincipal.getUsername());
+        session.setAttribute("name", userPrincipal.getName());
 
         // forward to home page
         RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
