@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import com.example.demo.handler.UserAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +23,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("loginService")
     private UserDetailsService userDetailsService; // register servic class
 
+    @Autowired
+    UserAuthenticationSuccessHandler userAuthenticationSuccessHandler;
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
@@ -40,10 +44,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .disable()
                 .authorizeRequests()
                 .antMatchers("/")
+                .permitAll()
+                .antMatchers("/SignUpPage")
                 .permitAll()
                 .antMatchers("/admin/**")
                 .hasRole("ADMIN")
@@ -52,10 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login/SignInPage")
-                .successHandler((httpServletRequest, httpServletResponse, authentication) -> {
-                    RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-                    redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/");
-                })
+                .loginProcessingUrl("/authenticateTheUser")
+                .successHandler(this.userAuthenticationSuccessHandler)
                 .failureHandler((httpServletRequest, httpServletResponse, e) -> {
                     httpServletRequest.setAttribute("username", httpServletRequest.getParameter("username"));
                     httpServletRequest.getRequestDispatcher("/login/SignInPage").forward(httpServletRequest, httpServletResponse);
