@@ -1,5 +1,9 @@
 package com.example.demo.board.controller;
 
+import java.util.Enumeration;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -14,9 +18,19 @@ public class BoardController {
 	
 	// 자유게시판
 	@RequestMapping(value = "go_board")
-	public String goFreeBoard() {
+	public ModelAndView goFreeBoard(HttpSession session) {
 		
-		return "board/free_board";
+		System.out.println(">>> 자유게시판");
+
+		String name = (String)session.getAttribute("name");
+		String userName = (String)session.getAttribute("userName");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("board/free_board");
+		mav.addObject("userName", userName);
+		mav.addObject("name", name);
+		
+		return mav;
 	}
 	
 	@RequestMapping(value = "go_board_detail")

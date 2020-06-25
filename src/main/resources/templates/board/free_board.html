@@ -24,18 +24,9 @@
 	        	<div class="menuextras">
 					<div class="extras">
 						<ul>
-							<li class="shopping-cart-items"><i class="glyphicon glyphicon-shopping-cart icon-white"></i> <a href="page-shopping-cart.html"><b>3 items</b></a></li>
-							<li>
-								<div class="dropdown choose-country">
-									<a class="#" data-toggle="dropdown" href="#"><img src="img/flags/gb.png" alt="Great Britain"> UK</a>
-									<ul class="dropdown-menu" role="menu">
-										<li role="menuitem"><a href="#"><img src="img/flags/us.png" alt="United States"> US</a></li>
-										<li role="menuitem"><a href="#"><img src="img/flags/de.png" alt="Germany"> DE</a></li>
-										<li role="menuitem"><a href="#"><img src="img/flags/es.png" alt="Spain"> ES</a></li>
-									</ul>
-								</div>
-							</li>
-			        		<li><a href="page-login.html">Login</a></li>
+							<li th:unless="${userName.equals('')}" th:text="${name} + ' 님 환영합니다.'"></li>
+			        		<li th:if="${userName.equals('')}"><a href="page-login.html">Login</a></li>
+			        		<li th:unless="${userName.equals('')}"><a href="page-login.html">Logout</a></li>
 			        	</ul>
 					</div>
 		        </div>
