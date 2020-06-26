@@ -11,7 +11,7 @@ public class LoginController {
 
     private Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    @RequestMapping(value = "SignInPage")
+    @RequestMapping(value = "signInPage")
     public String goTestLogin() {
     	
         return "login-test.html";
