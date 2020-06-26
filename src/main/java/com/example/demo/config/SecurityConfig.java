@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -42,19 +43,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity webSecurity) throws Exception {
+        webSecurity.ignoring().antMatchers(
+                "/resources/**",
+                "/static/**",
+                "/css/**",
+                "/fonts/**",
+                "/js/**",
+                "/fonts/**",
+                "/img_beom/**",
+                "/img/**"
+        );
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/",
-                        "/**/*.png",
-                        "/**/*.gif",
-                        "/**/*.svg",
-                        "/**/*.jpg",
-                        "/**/*.html",
-                        "/**/*.css",
-                        "/**/*.js")
+                .antMatchers("/")
                 .permitAll()
-                .antMatchers("/SignUpPage")
+                .antMatchers("/register/**")
                 .permitAll()
                 .antMatchers("/admin/**")
                 .hasRole("ADMIN")
@@ -62,12 +70,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login/SignInPage")
+                .loginPage("/login/signInPage")
                 .loginProcessingUrl("/authenticateTheUser")
                 .successHandler(this.userAuthenticationSuccessHandler)
                 .failureHandler((httpServletRequest, httpServletResponse, e) -> {
                     httpServletRequest.setAttribute("username", httpServletRequest.getParameter("username"));
-                    httpServletRequest.getRequestDispatcher("/login/SignInPage").forward(httpServletRequest, httpServletResponse);
+                    httpServletRequest.getRequestDispatcher("/login/signInPage").forward(httpServletRequest, httpServletResponse);
                 })
                 .permitAll()
                 .and()

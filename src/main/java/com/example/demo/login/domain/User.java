@@ -15,7 +15,7 @@ import java.util.Set;
 @Table(name = "user", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
                 "username"
-        }),
+        })
 })
 public class User extends DateAudit { // date type extends 하기
     @Id
@@ -31,7 +31,7 @@ public class User extends DateAudit { // date type extends 하기
 
     @NotBlank
     @Column(name = "password")
-    @Size(max = 50)
+    @Size(max = 70)
     private String password;
 
     @Column(name = "name")
