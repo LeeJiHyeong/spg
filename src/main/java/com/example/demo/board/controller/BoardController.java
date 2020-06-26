@@ -1,6 +1,5 @@
 package com.example.demo.board.controller;
 
-import java.util.Enumeration;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,7 +16,7 @@ public class BoardController {
 	private Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	// 자유게시판
-	@RequestMapping(value = "go_board")
+	@RequestMapping(value = "freeBoard")
 	public ModelAndView goFreeBoard(HttpSession session) {
 		
 		System.out.println(">>> 자유게시판");
@@ -33,35 +32,35 @@ public class BoardController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "go_board_detail")
+	@RequestMapping(value = "freeBoard/detail")
 	public String goFreeBoardDetail() {
 		
 		return "/board/free_board_detail";
 	}
 	
 	// 교육게시판
-	@RequestMapping(value = "go_edu_board")
+	@RequestMapping(value = "eduBoard")
 	public String goEducationBoard() {
 		
 		return "board/education_board";
 	}
 	
 	// 갤러리
-	@RequestMapping(value = "go_gallery")
+	@RequestMapping(value = "gallery")
 	public String goGallery() {
 		
 		return "board/gallery";
 	}
 	
 	// 공지사항
-	@RequestMapping(value = "go_notice")
+	@RequestMapping(value = "notice")
 	public String goNotice() {
 		
 		return "admin/notice";
 	}
 	
 	// 글작성
-	@RequestMapping(value = "go_write")
+	@RequestMapping(value = "write")
 	public ModelAndView goWrite() {
 		
 		String contentWriter = "서강준"; // 임시 작성자 데이터, 로그인 세션에서 데이터 따와야함
@@ -73,7 +72,7 @@ public class BoardController {
 		return mav;
 	}
 	
-	@RequestMapping(value="do_write")
+	@RequestMapping(value="doWrite")
 	public String doWrite() {
 		logger.info("*** 게시글 저장 프로세스");
 		
