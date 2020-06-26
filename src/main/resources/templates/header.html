@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<th:block th:fragment="commonHeader">
+		<header>
 	   <div class="mainmenu-wrapper">
 		        <div class="container">
 		        	<div class="menuextras">
 						<div class="extras">
 							<ul>
-				        		<li><a href="page-login.html">Sign In</a></li>
+				        		<li><a th:href="@{login/SignInPage}">Sign In</a></li>
 				        		<li><a href="page-login.html">Sign Up</a></li>
 				        	</ul>
 						</div>
@@ -15,13 +16,13 @@
 			        <nav id="mainmenu" class="mainmenu">
 						<ul>
 							<li class="logo-wrapper">
-								<a href="index.html">
-									<img id="main_logo_img" src="img_beom/spg_logo3.png" alt=" No Image">
+								<a th:href="@{/}">
+									<img id="main_logo_img" src="img_beom/spg_logo3.png" alt="No Image">
 								</a>
 							</li>
 							
 							<li class="active has-submenu">
-								<a href="./index.html">S.P.G</a>
+								<a th:href="@{/}">S.P.G</a>
 								<div class = mainmenu-submenu>
 									<div class="mainmenu-submenu-inner">
 										<div>
@@ -35,17 +36,15 @@
 									</div>
 								</div>
 							</li>
-							
 							<li>
-								<a href="features.html">공지사항</a>
+								<a th:href="@{/notice}">공지사항</a>
 							</li>
-							
 							<li>
-								<a href="index.html">자유게시판</a>
+								<a th:href="@{/freeBoard}">자유게시판</a>
 							</li>
 							
 							<li class="has-submenu">
-								<a href="index.html">교 육</a>
+								<a th:href="@{#}">교 육</a>
 								<div class = mainmenu-submenu>
 									<div class="mainmenu-submenu-inner">
 										<div>
@@ -58,7 +57,6 @@
 									</div>
 								</div>
 							</li>
-							
 							<li class="has-submenu">
 								<a href="index.html">스터디</a>
 								<div class = mainmenu-submenu>
@@ -73,7 +71,6 @@
 									</div>
 								</div>
 							</li>
-							
 							<li class="has-submenu">
 								<a href="#">시험자료</a>
 								<div class = mainmenu-submenu>
@@ -88,18 +85,14 @@
 									</div>
 								</div>
 							</li>
-							
 							<li>
-								<a href="go_gallery">갤러리</a>
+								<a th:href="@{/gallery}">갤러리</a>
 							</li>
-							<!-- /mainmenu-submenu-inner -->
-							<!-- /mainmenu-submenu -->							
 						</ul>
 					</nav>
 				</div>
-				
-								<br/>
-				
+				<br/>
 			</div>
+			</header>
 	</th:block>
 </html>
