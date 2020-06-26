@@ -1706,64 +1706,49 @@ span.color-red {
 .footer {
   background: #222;
   color: #A0A0A0;
-  padding: 0 20px 10px 20px;
-  border-top: 4px solid #4f8db3;
-  margin-top: 20px;
+  padding: 0px 20px 10px 20px;
+  border-top: 2px solid #4f8db3;
+  margin-top: 10px;
   -webkit-box-shadow: 0 -1px 12px rgba(0,0,0,0.4);
   -moz-box-shadow: 0 -1px 12px rgba(0,0,0,0.4);
   box-shadow: 0 -1px 12px rgba(0,0,0,0.4);
   color: 0 -1px 12px rgba(0,0,0,0.4);
 }
+
+.footer hr {
+	color : #E4E4E4;
+	width : 60%;
+	text-align : left;
+	margin-left: 0;
+	vertical-align: text-bottom
+}
+
 .footer h3 {
   color: #E4E4E4;
   font-size: 1.3em;
-  border-bottom: 1px dotted #7C7C7C;
 }
 .footer ul {
   padding: 0;
 }
-.footer-navigate-section li {
-  line-height: 20px !important;
+
+.footer p {
+  	color: #7C7C7C;
+  	padding-top: 10px;
+  	font-size: 0.9em;
 }
-.footer-stay-connected a {
-  text-align: left;
-  text-indent: -9999px;
-  display: block;
-  width: 115px;
-  height: 40px;
-  background: url(../img/stay-connected.png);
-  -webkit-opacity: 0.5;
-  -moz-opacity: 0.5;
-  opacity: 0.5;
-  -webkit-transition: opacity .25s linear;
-  -moz-transition: opacity .25s linear;
-  -o-transition: opacity .25s linear;
-  -ms-transition: opacity .25s linear;
-  transition: opacity .25s linear;
+
+/*-------------------------- add beom -----------------------*/
+.footer img{
+	width : 200px;
+	height: 100px;
+	margin-right: 20px;
+	margin-top: 15px;
+	float:left;
 }
-.footer-stay-connected a:hover {
-  -webkit-opacity: 1;
-  -moz-opacity: 1;
-  opacity: 1;
-}
-.footer-stay-connected a.facebook {
-  background-position: -115px 0;
-}
-.footer-stay-connected a.twitter {
-  background-position: -230px 0;
-}
-.footer-stay-connected a.googleplus {
-  background-position: 0 0;
-}
-.footer-stay-connected li {
-  text-align: center;
-}
-.footer-copyright {
-  text-align: center;
-  color: #7C7C7C;
-  border-top: 1px dotted #7C7C7C;
-  padding-top: 10px;
-  font-size: 0.9em;
+
+.footer-inner{
+	width: 300%;
+	background: red;
 }
 /*--------------------------------------------------------------------------
 +	Pagination Style (overrides Bootstrap style)
@@ -1898,13 +1883,16 @@ span.color-red {
   background-position: -50px 0;
 }
 #sequence > .sequence-canvas > li.bg1 {
-  background-image: url(../img/homepage-slider/slider-bg1.jpg);
+  /*background-image: url(../img/homepage-slider/slider-bg1.jpg);*/
+  	background-image: url(../img_beom/slide_bg/bg1_1.jpg);
 }
 #sequence > .sequence-canvas > li.bg2 {
-  background-image: url(../img/homepage-slider/slider-bg2.jpg);
+  /*background-image: url(../img/homepage-slider/slider-bg2.jpg);*/
+	background-image: url(../img_beom/slide_bg/bg2_2.jpg);
 }
 #sequence > .sequence-canvas > li.bg3 {
-  background-image: url(../img/homepage-slider/slider-bg3.jpg);
+  /*background-image: url(../img/homepage-slider/slider-bg3.jpg);*/
+    background-image: url(../img_beom/slide_bg/bg3_1.jpg);
 }
 #sequence > .sequence-canvas > li.bg4 {
   background-image: url(../img/homepage-slider/slider-bg4.jpg);
@@ -2370,7 +2358,18 @@ span.color-red {
   padding-left: 0;
   padding-top: 0;
   padding-bottom: 0;
+  display : inline;
+  
 }
+
+.mainmenu li.logo-wrapper{
+	display : inline;
+}
+
+.mainmenu li.logo-wrapper img{
+	width: 100px;
+}
+
 .mainmenu-wrapper {
   background-color: #FFF;
   border-bottom: 4px solid #4f8db3;
@@ -2395,6 +2394,7 @@ span.color-red {
 .mainmenu .mainmenu-submenu-inner > li {
   display: inline-block;
   *display: inline;
+  
 }
 .mainmenu > ul > li > a,
 .mainmenu .mainmenu-submenu-inner > li > a {
@@ -2425,8 +2425,9 @@ span.color-red {
   display: none;
   position: absolute;
   background: #4f8db3;
-  width: 100%;
-  left: 0;
+  width: 120px;
+  margin: auto;
+  /*left: 0;*/
   z-index: 999;
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
@@ -2439,7 +2440,7 @@ span.color-red {
   color: 0 5px 5px rgba(0,0,0,0.4);
 }
 .mainmenu .mainmenu-submenu-inner > div {
-  width: 33%;
+  width: 100%;
   float: left;
 }
 .mainmenu .mainmenu-submenu-inner:before,
@@ -2460,12 +2461,10 @@ span.color-red {
 .mainmenu-submenu h4 {
   color: #bad2e1;
   padding: 1em 0 0.6em;
-  margin-left: 20px;
   font-size: 160%;
   font-weight: 300;
 }
 .mainmenu-submenu ul {
-  margin-left: 20px;
 }
 @media screen and (max-width: 979px) {
   .mainmenu {
@@ -2514,8 +2513,10 @@ span.color-red {
     width: 100%;
     float: none;
     padding: 0;
+    
   }
 }
+
 /*--------------------------------------------------------------------------
 +	Extras Menu (Cart, Language, Login) Style
 --------------------------------------------------------------------------*/
