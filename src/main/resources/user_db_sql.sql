@@ -34,6 +34,9 @@ INSERT INTO user  VALUES
 (3, 'susan','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K', 'efg', 0, "2019-01-01 00:00:00" ,"2019-01-01","2019-01-01");
 -- id : john, pw : fun123
 
+INSERT INTO user_roles (user_id, role_id) VALUES (1, 2); 
+-- john
+
 -- 자유 게시판 table
 CREATE TABLE free_board(
 	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
