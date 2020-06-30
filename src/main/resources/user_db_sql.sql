@@ -24,7 +24,7 @@ CREATE TABLE db_test.user_roles (
     FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE
 );
 
-INSERT INTO roles(name) VALUES('ROLE_USER');
+INSERT INTO roles(name) VALUES('ROLE_STUDENT');
 INSERT INTO roles(name) VALUES('ROLE_ADMIN');
 INSERT INTO roles(name) VALUES('ROLE_UNAUTH');
 
@@ -33,9 +33,6 @@ INSERT INTO user  VALUES
 (2, 'mary','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K', "bcd", 0, "2019-01-01 00:00:00" ,"2019-01-01","2019-01-01"),
 (3, 'susan','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K', 'efg', 0, "2019-01-01 00:00:00" ,"2019-01-01","2019-01-01");
 -- id : john, pw : fun123
-
-INSERT INTO user_roles (user_id, role_id) VALUES (1, 2); 
--- john
 
 -- 자유 게시판 table
 CREATE TABLE free_board(
@@ -57,7 +54,12 @@ CREATE TABLE free_board_file(
 );
 -- 자유 게시판 파일 table
 
--- test code
+-- test code (free_board)
 insert into free_board(id, title, writer_id, writer_name, content) values(1, 'test title 1', 1, 'mary', 'test content 1');
 insert into free_board(id, title, writer_id, writer_name, content) values(2, 'test title 2', 1, 'mary', 'test content 2');
 insert into free_board(id, title, writer_id, writer_name, content) values(3, 'test title 3', 1, 'efg', 'test content 3');
+
+-- test code (user_roles)
+INSERT INTO user_roles (user_id, role_id) VALUES (1, 2);
+INSERT INTO user_roles (user_id, role_id) VALUES (2, 3);
+INSERT INTO user_roles (user_id, role_id) VALUES (3, 1);
