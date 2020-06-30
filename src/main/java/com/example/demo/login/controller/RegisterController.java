@@ -1,7 +1,7 @@
 package com.example.demo.login.controller;
 
-import com.example.demo.login.domain.RegisterRequest;
 import com.example.demo.login.domain.User;
+import com.example.demo.login.request.RegisterRequest;
 import com.example.demo.login.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

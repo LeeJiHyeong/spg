@@ -1,4 +1,4 @@
-package com.example.demo.login.domain;
+package com.example.demo.login.request;
 
 import lombok.Getter;
 import lombok.Setter;

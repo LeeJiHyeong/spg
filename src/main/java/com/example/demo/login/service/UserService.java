@@ -47,4 +47,18 @@ public class UserService {
         return this.userRepository.findByUserName(userName)
                 .orElse(null);
     }
+
+    @Transactional(rollbackOn = Exception.class)
+    public void deleteByUserName(String username) {
+        this.userRepository.deleteByUserName(username);
+    }
+
+    @Transactional(rollbackOn = Exception.class)
+    public User changeUserPassword(String username, String passowrd) {
+        User oridinaryUser = this.userRepository.findByUserName(username)
+                .orElseThrow(() -> new ResourceNotFoundException("Role", "roleName", RoleName.ROLE_STUDENT));
+        oridinaryUser.setPassword(this.bCryptPasswordEncoder.encode(passowrd));
+
+        return this.userRepository.save(oridinaryUser);
+    }
 }

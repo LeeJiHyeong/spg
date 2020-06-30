@@ -5,7 +5,6 @@ CREATE TABLE db_test.user (
   username VARCHAR(20) NOT NULL UNIQUE,
   password VARCHAR(70) NOT NULL,
   name varchar(40) NOT NULL,
-  active BIT(1) DEFAULT 0,
   active_date DATETIME,
   create_date DATETIME DEFAULT NULL,
   update_date DATETIME DEFAULT NULL
@@ -29,9 +28,9 @@ INSERT INTO roles(name) VALUES('ROLE_ADMIN');
 INSERT INTO roles(name) VALUES('ROLE_UNAUTH');
 
 INSERT INTO user  VALUES
-(1, 'john','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K', "abc", 0, "2019-01-01 00:00:00" ,"2019-01-01","2019-01-01"),
-(2, 'mary','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K', "bcd", 0, "2019-01-01 00:00:00" ,"2019-01-01","2019-01-01"),
-(3, 'susan','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K', 'efg', 0, "2019-01-01 00:00:00" ,"2019-01-01","2019-01-01");
+(1, 'john','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K', "abc", null, "2019-01-01","2019-01-01"),
+(2, 'mary','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K', "bcd", null, "2019-01-01","2019-01-01"),
+(3, 'susan','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K', 'efg', null, "2019-01-01","2019-01-01");
 -- id : john, pw : fun123
 
 -- 자유 게시판 table
