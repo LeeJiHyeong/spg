@@ -34,7 +34,7 @@ $(document).ready(function(){
 	$(".video-wrapper").fitVids();
 
 	//Initialize tooltips
-	$('.show-tooltip').tooltip();
+//	$('.show-tooltip').tooltip();		//쓰는곳 없어서 주석처리(오류발생)
 
 	//Contact Us Map
 	if($('#contact-us-map').length > 0){ //Checks if there is a map element
