@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import com.example.demo.login.domain.User;
+import com.example.demo.login.service.UserService;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +11,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -21,6 +25,9 @@ class SpgApplicationTests {
 
     @Autowired
     MockMvc mockMvc;
+
+    @Autowired
+    UserService userService;
 
     @Test
     public void loginTest() throws Exception {
@@ -38,5 +45,27 @@ class SpgApplicationTests {
         )
                 .andExpect(status().is4xxClientError())
                 .andDo(print());
+    }
+
+    @Test
+    public void changeUserPasswordTest() throws Exception {
+        // given
+        String userId = "john";
+        String newPassword = "fun123";
+
+        // when
+        User result = userService.changeUserPassword(userId, newPassword);
+
+        // then
+        Assert.assertThat(result, is(notNullValue()));
+    }
+
+    @Test
+    public void deleteUserTest() throws Exception {
+        // given
+        String username = "mary";
+
+        // when
+        this.userService.deleteByUserName(username);
     }
 }
