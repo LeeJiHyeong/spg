@@ -9,8 +9,4 @@ import com.example.demo.board.domain.FreeBoard;
 
 public interface FreeBoardRepository extends JpaRepository<FreeBoard, Long>{
 	
-	public Optional<FreeBoard> findById(Long id);
-	
-	public List<FreeBoard> findByUserName(String userName);
-	
 }
