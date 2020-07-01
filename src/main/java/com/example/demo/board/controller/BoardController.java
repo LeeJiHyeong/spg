@@ -1,25 +1,38 @@
 package com.example.demo.board.controller;
 
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.method.annotation.ModelMethodProcessor;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.example.demo.board.service.FreeBoardService;
+import com.example.demo.board.domain.*;
 
 @Controller
 public class BoardController {
 	
 	private Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
+	@Autowired
+	private FreeBoardService freeBoardService;
+	
 	// 자유게시판
 	@RequestMapping(value = "freeBoard")
 	public ModelAndView goFreeBoard(HttpSession session) {
 		
 		System.out.println(">>> 자유게시판");
+		
+		// test code
+		List<FreeBoard> list = this.freeBoardService.findAll();
+		System.out.println(list.get(0).getTitle());
+		// end test code
 
 		String name = (String)session.getAttribute("name");
 		String userName = (String)session.getAttribute("userName");
