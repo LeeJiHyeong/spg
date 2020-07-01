@@ -1,21 +1,77 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<th:block th:fragment="commonFooter">
-		<head>
-		<title>로그인 테스트 페이지</title>
-		</head>
-		<body>
-			<form th:action="@{/authenticateTheUser}" method="post">
-				<div>
-					<input type="hidden" id="crsfData" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-					아이디<input type="text" name="username" value="">
-					비밀번호<input type="password" name="password" value="">
-					<button type="submit">Login</button>
+	<head>
+		<title>로그인</title>
+		
+		<link rel="stylesheet" href="/css/login.css">
+	</head>
+		
+	<body>
+
+		<!-- Header -->
+		<div class="Header">
+			<th:block th:include="header :: commonHeader"></th:block>
+		</div>
+	
+		<div class="sub-visual-wrap">
+			<div class="title"></div>
+		</div>
+	
+		<div class="sub-container">
+			<div class="lnb-wrap">
+				<div class="lnb">
+					<div class="lnb-title-box">
+						<div>
+							<h2>기타</h2>
+						</div>
+					</div>
+					<ul class="lnb-menu">
+						<li class="active"><a class="active" href="#">로그인</a></li>
+						<li><a class="" href="#">회원가입</a></li>
+					</ul>
 				</div>
-			</form>
-			<div>
-				<a th:href="@{/SignUpPage}" class="btn btn-primary" role="button" aria-pressed="true">Register New User</a>
 			</div>
-		</body>
-	</th:block>
+			<div class="content-wrap">
+				<div class="tab"></div>
+				<div class="content">
+					<div class="co-board type2">
+						<div class="bn-login01">
+							<form class="b-login-box" th:action="@{/authenticateTheUser}"
+								method="post">
+								<fieldset class="b-login-zone">
+									<div class="b-login-input-wrap">
+										<input type="hidden" id="crsfData"
+											th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+										아이디 : <input type="text" name="username" value="">
+										비밀번호: <input type="password" name="password" value="">
+										<button type="submit" class="b-btn-login">Login</button>
+									</div>
+								</fieldset>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<!-- 
+				<form th:action="@{/authenticateTheUser}" class="b-login-box" method="post">
+					<div>
+						<input type="hidden" id="crsfData" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> 
+						아이디 : <input type="text" name="username" value=""> 
+						비밀번호: <input type="password" name="password" value="">
+						<button type="submit">Login</button>
+					</div>
+				</form>
+		
+				<div>
+					<a th:href="@{/register/signUpPage}" class="btn btn-primary" role="button" aria-pressed="true">Register New User</a>
+				</div>
+				-->
+	
+		<footer>
+			<th:block th:include="footer :: commonFooter"></th:block>
+		</footer>
+	
+	</body>
 </html>

@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<th:block th:fragment="commonFooter">
-		<footer>
+	    <link rel="stylesheet" href="/css/bootstrap.min.css">
+	    <link rel="stylesheet" href="/css/main.css">	
+		<div class="footer">
+		
 			<div class="footer-inner">
-				<img id="footer_logo_img" src="img_beom/spg_logo3_dark.png" alt=" No Image">
-				<div class="copyright_text">
-					<h3>Copyright &copy; S.P.G</h3>
-					<hr/>
-					<p>34134 대전광역시 유성구 대학로 99 충남대학교 공대5호관 301호 S.P.G</p>
+				
+				<div class="footer-wrapper">
+					<div><img id="footer_logo_img" src="../img_beom/spg_logo3.png" alt=" No Image"></div>
+					<div><h3>S.P.G - System Programming Group</h3></div>
 				</div>
-				<br/>
+								
+				<div class="copyright_text">
+				<hr/>
+					<p>Copyright &copy; S.P.G 34134 대전광역시 유성구 대학로 99 충남대학교 공대5호관 301호 S.P.G</p>
+				</div>	
 			</div>
-		</footer>
+			
+		</div>
 	</th:block>
 </html>
