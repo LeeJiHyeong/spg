@@ -56,7 +56,7 @@ public class UserService {
     @Transactional(rollbackOn = Exception.class)
     public User changeUserPassword(String username, String passowrd) {
         User oridinaryUser = this.userRepository.findByUserName(username)
-                .orElseThrow(() -> new ResourceNotFoundException("Role", "roleName", RoleName.ROLE_STUDENT));
+                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
         oridinaryUser.setPassword(this.bCryptPasswordEncoder.encode(passowrd));
 
         return this.userRepository.save(oridinaryUser);
