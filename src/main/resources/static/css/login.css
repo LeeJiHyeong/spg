@@ -1,0 +1,237 @@
+.Header{
+	display: block;
+}
+
+.sub-container{
+	position: relative;
+	margin:0 auto;
+	max-width: 1200px;
+}
+
+.sub-container:before{
+	content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 245px;
+    height: 110%;
+    background: #f3f3f3;
+    z-index: -10;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.lnb-wrap{
+	float:left;
+	width: 245px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.lnb{
+	margin: -116px 0 0 0;
+	background: #f3f3f3;
+}
+
+.lnb .lnb-title-box{
+	background: #4f8db3;
+	text-align: center;
+}
+
+.lnb .lnb-menu > li{
+	width: 100%;
+	border-bottom: 1px solid #ccc;
+    box-sizing: border-box;	
+}
+
+.lnb .lnb-menu > li > a.active{
+	background-color: black;
+    font-weight: 500;
+    color: #fff;
+}
+
+.lnb .lnb-menu > li > a {
+	display: block;
+    padding: 20px 20px;
+    font-size: 16px;
+    line-height: 21px;
+    font-weight: 500;
+    color: #303c4f;
+}
+
+.content-wrap {
+    float: left;
+    padding: 50px 0 0 75px;
+    width: calc(100% - 245px);
+    min-height: 1000px;
+    box-sizing: border-box;
+}
+
+.content {
+    padding: 0 0 80px 0;
+}
+
+ .bn-login01 .b-login-box{
+    padding: 60px 100px 50px;
+    border-bottom: 1px solid #c0c0c0;
+    border-left: none;
+    border-right: none;
+    background: url("/img_beom/spg_logo_blank.png") no-repeat;
+    background-position: left center;
+    background-size: 50%;
+}
+
+.b-login-zone {
+    float: right;
+    width: 50%;
+}
+
+.b-login-input-wrap input {
+    display: block;
+    margin: 0 0 10px;
+    padding: 14px 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.bn-login01.type01, .b-btn-login {
+    display: block;
+    padding: 16px 10px;
+    width: 100%;
+    border: none;
+    background: #4f8db3;
+    font-weight: 300;
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.bn-login01.type01, .b-login-box:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.sub-container:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.lnb .lnb-title-box h2 {
+   	padding: 40px 0;
+    font-weight: 600;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 0px;
+}
+
+.sub-visual-wrap {
+	min-height: 130px;
+    background: url("/img_beom/slide_bg/bg2_1.jpg") no-repeat center center;
+    background-size: cover;
+}
+
+.title {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.bn-login01.type01 .b-login-input-wrap input {
+    display: block;
+    margin: 0 0 10px;
+    padding: 14px 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+input, button {
+    font-family: inherit;
+}
+
+img, input, select, textarea {
+    vertical-align: middle;
+}
+
+fieldset, img {
+    border: none;
+}
+
+* {
+    text-decoration: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+div {
+    display: block;
+}
+
+div, ul, li, a, input, select, form, dl, dt, dd {
+    /* background: transparent no-repeat; */
+    list-style-type: none;
+}
+
+
+element.style {
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bolder;
+}
+* {
+    text-decoration: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+input {
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark-color(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    -webkit-appearance: textfield;
+    background-color: -internal-light-dark-color(rgb(255, 255, 255), rgb(59, 59, 59));
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    font: 400 13.3333px Arial;
+
+}
