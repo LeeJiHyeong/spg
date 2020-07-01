@@ -17,8 +17,9 @@ public class FreeBoardService {
 	FreeBoardRepository freeBoardRepository;
 
 	@Transactional
-	public boolean save() {
-		return false;
+	public FreeBoard save(FreeBoard freeBoard) {
+		this.freeBoardRepository.save(freeBoard);
+		return freeBoard;
 	}
 
 	@Transactional

@@ -87,8 +87,10 @@ public class BoardController {
 	
 	@RequestMapping(value="doWrite")
 	public String doWrite() {
-		logger.info("*** 게시글 저장 프로세스");
 		
-		return "#";
+		FreeBoard testWrite = new FreeBoard("테스트 타이틀", 1, "존", "테스트 컨텐트");
+		this.freeBoardService.save(testWrite);
+		
+		return "/";
 	}
 }
