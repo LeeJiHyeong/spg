@@ -1704,52 +1704,54 @@ span.color-red {
 	Footer Style
 --------------------------------------------------------------------------*/
 .footer {
-  background: #222;
-  color: #A0A0A0;
+  background: white;
   padding: 0px 20px 10px 20px;
   border-top: 2px solid #4f8db3;
-  margin-top: 10px;
-  -webkit-box-shadow: 0 -1px 12px rgba(0,0,0,0.4);
-  -moz-box-shadow: 0 -1px 12px rgba(0,0,0,0.4);
-  box-shadow: 0 -1px 12px rgba(0,0,0,0.4);
-  color: 0 -1px 12px rgba(0,0,0,0.4);
+  margin:auto;
+  margin-top: 5px;
+  height: 130px;
+  width: 100%;
 }
 
 .footer hr {
-	color : #E4E4E4;
-	width : 60%;
-	text-align : left;
-	margin-left: 0;
-	vertical-align: text-bottom
+	width : 80%;
+	border: 1px solid white;
 }
 
 .footer h3 {
   color: #E4E4E4;
-  font-size: 1.3em;
-}
-.footer ul {
-  padding: 0;
+  font-size: 1.0em;
 }
 
 .footer p {
   	color: #7C7C7C;
-  	padding-top: 10px;
   	font-size: 0.9em;
 }
 
 /*-------------------------- add beom -----------------------*/
-.footer img{
-	width : 200px;
-	height: 100px;
-	margin-right: 20px;
-	margin-top: 15px;
-	float:left;
+
+#footer_logo_img{
+	width : 75px;
+	height: 50px;
+	padding-right: 10px;
+	padding-top: 5px;
 }
 
-.footer-inner{
-	width: 300%;
-	background: red;
+.footer-wrapper > div{
+	float: left;
 }
+
+
+.footer-wrapper{
+	width: 80%;
+	margin:0 auto;
+}
+
+.copyright_text{
+	width: 80%;
+ 	margin:0 auto;
+}
+
 /*--------------------------------------------------------------------------
 +	Pagination Style (overrides Bootstrap style)
 --------------------------------------------------------------------------*/
@@ -2424,11 +2426,12 @@ span.color-red {
 .mainmenu .mainmenu-submenu {
   display: none;
   position: absolute;
-  background: #4f8db3;
-  width: 120px;
+  background: #4f8db3;/*#4f8db3*/
+  width: 200px;
   margin: auto;
   /*left: 0;*/
   z-index: 999;
+  /*
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
   -o-transform: translateZ(0);
@@ -2438,11 +2441,13 @@ span.color-red {
   -moz-box-shadow: 0 5px 5px rgba(0,0,0,0.4);
   box-shadow: 0 5px 5px rgba(0,0,0,0.4);
   color: 0 5px 5px rgba(0,0,0,0.4);
+  */
 }
 .mainmenu .mainmenu-submenu-inner > div {
   width: 100%;
   float: left;
 }
+
 .mainmenu .mainmenu-submenu-inner:before,
 .mainmenu .mainmenu-submenu-inner:after {
   content: " ";
@@ -2460,12 +2465,24 @@ span.color-red {
 }
 .mainmenu-submenu h4 {
   color: #bad2e1;
-  padding: 1em 0 0.6em;
+  padding: 1em 0.4em 0.6em;
   font-size: 160%;
   font-weight: 300;
 }
-.mainmenu-submenu ul {
+.mainmenu-submenu li {
+	border-bottom: 1px solid #bad2e1;
+	border-top : 1px solid #bad2e1;
+	text-align: center;
+	height:40px;
+	margin : auto;
+	display:block;
+	vertical-align: middle;
 }
+
+.mainmenu-submenu li > a{
+	margin : auto;
+}
+
 @media screen and (max-width: 979px) {
   .mainmenu {
     font-size: 0.8em;
