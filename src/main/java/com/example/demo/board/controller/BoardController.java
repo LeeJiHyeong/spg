@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.method.annotation.ModelMethodProcessor;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,24 +26,18 @@ public class BoardController {
 	
 	// 자유게시판
 	@RequestMapping(value = "freeBoard")
-	public ModelAndView goFreeBoard(HttpSession session) {
+	public String goFreeBoard(HttpSession session, Model model) {
 		
 		System.out.println(">>> 자유게시판");
 		
-		// test code
-		List<FreeBoard> list = this.freeBoardService.findAll();
-		System.out.println(list.get(0).getTitle());
-		// end test code
-
-		String name = (String)session.getAttribute("name");
-		String userName = (String)session.getAttribute("userName");
+		String userId = null;
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("board/free_board");
-		mav.addObject("userName", userName);
-		mav.addObject("name", name);
+		if (session.getAttribute("userName") != null) {
+			userId = (String)session.getAttribute("userName");
+		}
 		
-		return mav;
+		model.addAttribute("userId", userId);
+		return "/board/free_board";
 	}
 	
 	@RequestMapping(value = "freeBoard/detail")

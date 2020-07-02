@@ -1,38 +1,34 @@
 package com.example.demo.main.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/Main")
 public class MainController {
 
 	@RequestMapping(value = "/")
-	public ModelAndView goMain() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("index.html");
-		return mav;
+	public String goMain(HttpSession session, Model model) {
+		
+		// session
+		String userId = null;
+		
+		if (session.getAttribute("userName") != null) {
+			userId = (String)session.getAttribute("userName");
+		}
+		
+		model.addAttribute("userId", userId);
+		
+		return "index.html";
 	}
 
 	@RequestMapping(value = "/accessDenied")
 	public String accessDenied(){
 		return "access-deny.html";
-	}
-	
-	@RequestMapping(value = "gallery")
-	public String gallery(){
-		return "/board/gallery.html";
-	}
-	
-	@RequestMapping(value = "freeBoard")
-	public String freeBoard(){
-		return "/board/free_board.html";
-	}
-	
-	@RequestMapping(value = "eduBoard")
-	public String eduBoard(){
-		return "/board/education_board.html";
 	}
 	
 	@RequestMapping(value = "/test1")
