@@ -15,7 +15,7 @@ import java.util.Set;
 @Table(name = "user", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
                 "username"
-        }),
+        })
 })
 public class User extends DateAudit { // date type extends 하기
     @Id
@@ -31,16 +31,13 @@ public class User extends DateAudit { // date type extends 하기
 
     @NotBlank
     @Column(name = "password")
-    @Size(max = 50)
+    @Size(max = 70)
     private String password;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "active")
-    private boolean active;
-
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
