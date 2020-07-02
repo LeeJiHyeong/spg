@@ -1,119 +1,107 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-   <th:block th:fragment="commonHeader">
-      
-   <link rel="stylesheet" href="/css/main.css">
-   <link rel="stylesheet" href="/css/bootstrap.min.css">
- 
-    <script src="/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-        
-           <div class="mainmenu-wrapper">
-           <div class="container">
-              <div class="menuextras">
-               <div class="extras">
-                  <ul>
-                       <li><a href="/login/Signin">Sign In</a></li>
-                       <li><a href="/login/SignUp">Sign Up</a></li>
-                       
-                    </ul>
-               </div>
-              </div>
-              
-              <nav id="mainmenu" class="mainmenu">
-               <ul>
-                  <li class="logo-wrapper">
-                     <a href="/">
-                        <img id="main_logo_img" src="../img_beom/spg_logo3.png" alt=" No Image">
-                     </a>
-                  </li>
-                  
-                  <li class="active has-submenu">
-                     <a href="/">S.P.G</a>
-                     <div class = mainmenu-submenu>
-                        <div class="mainmenu-submenu-inner">
-                           <div>
-                              <h4>Introduce</h4>
-                              <ul>
-                                 <li><a href="#">동아리 소개</a></li>
-                                 <li><a href="#">지도교수 소개</a></li>
-                                 <li><a href="#">임원진 소개</a></li>
-                              </ul>
-                           </div>
-                        </div>
-                     </div>
-                  </li>
-                  
-                  <li>
-                     <a href="features.html">공지사항</a>
-                  </li>
-                  
-                  <li>
-                     <a href="/Main/freeBoard">자유게시판</a>
-                  </li>
-                  
-                  <li class="has-submenu">
-                     <a href="/Main/eduBoard">교 육</a>
-                     <div class = mainmenu-submenu>
-                        <div class="mainmenu-submenu-inner">
-                           <div>
-                              <h4>Study</h4>
-                              <ul>
-                                 <li><a href="#">신입생 교육</a></li>
-                                 <li><a href="#">재학생 교육</a></li>
-                              </ul>
-                           </div>
-                        </div>
-                     </div>
-                  </li>
-                  
-                  <li class="has-submenu">
-                     <a href="/">스터디</a>
-                     <div class = mainmenu-submenu>
-                        <div class="mainmenu-submenu-inner">
-                           <div>
-                              <h4>Group Study</h4>
-                              <ul>
-                                 <li><a href="#">멤버 모집</a></li>
-                                 <li><a href="#">정보 공유</a></li>
-                              </ul>
-                           </div>
-                        </div>
-                     </div>
-                  </li>
-                  
-                  <li class="has-submenu">
-                     <a href="/">시험자료</a>
-                     <div class = mainmenu-submenu>
-                        <div class="mainmenu-submenu-inner">
-                           <div>
-                              <h4>Test</h4>
-                              <ul>
-                                 <li><a href="#">수업 자료</a></li>
-                                 <li><a href="#">시험 자료</a></li>
-                              </ul>
-                           </div>
-                        </div>
-                     </div>
-                  </li>
-                  
-                  <li>
-                     <a href="/Main/gallery">갤러리</a>
-                  </li>
-               </ul>
-            </nav>
-         </div>
-      </div>
-      
-      <!-- Javascripts --> 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/js/jquery-1.9.1.min.js"><\/script>')</script>
-        <script src="/js/bootstrap.min.js"></script>
-        <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
-        <script src="/js/jquery.fitvids.js"></script>
-        <script src="/js/jquery.sequence-min.js"></script>
-        <script src="/js/jquery.bxslider.js"></script>
-        <script src="/js/main-menu.js"></script>
-        <script src="/js/template.js"></script>
-        
-   </th:block>
+<th:block th:fragment="commonHeader">
+
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+	<script src="/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+	<div class="mainmenu-wrapper">
+		<div class="container">
+			<div class="menuextras">
+				<div class="extras">
+					<ul th:if="${userId == null}">
+						<li><a th:href="@{/login/Signin}">Sign In</a></li>
+						<li><a th:href="@{/login/SignUp}">Sign Up</a></li>
+					</ul>
+					<ul th:unless="${userId == null}">
+						<li><span th:text="${userId} + '님 환영합니다.'"></span></li>
+						<li><a th:href="@{#}">마이페이지</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<nav id="mainmenu" class="mainmenu">
+				<ul>
+					<li class="logo-wrapper"><a href="/"> <img
+							id="main_logo_img" src="../img_beom/spg_logo3.png"
+							alt=" No Image">
+					</a></li>
+
+					<li class="active has-submenu"><a href="/">S.P.G</a>
+						<div class=mainmenu-submenu>
+							<div class="mainmenu-submenu-inner">
+								<div>
+									<h4>Introduce</h4>
+									<ul>
+										<li><a href="#">동아리 소개</a></li>
+										<li><a href="#">지도교수 소개</a></li>
+										<li><a href="#">임원진 소개</a></li>
+									</ul>
+								</div>
+							</div>
+						</div></li>
+
+					<li><a th:href="@{/notice}">공지사항</a></li>
+
+					<li><a th:href="@{/freeBoard}">자유게시판</a></li>
+
+					<li class="has-submenu"><a th:href="@{/eduBoard}">교 육</a>
+						<div class=mainmenu-submenu>
+							<div class="mainmenu-submenu-inner">
+								<div>
+									<h4>Study</h4>
+									<ul>
+										<li><a href="#">신입생 교육</a></li>
+										<li><a href="#">재학생 교육</a></li>
+									</ul>
+								</div>
+							</div>
+						</div></li>
+
+					<li class="has-submenu"><a href="/">스터디</a>
+						<div class=mainmenu-submenu>
+							<div class="mainmenu-submenu-inner">
+								<div>
+									<h4>Group Study</h4>
+									<ul>
+										<li><a href="#">멤버 모집</a></li>
+										<li><a href="#">정보 공유</a></li>
+									</ul>
+								</div>
+							</div>
+						</div></li>
+
+					<li class="has-submenu"><a href="/">시험자료</a>
+						<div class=mainmenu-submenu>
+							<div class="mainmenu-submenu-inner">
+								<div>
+									<h4>Test</h4>
+									<ul>
+										<li><a href="#">수업 자료</a></li>
+										<li><a href="#">시험 자료</a></li>
+									</ul>
+								</div>
+							</div>
+						</div></li>
+					<li><a th:href="@{/gallery}">갤러리</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<!-- Javascripts -->
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/js/jquery-1.9.1.min.js"><\/script>')</script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+	<script src="/js/jquery.fitvids.js"></script>
+	<script src="/js/jquery.sequence-min.js"></script>
+	<script src="/js/jquery.bxslider.js"></script>
+	<script src="/js/main-menu.js"></script>
+	<script src="/js/template.js"></script>
+
+</th:block>
 </html>
