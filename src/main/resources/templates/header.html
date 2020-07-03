@@ -12,12 +12,13 @@
 			<div class="menuextras">
 				<div class="extras">
 					<ul th:if="${userId == null}">
-						<li><a th:href="@{/login/Signin}">Sign In</a></li>
-						<li><a th:href="@{/login/SignUp}">Sign Up</a></li>
+						<li><a th:href="@{/login/Signin}">로그인</a></li>
+						<li><a th:href="@{/login/SignUp}">회원가입</a></li>
 					</ul>
 					<ul th:unless="${userId == null}">
 						<li><span th:text="${userId} + '님 환영합니다.'"></span></li>
 						<li><a th:href="@{#}">마이페이지</a></li>
+						<li><a th:href="@{#}">로그아웃</a></li>
 					</ul>
 				</div>
 			</div>
