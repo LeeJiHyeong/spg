@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Calendar;
 import java.util.Collections;
 
 @Service
@@ -27,6 +28,7 @@ public class AdminService {
         Role studentUser = this.roleRepository.findByName(roleName)
                 .orElseThrow(() -> new ResourceNotFoundException("Role", "name", roleName));
         user.setRoles(Collections.singleton(studentUser));
+        user.setActiveDate(Calendar.getInstance());
 
         this.userRepository.save(user);
     }
