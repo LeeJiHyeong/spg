@@ -46,6 +46,19 @@ public class BoardController {
 		return "/board/free_board_detail";
 	}
 	
+	// 글작성
+	@RequestMapping(value = "freeBoardWrite")
+	public ModelAndView goWrite() {
+		
+		String contentWriter = "서강준"; // 임시 작성자 데이터, 로그인 세션에서 데이터 따와야함
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("write-page");
+		mav.addObject("content_writer", contentWriter);
+
+		return mav;
+	}
+	
 	// 교육게시판
 	@RequestMapping(value = "eduBoard")
 	public String goEducationBoard() {
@@ -65,19 +78,6 @@ public class BoardController {
 	public String goNotice() {
 		
 		return "admin/notice";
-	}
-	
-	// 글작성
-	@RequestMapping(value = "write")
-	public ModelAndView goWrite() {
-		
-		String contentWriter = "서강준"; // 임시 작성자 데이터, 로그인 세션에서 데이터 따와야함
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("write-page");
-		mav.addObject("content_writer", contentWriter);
-
-		return mav;
 	}
 	
 	@RequestMapping(value="doWrite")
