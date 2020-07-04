@@ -18,48 +18,17 @@
   <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <body>
-
-  <div class="mainmenu-wrapper">
-    <div class="container">
-      <div class="menuextras">
-        <div class="extras">
-          <ul>
-            <li><a href="page-login.html">Login</a></li>
-          </ul>
-        </div>
-      </div>
-      <nav id="mainmenu" class="mainmenu">
-        <ul>
-          <li class="logo-wrapper"><a href="index.html"><img src="img/mPurpose-logo.png" alt="Multipurpose Twitter Bootstrap Template"></a></li>
-          <li class="active">
-            <a href="index.html">소개</a>
-          </li>
-          <li>
-            <a href="features.html">자유게시판</a>
-          </li>
-          <li class="has-submenu">
-            <a href="#">교육자료</a>
-            <!-- <ul>
-            <li class='has-sub'><a href='#'>지란지교 예약</a>
-          </li>
-          <li class='has-sub'><a href='classreserv.html'>강의실 예약</a>
-        </li>
-      </ul> -->
-    </li>
-    <li>
-      <a href="credits.html">스터디</a>
-    </li>
-    <li>
-      <a href="credits.html">비밀족보</a>
-    </li>
-  </ul>
-</nav>
-</div>
-</div>
-	<form action="@{/do_write}" method="post">
+	<div class="col-sm-12">
+		<!-- Header -->
+		<div class="Header">
+		<th:block th:include="header :: commonHeader"></th:block>
+	</div>
 		<!-- Post -->
-		<div class="col-sm-8">
+		<form action="@{/do_write}" method="post">
+		
+	
 		  <div class="blog-post blog-single-post">
+		  <div class="col-sm-81">
 		    <h1>게시글 작성</h1>
 		    <hr>
 		    <!-- 글작성 데이터 -->
@@ -84,9 +53,13 @@
 		    </div>
 		    <!-- 글작성 데이터 끝-->
 		  </div>
-		</div>
+		  </div>
 	</form>
+	  <!-- Footer -->
+       <footer>
+          <th:block th:include="footer :: commonFooter"></th:block>
+       </footer>
+	</div>
 	<!-- End Post -->
-
 </body>
 </html>
