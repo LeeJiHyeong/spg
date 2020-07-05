@@ -48,15 +48,16 @@ public class BoardController {
 	
 	// 글작성
 	@RequestMapping(value = "freeBoardWrite")
-	public ModelAndView goWrite() {
+	public String goWrite(HttpSession session, Model model) {
 		
-		String contentWriter = "서강준"; // 임시 작성자 데이터, 로그인 세션에서 데이터 따와야함
+		String userId = null;
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("write-page");
-		mav.addObject("content_writer", contentWriter);
-
-		return mav;
+		if (session.getAttribute("userName") != null) {
+			userId = (String)session.getAttribute("userName");
+		}
+		
+		model.addAttribute("userId", userId);
+		return "write-page";
 	}
 	
 	// 교육게시판
