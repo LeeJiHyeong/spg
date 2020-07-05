@@ -7,6 +7,7 @@ import org.hibernate.annotations.NaturalId;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Calendar;
 import java.util.Set;
 
 @Getter
@@ -36,6 +37,9 @@ public class User extends DateAudit { // date type extends 하기
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "active_date")
+    private Calendar activeDate;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
