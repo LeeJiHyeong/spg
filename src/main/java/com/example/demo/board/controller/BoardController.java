@@ -17,6 +17,7 @@ import com.example.demo.board.service.FreeBoardService;
 import com.example.demo.board.domain.*;
 
 @Controller
+@RequestMapping("/board")
 public class BoardController {
 	
 	private Logger logger = LoggerFactory.getLogger(BoardController.class);
@@ -47,7 +48,7 @@ public class BoardController {
 	}
 	
 	// 글작성
-	@RequestMapping(value = "freeBoardWrite")
+	@RequestMapping(value = "freeBoard/write")
 	public String goWrite(HttpSession session, Model model) {
 		
 		String userId = null;
@@ -57,7 +58,7 @@ public class BoardController {
 		}
 		
 		model.addAttribute("userId", userId);
-		return "write-page";
+		return "/board/free_board_write";
 	}
 	
 	// 교육게시판
