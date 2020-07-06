@@ -3,17 +3,21 @@ package com.example.demo.board.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.method.annotation.ModelMethodProcessor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.board.service.FreeBoardService;
+import com.example.demo.login.service.UserService;
 import com.example.demo.board.domain.*;
 
 @Controller
@@ -25,19 +29,18 @@ public class BoardController {
 	@Autowired
 	private FreeBoardService freeBoardService;
 	
+	@Autowired
+	private UserService userService;
+	
 	// 자유게시판
 	@RequestMapping(value = "freeBoard")
 	public String goFreeBoard(HttpSession session, Model model) {
 		
-		System.out.println(">>> 자유게시판");
-		
-		String userId = null;
-		
 		if (session.getAttribute("userName") != null) {
-			userId = (String)session.getAttribute("userName");
+			String userName = (String)session.getAttribute("userName");
+			model.addAttribute("userName", userName);
 		}
 		
-		model.addAttribute("userId", userId);
 		return "/board/free_board";
 	}
 	
@@ -51,14 +54,24 @@ public class BoardController {
 	@RequestMapping(value = "freeBoard/write")
 	public String goWrite(HttpSession session, Model model) {
 		
-		String userId = null;
-		
 		if (session.getAttribute("userName") != null) {
-			userId = (String)session.getAttribute("userName");
+			String userName = (String)session.getAttribute("userName");
+			model.addAttribute("userName", userName);
 		}
 		
-		model.addAttribute("userId", userId);
 		return "/board/free_board_write";
+	}
+	
+	@PostMapping(value = "freeBoard/doWrite")
+	public String doWrite(@ModelAttribute @Valid FreeBoard freeBoard) {
+		
+		
+//		FreeBoard testWrite = new FreeBoard("테스트 타이틀", 1, "존", "테스트 컨텐트");
+//		this.freeBoardService.save(testWrite);
+		System.out.println(">>> 게시글 저장 프로세스");
+		System.out.println(freeBoard.getTitle() + " " + freeBoard.getWriterId() + " " + freeBoard.getContent());
+		
+		return "/";
 	}
 	
 	// 교육게시판
@@ -82,12 +95,4 @@ public class BoardController {
 		return "admin/notice";
 	}
 	
-	@RequestMapping(value="doWrite")
-	public String doWrite() {
-		
-		FreeBoard testWrite = new FreeBoard("테스트 타이틀", 1, "존", "테스트 컨텐트");
-		this.freeBoardService.save(testWrite);
-		
-		return "/";
-	}
 }
