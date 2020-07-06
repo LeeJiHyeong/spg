@@ -74,7 +74,7 @@ public class BoardController {
 		
 		this.freeBoardService.save(freeBoard);
 		
-		return "/board/free_board";
+		return "redirect:/board/freeBoard";
 	}
 	
 	// 교육게시판
