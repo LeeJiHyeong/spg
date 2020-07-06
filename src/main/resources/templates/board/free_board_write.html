@@ -7,13 +7,13 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
 
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/icomoon-social.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/icomoon-social.css">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
 
-  <link rel="stylesheet" href="css/leaflet.css" />
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/writePage.css">
+  <link rel="stylesheet" href="/css/leaflet.css" />
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/writePage.css">
 
   <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
@@ -24,9 +24,7 @@
 		<th:block th:include="header :: commonHeader"></th:block>
 	</div>
 		<!-- Post -->
-		<form th:action="@{/do_write}" method="post">
-		
-	
+		<form th:action="@{freeBoard/doWrite}" method="post">
 		  <div class="blog-post blog-single-post">
 		  <div class="col-sm-81">
 		    <h1>게시글 작성</h1>
@@ -41,7 +39,7 @@
 		    <br>
 		    <div class="form-group">
 		      <label for="comment-name"><i class="glyphicon glyphicon-user"></i> <b>Your name</b></label>
-		      <input class="form-control" id="content_writer" type="text" placeholder="" th:value="${content_writer}" readonly="readonly">
+		      <input class="form-control" id="content_writer" type="text" placeholder="" th:value="${userId}" readonly="readonly">
 		    </div>
 		    <div class="form-group">
 		      <label for="comment-message"><i class="glyphicon glyphicon-comment"></i> <b>Content</b></label>
