@@ -17,6 +17,7 @@ import org.springframework.web.method.annotation.ModelMethodProcessor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.board.service.FreeBoardService;
+import com.example.demo.login.domain.User;
 import com.example.demo.login.service.UserService;
 import com.example.demo.board.domain.*;
 
@@ -56,7 +57,11 @@ public class BoardController {
 		
 		if (session.getAttribute("userName") != null) {
 			String userName = (String)session.getAttribute("userName");
+			User user = this.userService.findByUserName(userName);
+			Long writerId = user.getId();
+			
 			model.addAttribute("userName", userName);
+			model.addAttribute("writerId", writerId);
 		}
 		
 		return "/board/free_board_write";
@@ -65,13 +70,11 @@ public class BoardController {
 	@PostMapping(value = "freeBoard/doWrite")
 	public String doWrite(@ModelAttribute @Valid FreeBoard freeBoard) {
 		
-		
-//		FreeBoard testWrite = new FreeBoard("테스트 타이틀", 1, "존", "테스트 컨텐트");
-//		this.freeBoardService.save(testWrite);
 		System.out.println(">>> 게시글 저장 프로세스");
-		System.out.println(freeBoard.getTitle() + " " + freeBoard.getWriterId() + " " + freeBoard.getContent());
 		
-		return "/";
+		this.freeBoardService.save(freeBoard);
+		
+		return "/board/free_board";
 	}
 	
 	// 교육게시판
