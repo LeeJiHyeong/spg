@@ -32,5 +32,11 @@ public class FreeBoardFile {
 	private Long freeBoardId;
 	
 	public FreeBoardFile() {}
+	
+	public FreeBoardFile(String storeFileName, String ordinaryFileName, Long freeBoardId) {
+		this.storeFileName = storeFileName;
+		this.ordinaryFileName = ordinaryFileName;
+		this.freeBoardId = freeBoardId;
+	}
 
 }
