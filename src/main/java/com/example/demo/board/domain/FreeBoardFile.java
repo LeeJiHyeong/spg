@@ -30,5 +30,7 @@ public class FreeBoardFile {
 	@NotBlank
 	@Column(name = "free_board_id")
 	private Long freeBoardId;
+	
+	public FreeBoardFile() {}
 
 }
