@@ -64,7 +64,7 @@
     float: left;
     padding: 50px 0 0 75px;
     width: calc(100% - 245px);
-    min-height: 500px;
+    min-height: 1000px;
     box-sizing: border-box;
 }
 
@@ -150,6 +150,43 @@
     border: 1px solid #ccc;
     font-size: 14px;
     box-sizing: border-box;
+}
+
+.bn-manage01{
+	border: 1px solid black;
+}
+
+table{
+	width: 880px;
+}
+
+.bn-manage01 tr{
+	clear: both;
+	height: 50px;
+	width: 400px;
+}
+
+.bn-manage01 th{
+	background: red;
+	width: 20%;
+}
+
+.bn-manage01 td{
+	background: blue;
+	padding-left: 10px;
+	width: 50%;
+}
+
+.bn-manage01 input{
+	width: 50%;
+}
+
+.correct-btn00 {
+	margin-left: 20%;
+}
+
+.button-tr{
+	text-align: center;
 }
 
 input, button {

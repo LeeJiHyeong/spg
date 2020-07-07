@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title>마이 페이지</title>
+      
+      <link rel="stylesheet" href="/css/user_management.css">
+      <link rel="shortcut icon" href="../img_beom/favicon.ico" type="image/x-icon">
+
+   </head>
+      
+   <body>
+
+      <!-- Header -->
+      <div class="Header">
+         <th:block th:include="header :: commonHeader"></th:block>
+      </div>
+   
+      <div class="sub-visual-wrap"></div>
+   
+      <div class="sub-container">
+         <div class="lnb-wrap">
+            <div class="lnb">
+               <div class="lnb-title-box">
+                  <div>
+                     <h2>마이 페이지</h2>
+                  </div>
+               </div>
+               <ul class="lnb-menu">
+                  <li class="active"><a class="active" href="#">개인정보 수정</a></li>
+                  <li class="active"><a class="" href="#">내가 쓴 글</a></li>
+                  <li class="active"><a class="" href="#">회원 탈퇴</a></li>                  
+               </ul>
+            </div>
+         </div>
+         <div class="content-wrap">
+            <div class="tab"></div>
+            <div class="content">
+               <div class="co-board type2">
+                  <div class="bn-login01">
+                  
+					<!-- 로그인 페이지 보고 CSS 정리 필요 -->
+					<form id="form1" th:action="@{/user/identity}" method="post">
+					    <input type="hidden" id="crsfData" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+						<table class="bn-manage01">
+							<h3>개인정보 수정</h3>
+							<tbody>
+								<tr colspan="2">
+									<th>ID (학번)</th>
+									<td colspan="2" th:text="${userId}"></td>
+								</tr>
+								<tr>
+									<th>기존 비밀번호</th>			
+									<td><input form="form1" type="password" name="inputPW" th:disabled="${userIdentity}" th:autofocus="!${autofocus}"><button class="correct-btn00" type="submit">본인 확인</button></td>
+								</tr>
+								<tr>
+									<th>이 름</th>
+									<td colspan="2"><input type="text" th:autofocus="${autofocus}" onfocus="this.select()" th:placeholder="${userPH}" th:disabled="!${userIdentity}" th:value="${userName}"></td>
+								</tr>
+								<tr>
+									<th>비밀번호</th>
+									<td colspan="2" ><input type="password" th:placeholder="${userPH}" th:disabled="!${userIdentity}"></td>
+								</tr>
+								<tr>
+									<th>비밀번호 확인</th>
+									<td colspan="2"><input type="password" th:placeholder="${userPH}" th:disabled="!${userIdentity}"></td>
+								</tr>
+								<tr class="button-tr">
+									<td colspan="2"><button type="submit">수 정</button></td>
+								</tr>
+							</tbody>
+						</table>
+						
+					</form>
+					
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+   
+      <footer>
+         <th:block th:include="footer :: commonFooter"></th:block>
+      </footer>
+   
+   </body>
+</html>
