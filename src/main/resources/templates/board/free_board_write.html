@@ -26,7 +26,7 @@
 					<th:block th:include="header :: commonHeader"></th:block>
 				</div>
 				<!-- Post -->
-				<form th:action="@{doWrite}" method="post">
+				<form th:action="@{doWrite}" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="writerId" th:value="${writerId}">
 					<div class="blog-post blog-single-post">
 						<div class="col-sm-81">
@@ -38,7 +38,7 @@
 									placeholder="글 제목을 입력하세요.">
 							</div>
 							<hr>
-							<input type="file"> <br>
+							<input type="file" name="upload" /> <br>
 							<div class="form-group">
 								<label for="comment-name"><i
 									class="glyphicon glyphicon-user"></i> <b>Your name</b></label> <input
