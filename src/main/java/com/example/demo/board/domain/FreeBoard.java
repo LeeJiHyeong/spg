@@ -37,7 +37,7 @@ public class FreeBoard {
 	@Column(name = "content", columnDefinition = "TEXT")
 	private String content;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "free_board_id")
 	private List<FreeBoardFile> freeBoardFile;
 
