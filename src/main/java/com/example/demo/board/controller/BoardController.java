@@ -57,7 +57,12 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "freeBoard/detail")
-	public String goFreeBoardDetail() {
+	public String goFreeBoardDetail(HttpSession session, Model model) {
+		
+		if (session.getAttribute("userName") != null) {
+			String userName = (String)session.getAttribute("userName");
+			model.addAttribute("userName", userName);
+		}
 		
 		return "/board/free_board_detail";
 	}
