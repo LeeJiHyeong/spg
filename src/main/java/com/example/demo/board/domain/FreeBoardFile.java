@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.Getter;
@@ -27,8 +28,16 @@ public class FreeBoardFile {
 	@Column(name = "ordinary_filename")
 	private String ordinaryFileName;
 
-	@NotBlank
+	@NotNull
 	@Column(name = "free_board_id")
 	private Long freeBoardId;
+	
+	public FreeBoardFile() {}
+	
+	public FreeBoardFile(String storeFileName, String ordinaryFileName, Long freeBoardId) {
+		this.storeFileName = storeFileName;
+		this.ordinaryFileName = ordinaryFileName;
+		this.freeBoardId = freeBoardId;
+	}
 
 }
