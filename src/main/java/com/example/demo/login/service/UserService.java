@@ -61,4 +61,12 @@ public class UserService {
 
         return this.userRepository.save(oridinaryUser);
     }
+
+    @Transactional
+    public boolean checkNowPassword(String username, String passowrd) {
+        User user = this.userRepository.findByUserName(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+
+        return this.bCryptPasswordEncoder.matches(passowrd, user.getPassword());
+    }
 }

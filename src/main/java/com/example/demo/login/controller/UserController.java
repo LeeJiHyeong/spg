@@ -7,76 +7,67 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
-//추가
 import javax.servlet.http.HttpSession;
-
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
-    
+
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
-    
-    
-    @RequestMapping(value="Management")
+
+
+    @RequestMapping(value = "Management")
     public String Management(HttpSession session, Model model) {
-				
-		String userId = null;
-		
-		if (session.getAttribute("userName") != null) {
-			userId = (String)session.getAttribute("userName");
-			model.addAttribute("userId", userId);
-			model.addAttribute("placeholder", "본인확인이 필요합니다.");
-		}				
-		
-		 return "user-management.html";
+//        if (session.getAttribute("userName") != null) {
+//            String userName = (String) session.getAttribute("userName");
+//            ChangingPasswordRequest changingPasswordRequest = new ChangingPasswordRequest();
+//        }
+
+        return "user-management.html";
     }
-    
-    @RequestMapping(value="/identity", method=RequestMethod.POST)
-    public String userIdentity(HttpSession session, @RequestParam("inputPW")String inputpw, Model model) {
 
-		if (session.getAttribute("userName") != null) {
-			
-	    	User user = userService.findByUserName((String)session.getAttribute("userName"));
-	    	String disabled = null;
-	    	String placeholder = null;
-	    	String userName = null;
-	    	String inputPW_Dot = "";
+    @RequestMapping(value = "/identity", method = RequestMethod.POST)
+    public String userIdentity(HttpSession session, @RequestParam("inputPW") String inputpw, Model model) {
 
-	    	System.out.println(inputpw);
-	    	System.out.println(inputpw.length());   	
+        if (session.getAttribute("userName") != null) {
 
-	    	for(int i = 0; i<inputpw.length(); i++) {
-	    		inputPW_Dot += "●";
-	    	}
-	    	
-	    	// add    	    	
-	    	if(passwordEncoder.matches(inputpw, user.getPassword())) {
-	    		disabled = "disabled";
-	    		userName = user.getName();
-	    		model.addAttribute("placeholder", placeholder);
-	    		model.addAttribute("autofocus", "autofocus");
-				model.addAttribute("inputPW", inputPW_Dot);
-	    	}
-	    	else {
-				model.addAttribute("placeholder", "본인확인이 필요합니다.");
-	    	}
-	    	
-			model.addAttribute("userId", user.getUserName());	    	
-    		model.addAttribute("disabled", disabled);	
-    		model.addAttribute("userName", userName);
-		}
-    	
-    	return "user-management.html";
+            User user = userService.findByUserName((String) session.getAttribute("userName"));
+            String disabled = null;
+            String placeholder = null;
+            String userName = null;
+            String inputPW_Dot = "";
+
+            System.out.println(inputpw);
+            System.out.println(inputpw.length());
+
+            for (int i = 0; i < inputpw.length(); i++) {
+                inputPW_Dot += "●";
+            }
+
+            // add
+            if (passwordEncoder.matches(inputpw, user.getPassword())) {
+                disabled = "disabled";
+                userName = user.getName();
+                model.addAttribute("placeholder", placeholder);
+                model.addAttribute("autofocus", "autofocus");
+                model.addAttribute("inputPW", inputPW_Dot);
+            } else {
+                model.addAttribute("placeholder", "본인확인이 필요합니다.");
+            }
+
+            model.addAttribute("userId", user.getUserName());
+            model.addAttribute("disabled", disabled);
+            model.addAttribute("userName", userName);
+        }
+
+        return "user-management.html";
     }
 
     @PostMapping("/deleteUser")
@@ -90,12 +81,45 @@ public class UserController {
         return "redirect:/";
     }
 
+    @PostMapping("/checkNowPassword")
+    public String checkPassword(HttpSession httpSession,
+                                @RequestParam("password") String password) {
+        String userName = (String) httpSession.getAttribute("userName");
+        if (userName == null) {
+            return "";
+        }
+        String urlHeader = "redirect:";
+        String urlFooter = this.userService.checkNowPassword(userName, password) ? "/user/passwordChangePage" : "/";
+
+        return urlHeader + urlFooter;
+    }
+
+    @GetMapping("/passwordChangePage")
+    public String passwordChangePage(Model model) {
+        // todo add authetication for this page
+        model.addAttribute("changingPasswordRequest", new ChangingPasswordRequest());
+        return "user-password-change";
+    }
+
     @PostMapping("/changePassword")
-    public String changeUserPassowrd(@RequestBody ChangingPasswordRequest changingPasswordRequest) {    
-        if (this.userService.changeUserPassword(changingPasswordRequest.getUserName(), changingPasswordRequest.getPassword()) == null) {
-            return ""; // 비밀번호 변경 실패
+    public String changeUserPassowrd(HttpSession httpSession,
+                                     @Valid @ModelAttribute("changingPasswordRequest") ChangingPasswordRequest changingPasswordRequest,
+                                     BindingResult bindingResult,
+                                     Model model) {
+        String userName = (String) httpSession.getAttribute("userName");
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("changeError", "The two passwords do not match.");
+            model.addAttribute("changingPasswordRequest", new ChangingPasswordRequest());
+
+            return "user-password-change";
+        }
+        if (this.userService.changeUserPassword(userName, changingPasswordRequest.getPassword()) == null) {
+            model.addAttribute("changeError", "password update error");
+            model.addAttribute("changingPasswordRequest", new ChangingPasswordRequest());
+
+            return "user-password-change"; // 비밀번호 변경 실패
         }
 
-        return ""; // 성공
+        return "redirect:/";
     }
 }
