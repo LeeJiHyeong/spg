@@ -31,7 +31,7 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
         String userName = authentication.getName();
 
-        System.out.println("userName=" + userName);
+        System.out.println("userName/=" + userName);
 
         UserPrincipal userPrincipal = (UserPrincipal) this.userSerivce.loadUserByUsername(userName);
 

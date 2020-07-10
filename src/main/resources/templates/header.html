@@ -4,6 +4,8 @@
 
 	<link rel="stylesheet" href="/css/main.css">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="shortcut icon" href="../img_beom/favicon.ico" type="image/x-icon">
+
 
 	<script src="/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
@@ -17,7 +19,7 @@
 					</ul>
 					<ul th:unless="${userName == null}">
 						<li><span th:text="${userName} + '님 환영합니다.'"></span></li>
-						<li><a th:href="@{#}">마이페이지</a></li>
+						<li><a th:href="@{/user/Management}">마이페이지</a></li>
 						<li><a th:href="@{#}">로그아웃</a></li>
 					</ul>
 				</div>
