@@ -35,7 +35,7 @@ public class UserController {
 		if (session.getAttribute("userName") != null) {
 			userId = (String)session.getAttribute("userName");
 			model.addAttribute("userId", userId);
-			model.addAttribute("userPH", "본인확인이 필요합니다.");
+			model.addAttribute("placeholder", "본인확인이 필요합니다.");
 		}				
 		
 		 return "User_Management.html";
@@ -47,27 +47,32 @@ public class UserController {
 		if (session.getAttribute("userName") != null) {
 			
 	    	User user = userService.findByUserName((String)session.getAttribute("userName"));
-	    	String userIdentity = null;
-	    	String userPH = null;
+	    	String disabled = null;
+	    	String placeholder = null;
 	    	String userName = null;
+	    	String inputPW_Dot = "";
 
-	    	System.out.println(user.getId());   	
 	    	System.out.println(inputpw);
+	    	System.out.println(inputpw.length());   	
+
+	    	for(int i = 0; i<inputpw.length(); i++) {
+	    		inputPW_Dot += "●";
+	    	}
 	    	
 	    	// add    	    	
 	    	if(passwordEncoder.matches(inputpw, user.getPassword())) {
-	    		System.out.println("Please!");
-	    		userIdentity = "disabled";
+	    		disabled = "disabled";
 	    		userName = user.getName();
-	    		model.addAttribute("userPH", userPH);
+	    		model.addAttribute("placeholder", placeholder);
 	    		model.addAttribute("autofocus", "autofocus");
-				model.addAttribute("userId", user.getUserName());
+				model.addAttribute("inputPW", inputPW_Dot);
 	    	}
 	    	else {
-	    		System.out.println("T T");
+				model.addAttribute("placeholder", "본인확인이 필요합니다.");
 	    	}
 	    	
-    		model.addAttribute("userIdentity", userIdentity);	
+			model.addAttribute("userId", user.getUserName());	    	
+    		model.addAttribute("disabled", disabled);	
     		model.addAttribute("userName", userName);
 		}
     	
@@ -86,7 +91,7 @@ public class UserController {
     }
 
     @PostMapping("/changePassword")
-    public String changeUserPassowrd(@RequestBody ChangingPasswordRequest changingPasswordRequest) {
+    public String changeUserPassowrd(@RequestBody ChangingPasswordRequest changingPasswordRequest) {    
         if (this.userService.changeUserPassword(changingPasswordRequest.getUserName(), changingPasswordRequest.getPassword()) == null) {
             return ""; // 비밀번호 변경 실패
         }

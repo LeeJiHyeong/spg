@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
 @FieldMatch.List({
         @FieldMatch(first = "password", second = "matchingPassword", message = "The password fields must match")
 })
+
 @Getter
 @Setter
 public class ChangingPasswordRequest {

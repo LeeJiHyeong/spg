@@ -26,7 +26,7 @@
                   </div>
                </div>
                <ul class="lnb-menu">
-                  <li class="active"><a class="active" href="#">개인정보 수정</a></li>
+                  <li class="active"><a class="active" th:href="@{/user/Management}">개인정보 수정</a></li>
                   <li class="active"><a class="" href="#">내가 쓴 글</a></li>
                   <li class="active"><a class="" href="#">회원 탈퇴</a></li>                  
                </ul>
@@ -39,37 +39,36 @@
                   <div class="bn-login01">
                   
 					<!-- 로그인 페이지 보고 CSS 정리 필요 -->
-					<form id="form1" th:action="@{/user/identity}" method="post">
+					<form method="post" th:action="@{user/changePassword}">
 					    <input type="hidden" id="crsfData" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 						<table class="bn-manage01">
 							<h3>개인정보 수정</h3>
 							<tbody>
-								<tr colspan="2">
+								<tr>
 									<th>ID (학번)</th>
 									<td colspan="2" th:text="${userId}"></td>
 								</tr>
 								<tr>
 									<th>기존 비밀번호</th>			
-									<td><input form="form1" type="password" name="inputPW" th:disabled="${userIdentity}" th:autofocus="!${autofocus}"><button class="correct-btn00" type="submit">본인 확인</button></td>
+									<td><input type="password" name="inputPW" th:placeholder="${inputPW}" th:disabled="${disabled}" th:autofocus="!${autofocus}"><button th:formaction="@{/user/identity}" class="correct-btn00" type="submit">본인 확인</button></td>
 								</tr>
 								<tr>
 									<th>이 름</th>
-									<td colspan="2"><input type="text" th:autofocus="${autofocus}" onfocus="this.select()" th:placeholder="${userPH}" th:disabled="!${userIdentity}" th:value="${userName}"></td>
+									<td colspan="2"><input name="userName" type="text" th:autofocus="${autofocus}" onfocus="this.select()" th:placeholder="${placeholder}" th:disabled="!${disabled}" th:value="${userName}"></td>
 								</tr>
 								<tr>
 									<th>비밀번호</th>
-									<td colspan="2" ><input type="password" th:placeholder="${userPH}" th:disabled="!${userIdentity}"></td>
+									<td colspan="2" ><input name="inputChangePw" type="password" th:placeholder="${placeholder}" th:disabled="!${disabled}"></td>
 								</tr>
 								<tr>
 									<th>비밀번호 확인</th>
-									<td colspan="2"><input type="password" th:placeholder="${userPH}" th:disabled="!${userIdentity}"></td>
+									<td colspan="2"><input name="inputChangeCheckPw" type="password" th:placeholder="${placeholder}" th:disabled="!${disabled}"></td>
 								</tr>
 								<tr class="button-tr">
-									<td colspan="2"><button type="submit">수 정</button></td>
+									<td colspan="2"><button th:formaction="@{/user/changePassword}" type="submit">수 정</button></td>
 								</tr>
 							</tbody>
-						</table>
-						
+						</table>	
 					</form>
 					
                   </div>

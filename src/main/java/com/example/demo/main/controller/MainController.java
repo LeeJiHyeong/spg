@@ -27,14 +27,5 @@ public class MainController {
 	public String accessDenied(){
 		return "access-deny.html";
 	}
-	
-	@RequestMapping(value = "/test1")
-	public String test1(){
-		return "access-deny.html";
-	}
-	
-	@RequestMapping(value = "/test2")
-	public String test2(){
-		return "access-deny.html";
-	}
+
 }
