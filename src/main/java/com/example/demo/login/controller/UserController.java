@@ -38,7 +38,7 @@ public class UserController {
 			model.addAttribute("placeholder", "본인확인이 필요합니다.");
 		}				
 		
-		 return "User_Management.html";
+		 return "user-management.html";
     }
     
     @RequestMapping(value="/identity", method=RequestMethod.POST)
@@ -76,7 +76,7 @@ public class UserController {
     		model.addAttribute("userName", userName);
 		}
     	
-    	return "User_Management.html";
+    	return "user-management.html";
     }
 
     @PostMapping("/deleteUser")
