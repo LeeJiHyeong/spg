@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,8 +57,16 @@ public class BoardController {
 		return "/board/free_board";
 	}
 	
-	@RequestMapping(value = "freeBoard/detail")
-	public String goFreeBoardDetail() {
+	@GetMapping(value = "freeBoard/detail")
+	public String goFreeBoardDetail(HttpSession session, Model model,
+									@RequestParam("contentId") Long contentId) {
+		
+		if (session.getAttribute("userName") != null) {
+			String userName = (String)session.getAttribute("userName");
+			model.addAttribute("userName", userName);
+		}
+		
+		System.out.println(contentId);
 		
 		return "/board/free_board_detail";
 	}
