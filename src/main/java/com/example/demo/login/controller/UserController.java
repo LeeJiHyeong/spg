@@ -23,7 +23,7 @@ public class UserController {
     BCryptPasswordEncoder passwordEncoder;
 
 
-    @RequestMapping(value = "Management")
+    @RequestMapping(value = "management")
     public String Management(HttpSession session, Model model) {
 //        if (session.getAttribute("userName") != null) {
 //            String userName = (String) session.getAttribute("userName");
@@ -111,13 +111,13 @@ public class UserController {
             model.addAttribute("changeError", "The two passwords do not match.");
             model.addAttribute("changingPasswordRequest", new ChangingPasswordRequest());
 
-            return "user-password-change";
+            return "redirect:/user/passwordChangePage";
         }
         if (this.userService.changeUserPassword(userName, changingPasswordRequest.getPassword()) == null) {
             model.addAttribute("changeError", "password update error");
             model.addAttribute("changingPasswordRequest", new ChangingPasswordRequest());
 
-            return "user-password-change"; // 비밀번호 변경 실패
+            return "redirect:/user/passwordChangePage";
         }
 
         return "redirect:/";
