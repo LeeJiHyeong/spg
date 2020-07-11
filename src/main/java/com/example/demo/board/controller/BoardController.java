@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -66,7 +67,12 @@ public class BoardController {
 			model.addAttribute("userName", userName);
 		}
 		
-		System.out.println(contentId);
+		FreeBoard content = this.freeBoardService.findById(contentId);
+		
+		model.addAttribute("contentTitle", content.getTitle());
+		model.addAttribute("writerName", content.getWriterName());
+		model.addAttribute("contentText", content.getContent());
+		
 		
 		return "/board/free_board_detail";
 	}
