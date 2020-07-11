@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.board.domain.FreeBoard;
 import com.example.demo.board.reposiroty.FreeBoardRepository;
+import com.example.demo.exception.ResourceNotFoundException;
 
 @Service
 public class FreeBoardService {
@@ -30,7 +31,7 @@ public class FreeBoardService {
 	
 	@Transactional
 	public FreeBoard findById(Long id) {
-		return this.freeBoardRepository.findById(id).get();
+		return this.freeBoardRepository.findById(id).orElseGet(null);
 	}
 
 	public FreeBoardService() {
