@@ -1,6 +1,7 @@
 package com.example.demo.board.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -25,6 +26,11 @@ public class FreeBoardService {
 	@Transactional
 	public List<FreeBoard> findAll() {
 		return this.freeBoardRepository.findAll();
+	}
+	
+	@Transactional
+	public FreeBoard findById(Long id) {
+		return this.freeBoardRepository.findById(id).get();
 	}
 
 	public FreeBoardService() {
