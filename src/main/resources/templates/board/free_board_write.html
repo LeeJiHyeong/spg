@@ -26,7 +26,7 @@
 					<th:block th:include="header :: commonHeader"></th:block>
 				</div>
 				<!-- Post -->
-				<form th:action="@{doWrite}" method="post" enctype="multipart/form-data">
+				<form th:action="@{doWrite}" method="post" enctype="multipart/form-data" onsubmit="return checkContent();">
 					<input type="hidden" name="writerId" th:value="${writerId}">
 					<div class="blog-post blog-single-post">
 						<div class="col-sm-81">
@@ -35,7 +35,7 @@
 							<!-- 글작성 데이터 -->
 							<div class="single-post-title">
 								<b>★Title</b> <input type="text" name="title" class="form-control"
-									placeholder="글 제목을 입력하세요.">
+									placeholder="글 제목을 입력하세요." id="content-title">
 							</div>
 							<hr>
 							<input type="file" name="upload" /> <br>
@@ -67,4 +67,5 @@
 			</div>
 			<!-- End Post -->
 		</body>
+		<script src="/js/freeboard.js"></script>
 </html>
