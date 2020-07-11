@@ -68,11 +68,17 @@ public class BoardController {
 		}
 		
 		FreeBoard content = this.freeBoardService.findById(contentId);
+		FreeBoardFile fileInContent = this.freeBoardFileService.findByFreeBoardId(contentId);
 		
-		model.addAttribute("contentTitle", content.getTitle());
-		model.addAttribute("writerName", content.getWriterName());
-		model.addAttribute("contentText", content.getContent());
+		if (content != null) {
+			model.addAttribute("contentTitle", content.getTitle());
+			model.addAttribute("writerName", content.getWriterName());
+			model.addAttribute("contentText", content.getContent());
+		}
 		
+		if (fileInContent != null) {
+			model.addAttribute("fileName", fileInContent.getOrdinaryFileName());
+		}
 		
 		return "/board/free_board_detail";
 	}
@@ -99,7 +105,7 @@ public class BoardController {
 		
 		System.out.println(">>> 게시글 저장 프로세스");
 		
-		//TODO:: 이지형, file table 수정시 파일업로드 프로세스 service로 옮겨야함
+		//TODO:: 이지형
 		
 		String ordinaryFileName = uploadFile.getOriginalFilename();
 		
