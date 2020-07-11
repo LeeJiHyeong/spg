@@ -42,16 +42,16 @@
 					<div class="single-post-title">
 						<!-- <h3>Post Title</h3> -->
 						<b>제목</b>
-						<input type="text" class="form-control" value="권오범은 몸짱이다." disabled="disabled">
+						<input type="text" class="form-control" th:value="${contentTitle}" disabled="disabled">
 					</div>
 					<hr>
 					<div class="form-group">
 						<label for="comment-name"><i class="glyphicon glyphicon-user"></i> <b>작성자</b></label>
-						<input class="form-control" id="comment-name" type="text" value="권오범" disabled="disabled">
+						<input class="form-control" id="comment-name" type="text" th:value="${writerName}" disabled="disabled">
 					</div>
 					<div class="form-group">
 						<label for="comment-message"><i class="glyphicon glyphicon-comment"></i> <b>Content</b></label>
-						<textarea class="form-control" rows="20" id="comment-message" disabled="disabled">내용내용내용</textarea>
+						<textarea class="form-control" rows="20" id="comment-message" disabled="disabled" th:text="${contentText}">내용내용내용</textarea>
 					</div>
 					<!-- comment -->
 					<div id="form-commentInfo"> 
