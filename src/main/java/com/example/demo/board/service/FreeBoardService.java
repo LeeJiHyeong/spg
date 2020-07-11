@@ -31,7 +31,7 @@ public class FreeBoardService {
 	
 	@Transactional
 	public FreeBoard findById(Long id) {
-		return this.freeBoardRepository.findById(id).orElseGet(null);
+		return this.freeBoardRepository.findById(id).orElseGet(() -> null);
 	}
 
 	public FreeBoardService() {
