@@ -69,4 +69,14 @@ public class UserService {
 
         return this.bCryptPasswordEncoder.matches(passowrd, user.getPassword());
     }
+
+    @Transactional
+    public User updateUsernameAndName(String pastUserName, String username, String name) {
+        User user = this.userRepository.findByUserName(pastUserName)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+        user.setUserName(username);
+        user.setName(name);
+
+        return this.userRepository.save(user);
+    }
 }

@@ -1,86 +1,94 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <title>마이 페이지</title>
-      
-      <link rel="stylesheet" href="/css/user_management.css">
-      <link rel="shortcut icon" href="../img_beom/favicon.ico" type="image/x-icon">
+<head>
+    <title>마이 페이지</title>
 
-   </head>
-      
-   <body>
+    <link rel="stylesheet" href="/css/user_management.css">
+    <link rel="shortcut icon" href="../img_beom/favicon.ico" type="image/x-icon">
 
-      <!-- Header -->
-      <div class="Header">
-         <th:block th:include="header :: commonHeader"></th:block>
-      </div>
-   
-      <div class="sub-visual-wrap"></div>
-   
-      <div class="sub-container">
-         <div class="lnb-wrap">
-            <div class="lnb">
-               <div class="lnb-title-box">
-                  <div>
-                     <h2>마이 페이지</h2>
-                  </div>
-               </div>
-               <ul class="lnb-menu">
-                  <li class="active"><a class="active" th:href="@{/user/Management}">개인정보 수정</a></li>
-                  <li class="active"><a class="" href="#">내가 쓴 글</a></li>
-                  <li class="active"><a class="" href="#">회원 탈퇴</a></li>                  
-               </ul>
+</head>
+
+<body>
+
+<!-- Header -->
+<div class="Header">
+    <th:block th:include="header :: commonHeader"></th:block>
+</div>
+
+<div class="sub-visual-wrap"></div>
+
+<div class="sub-container">
+    <div class="lnb-wrap">
+        <div class="lnb">
+            <div class="lnb-title-box">
+                <div>
+                    <h2>마이 페이지</h2>
+                </div>
             </div>
-         </div>
-         <div class="content-wrap">
-            <div class="tab"></div>
-            <div class="content">
-               <div class="co-board type2">
-                  <div class="bn-login01">
-                  
-					<!-- 로그인 페이지 보고 CSS 정리 필요 -->
-					<form method="post" th:action="@{user/changePassword}">
-					    <input type="hidden" id="crsfData" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-						<table class="bn-manage01">
-							<h3>개인정보 수정</h3>
-							<tbody>
-								<tr>
-									<th>ID (학번)</th>
-									<td colspan="2" th:text="${userName}"></td>
-								</tr>
-								<tr>
-									<th>기존 비밀번호</th>			
-									<td><input type="password" name="inputPW" th:placeholder="${inputPW}" th:disabled="${disabled}" th:autofocus="!${autofocus}"><button th:formaction="@{/user/identity}" class="correct-btn00" type="submit">본인 확인</button></td>
-								</tr>
-								<tr>
-									<th>이 름</th>
-									<td colspan="2"><input name="userName" type="text" th:autofocus="${autofocus}" onfocus="this.select()" th:placeholder="${placeholder}" th:disabled="!${disabled}" th:value="${userName}"></td>
-								</tr>
-								<tr>
-									<th>비밀번호</th>
-									<td colspan="2" ><input name="inputChangePw" type="password" th:placeholder="${placeholder}" th:disabled="!${disabled}"></td>
-								</tr>
-								<tr>
-									<th>비밀번호 확인</th>
-									<td colspan="2"><input name="inputChangeCheckPw" type="password" th:placeholder="${placeholder}" th:disabled="!${disabled}"></td>
-								</tr>
-								<tr class="button-tr">
-									<td colspan="2"><button th:formaction="@{/user/changePassword}" type="submit">수 정</button></td>
-								</tr>
-							</tbody>
-						</table>	
-					</form>
-					
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+            <ul class="lnb-menu">
+                <li class="active"><a class="active" th:href="@{/user/Management}">개인정보 수정</a></li>
+                <li class="active"><a class="" href="#">내가 쓴 글</a></li>
+                <li class="active"><a class="" href="#">회원 탈퇴</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content-wrap">
+        <div class="tab"></div>
+        <div class="content">
+            <div class="co-board type2">
+                <div class="bn-login01">
+                    <h3>개인정보 변경</h3>
+                    <form method="POST" th:action="@{/user/changeUserData}"
+                          th:object="${userDataRequest}">
+                        <!-- <input type="hidden" id="crsfData" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
+                        <div class="form-group col-xs-15">
+<!--                            <div>-->
+<!--                                &lt;!&ndash; Check for registration error &ndash;&gt;-->
+<!--                                <div th:if="${changeError}" class="alert alert-danger col-xs-offset-1 col-xs-10">-->
+<!--                                    <span th:text="${changeError}"></span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>
 
-   
-      <footer>
-         <th:block th:include="footer :: commonFooter"></th:block>
-      </footer>
-   
-   </body>
+                        <div class="form-group">
+                            <label for="register-username"><i class="icon-user"></i> <b>학번</b></label>
+                            <input class="form-control" id="register-username" type="text" th:field="*{userName}"
+                                   placeholder="username (*)">
+                        </div>
+                        <div th:if="${#fields.hasErrors('userName')}"
+                             style="margin-bottom: 25px" class="text-danger">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('userName')}" th:text="'User name ' + ${err}"/>
+                            </ul>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-name"><i class="icon-name"><b>이름</b></i></label>
+                            <input class="form-control" th:field="*{name}" id="register-name" type="text"
+                                   placeholder="name (*)">
+                        </div>
+                        <div th:if="${#fields.hasErrors('name')}"
+                             style="margin-bottom: 25px" class="text-danger">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('name')}" th:text="'name ' + ${err}"/>
+                            </ul>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn pull-right">Register</button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer>
+    <th:block th:include="footer :: commonFooter"></th:block>
+</footer>
+
+</body>
 </html>
