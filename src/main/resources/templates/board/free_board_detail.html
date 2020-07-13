@@ -53,6 +53,12 @@
 						<label for="comment-message"><i class="glyphicon glyphicon-comment"></i> <b>Content</b></label>
 						<textarea class="form-control" rows="20" id="comment-message" disabled="disabled" th:text="${contentText}">내용내용내용</textarea>
 					</div>
+					<div class="single-post-title">
+						<!-- <h3>Post Title</h3> -->
+						<b>첨부파일</b>
+						<a th:href="@{#}"><span th:text="${fileName}">abc.text</span></a>
+						<br /><br />
+					</div>
 					<!-- comment -->
 					<div id="form-commentInfo"> 
 						<div id="comment-count">댓글 <span id="count">0</span></div>
@@ -64,7 +70,7 @@
 						<div class="eachComment">
 							<div class="name">
 								<span>포마드권오범</span>
-								<input type="button" class="btn" value="삭제" style="background: none repeat scroll 0 0 #DA1111;">
+								<input type="button" class="btn" value="삭제" style="background: none repeat scroll 0 0 #FF1111;">
 							</div>
 							<div class="inputValue">
 								<span>댓글내용</span>
@@ -82,7 +88,7 @@
 					</div>
 	        	</div>
 	        	<div class="right_button">
-					<a href="page-blog-posts.html" class="btn"> 목록 </a>
+					<a th:href="@{/board/freeBoard}" class="btn"> 목록 </a>
 				</div>
 	        </div>
 	    </div>

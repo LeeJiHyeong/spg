@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.board.service.FreeBoardFileService;
 import com.example.demo.board.service.FreeBoardService;
 import com.example.demo.login.domain.User;
+import com.example.demo.login.service.UserPrincipal;
 import com.example.demo.login.service.UserService;
 import com.example.demo.board.domain.*;
 
@@ -68,11 +69,17 @@ public class BoardController {
 		}
 		
 		FreeBoard content = this.freeBoardService.findById(contentId);
+		FreeBoardFile fileInContent = this.freeBoardFileService.findByFreeBoardId(contentId);
 		
-		model.addAttribute("contentTitle", content.getTitle());
-		model.addAttribute("writerName", content.getWriterName());
-		model.addAttribute("contentText", content.getContent());
+		if (content != null) {
+			model.addAttribute("contentTitle", content.getTitle());
+			model.addAttribute("writerName", content.getWriterName());
+			model.addAttribute("contentText", content.getContent());
+		}
 		
+		if (fileInContent != null) {
+			model.addAttribute("fileName", fileInContent.getOrdinaryFileName());
+		}
 		
 		return "/board/free_board_detail";
 	}
@@ -99,7 +106,7 @@ public class BoardController {
 		
 		System.out.println(">>> 게시글 저장 프로세스");
 		
-		//TODO:: 이지형, file table 수정시 파일업로드 프로세스 service로 옮겨야함
+		//TODO:: 이지형
 		
 		String ordinaryFileName = uploadFile.getOriginalFilename();
 		
@@ -136,8 +143,11 @@ public class BoardController {
 	
 	// 갤러리
 	@RequestMapping(value = "gallery")
-	public String goGallery() {
+	public String goGallery(HttpSession session, Model model) {
 		
+        UserPrincipal user = (UserPrincipal) session.getAttribute("user");
+        model.addAttribute("userName", user.getUsername());
+
 		return "board/gallery";
 	}
 	
