@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>마이 페이지-회원탈퇴</title>
+
+    <link rel="stylesheet" href="/css/user_withdrawal.css">
+    <link rel="shortcut icon" href="../img_beom/favicon.ico" type="image/x-icon">
+
+</head>
+
+<body>
+
+<!-- Header -->
+<div class="Header">
+    <th:block th:include="header :: commonHeader"></th:block>
+</div>
+
+<div class="sub-visual-wrap"></div>
+
+<div class="sub-container">
+    <div class="lnb-wrap">
+        <div class="lnb">
+            <div class="lnb-title-box">
+                <div>
+                    <h2>마이 페이지</h2>
+                </div>
+            </div>
+            <ul class="lnb-menu">
+                <li><a class="" th:href="@{/user/management}">개인정보 수정</a></li>
+                <li><a class="" th:href="@{/user/passwordChangePage}">비밀번호 변경</a></li>               
+                <li><a class="" href="#">내가 쓴 글</a></li>
+                <li><a class="active" th:href="@{/user/withdrawalPage}">회원 탈퇴</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content-wrap">
+        <div class="tab"></div>
+        <div class="content">
+            <div class="co-board type2">
+                <div class="bn-login01">
+                    <form th:action="@{/user/withdrawal}" method="POST">
+                        <h3>회원탈퇴</h3>
+                        <input type="hidden" id="crsfData" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <div class="form-group">
+                            <label for="register-password"><i class="icon-lock"></i> <b>비밀번호</b></label>
+                            <input class="form-control" name="password" id="password" type="password"
+                                   placeholder="password (*)">
+                        </div>
+
+
+                        <div class="form-group">
+                            <button type="submit" class="btn pull-right">탈퇴하기</button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer>
+    <th:block th:include="footer :: commonFooter"></th:block>
+</footer>
+
+</body>
+</html>

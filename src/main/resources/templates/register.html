@@ -1,179 +1,132 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" class="no-js">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>SPG - Register</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/icomoon-social.css">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
-
-    <link rel="stylesheet" href="/css/leaflet.css"/>
-    <!--[if lte IE 8]>
-    <link rel="stylesheet" href="css/leaflet.ie.css"/>
-    <![endif]-->
-    <link rel="stylesheet" href="/css/main.css">
-
-    <script src="/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-</head>
-<body>
-<!--[if lt IE 7]>
-<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to
-    improve your experience.</p>
-<![endif]-->
-
-
-<!-- Navigation & Logo-->
-<div class="mainmenu-wrapper">
-    <div class="container">
-        <div class="menuextras">
-            <div class="extras">
-                <ul>
-                    <li class="shopping-cart-items"><i class="glyphicon glyphicon-shopping-cart icon-white"></i> <a
-                            href="page-shopping-cart.html"><b>3 items</b></a></li>
-                    <li>
-                        <div class="dropdown choose-country">
-                            <!-- 필요없는 오류
-                            <a class="#" data-toggle="dropdown" href="#">
-                            <img src="img/flags/gb.png" alt="Great Britain"> UK
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li role="menuitem"><a href="#"><img src="img/flags/us.png" alt="United States"> US</a>
-                                </li>
-                                <li role="menuitem"><a href="#"><img src="img/flags/de.png" alt="Germany"> DE</a></li>
-                                <li role="menuitem"><a href="#"><img src="img/flags/es.png" alt="Spain"> ES</a></li>
-                            </ul>
-                             -->
-                        </div>
-                    </li>
-                    <li><a href="loginl">Login</a></li>
-                </ul>
-            </div>
-        </div>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title>회원가입</title>
       
-      <!-- 헤더 들어갈 자리 -->
-        
-    </div>
-</div>
+      <link rel="stylesheet" href="/css/register.css">
+      <link rel="shortcut icon" href="../img_beom/favicon.ico" type="image/x-icon">
 
-<!-- Page Title -->
-<div class="section section-breadcrumbs">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Register</h1>
+   </head>
+      
+   <body>
+
+      <!-- Header -->
+      <div class="Header">
+         <th:block th:include="header :: commonHeader"></th:block>
+      </div>
+   
+      <div class="sub-visual-wrap">
+         <div class="title"></div>
+      </div>
+   
+      <div class="sub-container">
+         <div class="lnb-wrap">
+            <div class="lnb">
+               <div class="lnb-title-box">
+                  <div>
+                     <h2>기타</h2>
+                  </div>
+               </div>
+               <ul class="lnb-menu">
+                  <li><a th:href="@{/login/Signin}">로그인</a></li>
+                  <li><a class="active" th:href="@{/register/signUpPage}">회원가입</a></li>
+               </ul>
             </div>
-        </div>
-    </div>
-</div>
-
-<div class="section">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-5">
-                <div class="basic-login">
-                    <form th:action="@{/register/registration}"
-                          th:object="${user}" method="POST">
-                        <div class="form-group col-xs-15">
-                            <div>
-                                <!-- Check for registration error -->
-                                <div th:if="${registrationError}" class="alert alert-danger col-xs-offset-1 col-xs-10">
-                                    <span th:text="${registrationError}"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="register-username"><i class="icon-user"></i> <b>학번</b></label>
-                            <input class="form-control" id="register-username" type="text" th:field="*{userName}"
-                                   placeholder="username (*)">
-                        </div>
-                        <div th:if="${#fields.hasErrors('userName')}"
-                             style="margin-bottom: 25px" class="text-danger">
-                            <ul>
-                                <li th:each="err : ${#fields.errors('userName')}" th:text="'User name ' + ${err}"/>
-                            </ul>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="register-password"><i class="icon-lock"></i> <b>비밀번호</b></label>
-                            <input class="form-control" th:field="*{password}" id="register-password" type="password"
-                                   placeholder="password (*)">
-                        </div>
-                        <div th:if="${#fields.hasErrors('password')}"
-                             style="margin-bottom: 25px" class="text-danger">
-                            <ul>
-                                <li th:each="err : ${#fields.errors('password')}" th:text="'Password ' + ${err}"/>
-                            </ul>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="register-password2"><i class="icon-lock"></i> <b>비밀번호 확인</b></label>
-                            <input class="form-control" id="register-password2" type="password"
-                                   placeholder="confirm password (*)" th:field="*{matchingPassword}"
-                                   th:errorclass="fieldError">
-                        </div>
-                        <div th:if="${#fields.hasErrors('matchingPassword')}"
-                             style="margin-bottom: 25px" class="text-danger">
-                            <ul>
-                                <li th:each="err : ${#fields.errors('matchingPassword')}"
-                                    th:text="'Password ' + ${err}"/>
-                            </ul>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="register-name"><i class="icon-name"><b>Name</b></i></label>
-                            <input class="form-control" th:field="*{name}" id="register-name" type="text"
-                                   placeholder="name (*)">
-                        </div>
-                        <div th:if="${#fields.hasErrors('name')}"
-                             style="margin-bottom: 25px" class="text-danger">
-                            <ul>
-                                <li th:each="err : ${#fields.errors('name')}" th:text="'name ' + ${err}"/>
-                            </ul>
-                        </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="btn pull-right">Register</button>
-                            <div class="clearfix"></div>
-                        </div>
-                    </form>
-                </div>
+         </div>
+         <div class="content-wrap">
+            <div class="tab"></div>
+            <div class="content">
+               <div class="co-board type2">
+                  <div class="bn-login01">
+					
+					<div class="section">
+					    <div class="">
+					        <div class="row">
+					        	<h3>회원 가입</h3>
+					            <div class="col-sm">
+					                <div class="basic-login">
+					                    <form th:action="@{/register/registration}"
+					                          th:object="${user}" method="POST">
+					                        <div class="form-group col-xs-15">
+					                            <div>
+					                                <!-- Check for registration error -->
+					                                <div th:if="${registrationError}" class="alert alert-danger col-xs-offset-1 col-xs-10">
+					                                    <span th:text="${registrationError}"></span>
+					                                </div>
+					                            </div>
+					                        </div>
+					
+					                        <div class="form-group">
+					                            <label for="register-username"><i class="icon-user"></i> <b>학번</b></label>
+					                            <input class="form-control" id="register-username" type="text" th:field="*{userName}"
+					                                   placeholder="username (*)">
+					                        </div>
+					                        <div th:if="${#fields.hasErrors('userName')}"
+					                             style="margin-bottom: 25px" class="text-danger">
+					                            <ul>
+					                                <li th:each="err : ${#fields.errors('userName')}" th:text="'User name ' + ${err}"/>
+					                            </ul>
+					                        </div>
+					
+					                        <div class="form-group">
+					                            <label for="register-password"><i class="icon-lock"></i> <b>비밀번호</b></label>
+					                            <input class="form-control" th:field="*{password}" id="register-password" type="password"
+					                                   placeholder="password (*)">
+					                        </div>
+					                        <div th:if="${#fields.hasErrors('password')}"
+					                             style="margin-bottom: 25px" class="text-danger">
+					                            <ul>
+					                                <li th:each="err : ${#fields.errors('password')}" th:text="'Password ' + ${err}"/>
+					                            </ul>
+					                        </div>
+					
+					                        <div class="form-group">
+					                            <label for="register-password2"><i class="icon-lock"></i> <b>비밀번호 확인</b></label>
+					                            <input class="form-control" id="register-password2" type="password"
+					                                   placeholder="confirm password (*)" th:field="*{matchingPassword}"
+					                                   th:errorclass="fieldError">
+					                        </div>
+					                        <div th:if="${#fields.hasErrors('matchingPassword')}"
+					                             style="margin-bottom: 25px" class="text-danger">
+					                            <ul>
+					                                <li th:each="err : ${#fields.errors('matchingPassword')}"
+					                                    th:text="'Password ' + ${err}"/>
+					                            </ul>
+					                        </div>
+					
+					                        <div class="form-group">
+					                            <label for="register-name"><i class="icon-name"><b>Name</b></i></label>
+					                            <input class="form-control" th:field="*{name}" id="register-name" type="text"
+					                                   placeholder="name (*)">
+					                        </div>
+					                        <div th:if="${#fields.hasErrors('name')}"
+					                             style="margin-bottom: 25px" class="text-danger">
+					                            <ul>
+					                                <li th:each="err : ${#fields.errors('name')}" th:text="'name ' + ${err}"/>
+					                            </ul>
+					                        </div>
+					
+					                        <div class="form-group">
+					                            <button type="submit" class="btn pull-right">Register</button>
+					                            <div class="clearfix"></div>
+					                        </div>
+					                    </form>
+					                </div>
+					            </div>
+					
+					        </div>
+					    </div>
+					</div>
+					
+                  </div>
+               </div>
             </div>
-
-        </div>
-    </div>
-</div>
-
-<!-- Footer -->
-<div class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-footer col-md-3 col-xs-6">
-                <th:block th:include="footer :: commonFooter"></th:block>
-            </div>
-        </div>
-    </div>
-</div>
-
-   <!-- Javascripts -->
-   <script src="/js/register.js"></script>
-   <!--
-        <script src="/js/bootstrap.min.js"></script>        
-         -->
-         <!-- 헤더에 필요 -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/jquery-1.9.1.min.js"><\/script>')</script>
-        <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
-        <script src="/js/jquery.sequence-min.js"></script>
-        <script src="/js/jquery.bxslider.js"></script>
-        <script src="/js/jquery.fitvids.js"></script>
-        <script src="/js/main-menu.js"></script>
-        <script src="/js/template.js"></script>
-
-</body>
+         </div>
+      </div>
+   
+      <footer>
+         <th:block th:include="footer :: commonFooter"></th:block>
+      </footer>
+   
+   </body>
 </html>

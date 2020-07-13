@@ -2423,15 +2423,18 @@ span.color-red {
   color: #fff;
   background: #4f8db3;
 }
+
+.mainmenu > ul > li.has-submenu a.homeButton{
+  border-bottom: 1px solid #bad2e1;
+}
+
 .mainmenu .mainmenu-submenu {
   display: none;
   position: absolute;
-  background: #4f8db3;/*#4f8db3*/
+  background: #4f8db3;
   width: 200px;
   margin: auto;
-  /*left: 0;*/
   z-index: 999;
-  /*
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
   -o-transform: translateZ(0);
@@ -2441,8 +2444,8 @@ span.color-red {
   -moz-box-shadow: 0 5px 5px rgba(0,0,0,0.4);
   box-shadow: 0 5px 5px rgba(0,0,0,0.4);
   color: 0 5px 5px rgba(0,0,0,0.4);
-  */
 }
+
 .mainmenu .mainmenu-submenu-inner > div {
   width: 100%;
   float: left;
@@ -2461,11 +2464,10 @@ span.color-red {
 }
 .mainmenu-open .mainmenu-submenu {
   display: block;
-  padding-bottom: 3em;
 }
 .mainmenu-submenu h4 {
   color: #bad2e1;
-  padding: 1em 0.4em 0.6em;
+  padding: 0.5em 0.4em 0.6em;
   font-size: 160%;
   font-weight: 300;
 }
@@ -2476,7 +2478,7 @@ span.color-red {
 	height:40px;
 	margin : auto;
 	display:block;
-	vertical-align: middle;
+	padding-top: 10px;
 }
 
 .mainmenu-submenu li > a{

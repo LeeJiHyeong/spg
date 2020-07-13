@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.board.service.FreeBoardFileService;
 import com.example.demo.board.service.FreeBoardService;
 import com.example.demo.login.domain.User;
+import com.example.demo.login.service.UserPrincipal;
 import com.example.demo.login.service.UserService;
 import com.example.demo.board.domain.*;
 
@@ -142,8 +143,11 @@ public class BoardController {
 	
 	// 갤러리
 	@RequestMapping(value = "gallery")
-	public String goGallery() {
+	public String goGallery(HttpSession session, Model model) {
 		
+        UserPrincipal user = (UserPrincipal) session.getAttribute("user");
+        model.addAttribute("userName", user.getUsername());
+
 		return "board/gallery";
 	}
 	
