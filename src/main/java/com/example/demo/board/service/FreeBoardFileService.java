@@ -19,5 +19,10 @@ public class FreeBoardFileService {
 		this.freeBoardFileRepository.save(freeBoardFile);
 		return freeBoardFile;
 	}
+	
+	@Transactional
+	public FreeBoardFile findByFreeBoardId(Long freeBoardId) {
+		return this.freeBoardFileRepository.findByFreeBoardId(freeBoardId).orElseGet(() -> null);
+	}
 
 }
