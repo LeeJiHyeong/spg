@@ -80,7 +80,7 @@
 #comments{ margin-top: 10px; } 
 .eachComment{ width :100%; margin: 10px; padding: 1.5em; border-bottom: 1px solid #c1bcba; }
 .eachComment .name{ font-size: 1.0em; font-weight: bold; color: black; margin-bottom: 0.3em; display: flex; justify-content: space-between; }
-.eachComment .inputValue{ font-size: 1.2em;}
+.eachComment .inputValue{ font-size: 0.9em;}
 .eachComment .time{ font-size: 0.7em; color: #c1bcba; font-style: oblique; margin-top: 0.5em; margin-bottom: 0.5em; } 
 .eachComment .voteDiv{ display: flex; justify-content: flex-end; }
 
