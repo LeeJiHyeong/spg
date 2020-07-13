@@ -14,13 +14,14 @@
 			<div class="menuextras">
 				<div class="extras">
 					<ul th:if="${userName == null}">
-						<li><a th:href="@{/login/Signin}">로그인</a></li>
-						<li><a th:href="@{/login/SignUp}">회원가입</a></li>
+						<li><a th:href="@{/login/signinPage}">로그인</a></li>
+						<li><a th:href="@{/register/signUpPage}">회원가입</a></li>
 					</ul>
 					<ul th:unless="${userName == null}">
 						<li><span th:text="${userName} + '님 환영합니다.'"></span></li>
-						<li><a th:href="@{/user/Management}">마이페이지</a></li>
-						<li><a th:href="@{#}">로그아웃</a></li>
+						<li><a th:href="@{/user/management}">마이페이지</a></li>
+						<li><a href="#" onclick="document.getElementById('logout').submit();">로그아웃</a></li>
+						<form id="logout" th:action="@{/logout}" method="POST"></form>
 					</ul>
 				</div>
 			</div>
@@ -32,63 +33,31 @@
 							alt=" No Image">
 					</a></li>
 
-					<li class="active has-submenu"><a href="/">S.P.G</a>
+					<li class="active has-submenu"><a class="homeButton" href="/">S.P.G</a>
 						<div class=mainmenu-submenu>
 							<div class="mainmenu-submenu-inner">
-								<div>
-									<h4>Introduce</h4>
-									<ul>
-										<li><a href="#">동아리 소개</a></li>
-										<li><a href="#">지도교수 소개</a></li>
-										<li><a href="#">임원진 소개</a></li>
-									</ul>
-								</div>
+								<h4>Introduce</h4>
+								<ul>
+									<li><a href="#">동아리 소개</a></li>
+									<li><a href="#">지도교수 소개</a></li>
+									<li><a href="#">임원진 소개</a></li>
+								</ul>
 							</div>
-						</div></li>
+						</div>
+					</li>
 
 					<li><a th:href="@{/notice}">공지사항</a></li>
-
+					
 					<li><a th:href="@{/board/freeBoard}">자유게시판</a></li>
-
-					<li class="has-submenu"><a th:href="@{/board/eduBoard}">교 육</a>
-						<div class=mainmenu-submenu>
-							<div class="mainmenu-submenu-inner">
-								<div>
-									<h4>Study</h4>
-									<ul>
-										<li><a href="#">신입생 교육</a></li>
-										<li><a href="#">재학생 교육</a></li>
-									</ul>
-								</div>
-							</div>
-						</div></li>
-
-					<li class="has-submenu"><a href="/">스터디</a>
-						<div class=mainmenu-submenu>
-							<div class="mainmenu-submenu-inner">
-								<div>
-									<h4>Group Study</h4>
-									<ul>
-										<li><a href="#">멤버 모집</a></li>
-										<li><a href="#">정보 공유</a></li>
-									</ul>
-								</div>
-							</div>
-						</div></li>
-
-					<li class="has-submenu"><a href="/">시험자료</a>
-						<div class=mainmenu-submenu>
-							<div class="mainmenu-submenu-inner">
-								<div>
-									<h4>Test</h4>
-									<ul>
-										<li><a href="#">수업 자료</a></li>
-										<li><a href="#">시험 자료</a></li>
-									</ul>
-								</div>
-							</div>
-						</div></li>
+					
+					<li><a th:href="@{/board/eduBoard}">교 육</a></li>
+					
+					<li><a th:href="@{/}">스터디</a></li>
+					
+					<li><a th:href="@{/}">시험자료</a></li>
+					
 					<li><a th:href="@{/board/gallery}">갤러리</a></li>
+					
 				</ul>
 			</nav>
 		</div>
