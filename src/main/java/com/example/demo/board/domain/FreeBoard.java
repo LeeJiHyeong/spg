@@ -1,5 +1,6 @@
 package com.example.demo.board.domain;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.*;
@@ -36,6 +37,9 @@ public class FreeBoard {
 	@NotBlank
 	@Column(name = "content", columnDefinition = "TEXT")
 	private String content;
+	
+	@Column(name = "create_date")
+	private Calendar createDate;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "free_board_id")
