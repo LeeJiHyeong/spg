@@ -11,31 +11,19 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	
+
     @Autowired
     private UserService userService;
 
-    @PostMapping("/deleteUser")
-    public String deleteUser(HttpSession httpSession) {
-        Object id = httpSession.getAttribute("userName");
-        if (id == null) {
-            return "redirect:/";
-        }
-        this.userService.deleteByUserName((String) id);
-
-        return "redirect:/";
-    }
-    
     @RequestMapping("/withdrawalPage")
     public String withdrawalPage(HttpSession session, Model model) {
         UserPrincipal user = (UserPrincipal) session.getAttribute("user");
@@ -43,23 +31,23 @@ public class UserController {
             return "redirect:/";
         }
         model.addAttribute("userName", user.getUsername());
-    	
-    	return "user-withdrawal";
+
+        return "user-withdrawal";
     }
-    
+
     @RequestMapping("/withdrawal")
     public String withdrawalUser(HttpSession session, @RequestParam("password") String password, HttpServletResponse response) throws IOException {
-    	
+
         String userName = (String) session.getAttribute("userName");
         if (userName == null) {
             return "index";
         }
-    	
-    	System.out.println(this.userService.checkNowPassword(userName, password));
 
+        boolean checkNowUserPassword = this.userService.checkNowPassword(userName, password);
+        System.out.println(checkNowUserPassword);
 
-        if(this.userService.checkNowPassword(userName, password)) {
-            this.userService.deleteByUserName(userName);
+        if (checkNowUserPassword) {
+            this.userService.deleteByUserName(userName); // delete user
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>alert('회원 탈퇴가 완료되었습니다.');</script>");
@@ -99,10 +87,10 @@ public class UserController {
 
             return "user-management";
         }
-        
+
         String pastUsername = (String) httpSession.getAttribute("userName");
         User user = this.userService.updateUsernameAndName(pastUsername, userDataRequest.getUserName(), userDataRequest.getName());
-        
+
         if (user == null) {
             model.addAttribute("changeError", "Sorry It is not changed.");
 
@@ -117,19 +105,6 @@ public class UserController {
         return "redirect:/user/management";
     }
 
-    @PostMapping("/checkNowPassword")
-    public String checkPassword(HttpSession httpSession,
-                                @RequestParam("password") String password) {
-        String userName = (String) httpSession.getAttribute("userName");
-        String urlHeader = "redirect:/";
-        if (userName == null) {
-            return urlHeader;
-        }
-        String urlFooter = this.userService.checkNowPassword(userName, password) ? "user/passwordChangePage" : "/";
-        
-        return urlHeader + urlFooter;
-    }
-    
     @GetMapping("/passwordChangePage")
     public String passwordChangePage(Model model) {
         // todo add authetication for this page
@@ -144,13 +119,13 @@ public class UserController {
                                      Model model) {
         String userName = (String) httpSession.getAttribute("userName");
         if (bindingResult.hasErrors()) {
-            model.addAttribute("changeError", "The two passwords do not match.");
+            model.addAttribute("changeError", "The two passwords do not match or please insert your password.");
             model.addAttribute("changingPasswordRequest", new ChangingPasswordRequest());
 
             return "user-password-change";
         }
         if (this.userService.changeUserPassword(userName, changingPasswordRequest.getPassword()) == null) {
-            model.addAttribute("changeError", "password update error");
+            model.addAttribute("changeError", "you password is not correct.");
             model.addAttribute("changingPasswordRequest", new ChangingPasswordRequest());
 
             return "user-password-change";

@@ -53,10 +53,14 @@ public class UserService {
         this.userRepository.deleteByUserName(username);
     }
 
-    @Transactional(rollbackOn = Exception.class)
+    @Transactional
     public User changeUserPassword(String username, String passowrd) {
         User oridinaryUser = this.userRepository.findByUserName(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+        boolean isUserPasswordCorrect = this.bCryptPasswordEncoder.matches(passowrd, oridinaryUser.getPassword());
+        if (!isUserPasswordCorrect) {
+            return null;
+        }
         oridinaryUser.setPassword(this.bCryptPasswordEncoder.encode(passowrd));
 
         return this.userRepository.save(oridinaryUser);
