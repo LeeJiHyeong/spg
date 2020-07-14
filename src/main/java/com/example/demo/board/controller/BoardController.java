@@ -3,6 +3,7 @@ package com.example.demo.board.controller;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -30,6 +31,7 @@ import com.example.demo.board.service.FreeBoardService;
 import com.example.demo.login.domain.User;
 import com.example.demo.login.service.UserPrincipal;
 import com.example.demo.login.service.UserService;
+import com.common.utils.PageVO;
 import com.example.demo.board.domain.*;
 
 @Controller
@@ -48,13 +50,28 @@ public class BoardController {
 	private UserService userService;
 	
 	// 자유게시판
-	@RequestMapping(value = "freeBoard")
-	public String goFreeBoard(HttpSession session, Model model) {
+	@GetMapping(value = "freeBoard")
+	public String goFreeBoard(HttpSession session, Model model,
+							  @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 		
+		// session
 		if (session.getAttribute("userName") != null) {
 			String userName = (String)session.getAttribute("userName");
 			model.addAttribute("userName", userName);
 		}
+		
+		int totalCount = this.freeBoardService.getTotalCount();
+		List<FreeBoard> pageList = this.freeBoardService.findByPage(pageNum - 1);
+		PageVO pageInfo = new PageVO();
+		
+		if(totalCount > 0) {
+			pageInfo.setPageSize(10);
+			pageInfo.setPageNo(pageNum);
+			pageInfo.setTotalCount(totalCount);
+		}  
+		
+		model.addAttribute("pageList", pageList);
+		model.addAttribute("pageInfo", pageInfo);
 		
 		return "/board/free_board";
 	}

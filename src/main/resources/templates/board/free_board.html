@@ -45,136 +45,20 @@
 	    						<th>작성일</th>
 	    						<th>조회</th>
 	    					</tr>
-	    					<tr>
-	    						<!-- No -->
-	    						<!-- <td class="job-position"> -->
-	    						<td class="job-position">1</td>
-	    						<!-- 제목 -->
-	    						<td class="job-position"><a th:href="@{freeBoard/detail?contentId=1}">최대 몇글자 까지 들어갈것인가</a></td>
-	    						<!-- 작성자 -->
-	    						<td class="job-position">권오범</td>
-	    						<!-- 작성일 -->
-	    						<td class="job-position">2020.01.01</td>
-	    						<!-- 조회 -->
-	    						<td class="job-position">123</td>
-	    					</tr>
-	    					<tr>
-	    						<!-- No -->
-	    						<!-- <td class="job-position"> -->
-	    						<td class="job-position">2</td>
-	    						<!-- 제목 -->
-	    						<td class="job-position"><a th:href="@{freeBoard/detail?contentId=99}">최대 몇글자 까지 들어갈것인가</a></td>
-	    						<!-- 작성자 -->
-	    						<td class="job-position">오경택</td>
-	    						<!-- 작성일 -->
-	    						<td class="job-position">2020.01.01</td>
-	    						<!-- 조회 -->
-	    						<td class="job-position">123</td>
-	    					</tr>
-	    					<tr>
-	    						<!-- No -->
-	    						<!-- <td class="job-position"> -->
-	    						<td class="job-position">3</td>
-	    						<!-- 제목 -->
-	    						<td class="job-position">최대 몇글자 까지 들어갈것인가</td>
-	    						<!-- 작성자 -->
-	    						<td class="job-position">이지형</td>
-	    						<!-- 작성일 -->
-	    						<td class="job-position">2020.01.01</td>
-	    						<!-- 조회 -->
-	    						<td class="job-position">123</td>
-	    					</tr>
-	    					<tr>
-	    						<!-- No -->
-	    						<!-- <td class="job-position"> -->
-	    						<td class="job-position">4</td>
-	    						<!-- 제목 -->
-	    						<td class="job-position">최대 몇글자 까지 들어갈것인가</td>
-	    						<!-- 작성자 -->
-	    						<td class="job-position">신동환</td>
-	    						<!-- 작성일 -->
-	    						<td class="job-position">2020.01.01</td>
-	    						<!-- 조회 -->
-	    						<td class="job-position">124</td>
-	    					</tr>
-	    					<tr>
-	    						<!-- No -->
-	    						<!-- <td class="job-position"> -->
-	    						<td class="job-position">5</td>
-	    						<!-- 제목 -->
-	    						<td class="job-position">최대 몇글자 까지 들어갈것인가</td>
-	    						<!-- 작성자 -->
-	    						<td class="job-position">권오범</td>
-	    						<!-- 작성일 -->
-	    						<td class="job-position">2020.01.01</td>
-	    						<!-- 조회 -->
-	    						<td class="job-position">123</td>
-	    					</tr>
-	    					<tr>
-	    						<!-- No -->
-	    						<!-- <td class="job-position"> -->
-	    						<td class="job-position">6</td>
-	    						<!-- 제목 -->
-	    						<td class="job-position">최대 몇글자 까지 들어갈것인가</td>
-	    						<!-- 작성자 -->
-	    						<td class="job-position">권오범</td>
-	    						<!-- 작성일 -->
-	    						<td class="job-position">2020.01.01</td>
-	    						<!-- 조회 -->
-	    						<td class="job-position">123</td>
-	    					</tr>
-	    					<tr>
-	    						<!-- No -->
-	    						<!-- <td class="job-position"> -->
-	    						<td class="job-position">7</td>
-	    						<!-- 제목 -->
-	    						<td class="job-position">최대 몇글자 까지 들어갈것인가</td>
-	    						<!-- 작성자 -->
-	    						<td class="job-position">권오범</td>
-	    						<!-- 작성일 -->
-	    						<td class="job-position">2020.01.01</td>
-	    						<!-- 조회 -->
-	    						<td class="job-position">123</td>
-	    					</tr>
-	    					<tr>
-	    						<!-- No -->
-	    						<!-- <td class="job-position"> -->
-	    						<td class="job-position">8</td>
-	    						<!-- 제목 -->
-	    						<td class="job-position">최대 몇글자 까지 들어갈것인가</td>
-	    						<!-- 작성자 -->
-	    						<td class="job-position">권오범</td>
-	    						<!-- 작성일 -->
-	    						<td class="job-position">2020.01.01</td>
-	    						<!-- 조회 -->
-	    						<td class="job-position">123</td>
-	    					</tr>
-	    					<tr>
-	    						<!-- No -->
-	    						<!-- <td class="job-position"> -->
-	    						<td class="job-position">9</td>
-	    						<!-- 제목 -->
-	    						<td class="job-position">최대 몇글자 까지 들어갈것인가</td>
-	    						<!-- 작성자 -->
-	    						<td class="job-position">권오범</td>
-	    						<!-- 작성일 -->
-	    						<td class="job-position">2020.01.01</td>
-	    						<!-- 조회 -->
-	    						<td class="job-position">123</td>
-	    					</tr>
-	    					<tr>
-	    						<!-- No -->
-	    						<!-- <td class="job-position"> -->
-	    						<td class="job-position">10</td>
-	    						<!-- 제목 -->
-	    						<td class="job-position">최대 몇글자 까지 들어갈것인가</td>
-	    						<!-- 작성자 -->
-	    						<td class="job-position">권오범</td>
-	    						<!-- 작성일 -->
-	    						<td class="job-position">2020.01.01</td>
-	    						<!-- 조회 -->
-	    						<td class="job-position">123</td>
-	    					</tr>
+	    					<th:block th:each="page : ${pageList}">
+		    					<tr>
+		    						<!-- No -->
+		    						<td class="job-position" th:text="${page.getId()}">1</td>
+		    						<!-- 제목 -->
+		    						<td class="job-position"><a th:href="@{freeBoard/detail(contentId=${page.getId()})}"><span th:text="${page.getTitle()}"></span></a></td>
+		    						<!-- 작성자 -->
+		    						<td class="job-position" th:text="${page.getWriterName()}"></td>
+		    						<!-- 작성일 -->
+		    						<td class="job-position" th:text="${#dates.format(page.getCreateDate(), 'yyyy-MM-dd')}"></td>
+		    						<!-- 조회 -->
+		    						<td class="job-position">123</td>
+		    					</tr>
+	    					</th:block>
 	    				</table>
 	    			</div>
 	    			<!-- End Open Vacancies List -->
@@ -187,15 +71,15 @@
 		
 		<!-- Paging -->
 		<div class="paging">
-			<a href="#" class="btn_arr first"><span><<</span></a>            
-			<a href="#" class="btn_arr prev"><span><</span></a>     
-			<a href="#" class="on">1</a><!-- D : 활성화페이지일 경우 : on 처리 -->
-			<a href="#">2</a>
-			<a href="#">3</a>
-			<a href="#">4</a>
-			<a href="#">5</a>
-			<a href="#" class="btn_arr next"><span>></span></a>            
-			<a href="#" class="btn_arr last"><span>>></span></a> 
+			<a th:href="@{/board/freeBoard(pageNum=${pageInfo.getFirstPageNo()})}" class="btn_arr first"><span><<</span></a>            
+			<a th:href="@{/board/freeBoard(pageNum=${pageInfo.getPrevPageNo()})}" class="btn_arr prev"><span><</span></a>
+			<th:block th:each="num : ${#numbers.sequence(pageInfo.getStartPageNo(), pageInfo.getEndPageNo())}">
+				<!-- D : 활성화페이지일 경우 : on 처리 -->     
+				<a th:if="${pageInfo.getPageNo() == num}" th:href="@{/board/freeBoard(pageNum=${num})}" class="on"><span th:text="${num}"></span></a>
+				<a th:unless="${pageInfo.getPageNo() == num}" th:href="@{/board/freeBoard(pageNum=${num})}"><span th:text="${num}"></span></a><!-- D : 활성화페이지일 경우 : on 처리 -->
+			</th:block>
+			<a th:href="@{/board/freeBoard(pageNum=${pageInfo.getNextPageNo()})}" class="btn_arr next"><span>></span></a>            
+			<a th:href="@{/board/freeBoard(pageNum=${pageInfo.getFinalPageNo()})}" class="btn_arr last"><span>>></span></a> 
 		</div>
 		<!-- Search -->
 		<div class="search">
