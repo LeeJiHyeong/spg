@@ -48,7 +48,4 @@ public class FreeBoardService {
 	public int getTotalCount() {
 		return (int)this.freeBoardRepository.count();
 	}
-
-	public FreeBoardService() {
-	}
 }
