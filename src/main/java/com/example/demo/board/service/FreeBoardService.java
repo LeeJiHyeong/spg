@@ -6,6 +6,9 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.board.domain.FreeBoard;
@@ -32,6 +35,18 @@ public class FreeBoardService {
 	@Transactional
 	public FreeBoard findById(Long id) {
 		return this.freeBoardRepository.findById(id).orElseGet(() -> null);
+	}
+	
+	@Transactional
+	public List<FreeBoard> findByPage(int startNum) {
+		Pageable pageable = PageRequest.of(startNum, 10);
+		Page<FreeBoard> page = this.freeBoardRepository.findAll(pageable);
+		return page.getContent();
+	}
+	
+	@Transactional
+	public int getTotalCount() {
+		return (int)this.freeBoardRepository.count();
 	}
 
 	public FreeBoardService() {
