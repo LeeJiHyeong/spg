@@ -54,9 +54,27 @@ CREATE TABLE free_board_file(
 -- 자유 게시판 파일 table
 
 -- test code (free_board)
-insert into free_board(id, title, writer_id, writer_name, content) values(1, 'test title 1', 1, 'mary', 'test content 1');
-insert into free_board(id, title, writer_id, writer_name, content) values(2, 'test title 2', 1, 'mary', 'test content 2');
-insert into free_board(id, title, writer_id, writer_name, content) values(3, 'test title 3', 1, 'efg', 'test content 3');
+insert into free_board(title, writer_id, writer_name, content) values('시원스쿨, 과연 신동환은 어떻게될것인가', 1, 'mary', 'test content 1');
+insert into free_board(title, writer_id, writer_name, content) values('test title 2', 1, '권오범', 'test content 212');
+insert into free_board(title, writer_id, writer_name, content) values('test title 3', 1, '이규철', 'test content 166');
+insert into free_board(title, writer_id, writer_name, content) values('test title 4', 1, '공은배', 'test content 165');
+insert into free_board(title, writer_id, writer_name, content) values('test title 5', 1, '오해인', 'test content 16');
+insert into free_board(title, writer_id, writer_name, content) values('test title 6', 1, '신동택', 'test content 154');
+insert into free_board(title, writer_id, writer_name, content) values('test title 7', 1, '김귀환', 'test content 1654');
+insert into free_board(title, writer_id, writer_name, content) values('test title 8', 1, '기기괴괴', 'test content 19');
+insert into free_board(title, writer_id, writer_name, content) values('test title 9', 1, '슈렉', 'test content 9');
+insert into free_board(title, writer_id, writer_name, content) values('test title 10', 1, '페이커', 'test content 10');
+insert into free_board(title, writer_id, writer_name, content) values('test title 11', 1, '안성진', 'test content 11');
+insert into free_board(title, writer_id, writer_name, content) values('test title 12', 1, '안생진', 'test content 12');
+insert into free_board(title, writer_id, writer_name, content) values('test title 13', 1, '안뚱', 'test content 13');
+insert into free_board(title, writer_id, writer_name, content) values('test title 14', 1, '배수민', 'test content 14');
+insert into free_board(title, writer_id, writer_name, content) values('test title 15', 1, '배짱', 'test content 15');
+insert into free_board(title, writer_id, writer_name, content) values('test title 16', 1, '김지허', 'test content 16');
+insert into free_board(title, writer_id, writer_name, content) values('test title 17', 1, '김성한', 'test content 17');
+insert into free_board(title, writer_id, writer_name, content) values('test title 18', 1, '김지호동거인', 'test content 18');
+insert into free_board(title, writer_id, writer_name, content) values('test title 19', 1, '맥주', 'test content 19');
+insert into free_board(title, writer_id, writer_name, content) values('test title 20', 1, '소주', 'test content 20');
+insert into free_board(title, writer_id, writer_name, content) values('test title 21', 1, 'mary', 'test content 21');
 
 -- test code (user_roles)
 INSERT INTO user_roles (user_id, role_id) VALUES (1, 2);
