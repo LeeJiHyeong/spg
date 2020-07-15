@@ -70,7 +70,8 @@
 						<div class="eachComment">
 							<div class="name">
 								<span>포마드권오범</span>
-								<input type="button" class="btn" value="삭제" style="background: none repeat scroll 0 0 #DA1111;">
+								<!-- <input type="button" class="btn" value="삭제" style="background: none repeat scroll 0 0 #DA1111;"> -->
+								<a th:href="@{#}"><span class="remove-btn">&times;</span></a>
 							</div>
 							<div class="inputValue">
 								<span>댓글내용</span>
@@ -79,7 +80,8 @@
 						<div class="eachComment">
 							<div class="name">
 								<span>포마드신동환</span>
-								<input type="button" class="btn" value="삭제" style="background: none repeat scroll 0 0 #DA1111;">
+								<!-- <input type="button" class="btn" value="삭제" style="background: none repeat scroll 0 0 #DA1111;"> -->
+								<a th:href="@{#}"><span class="remove-btn">&times;</span></a>
 							</div>
 							<div class="inputValue">
 								<span>댓글내용</span>
@@ -88,6 +90,8 @@
 					</div>
 	        	</div>
 	        	<div class="right_button">
+	        		<a th:href="@{#}" class="btn" style="background: none repeat scroll 0 0 #DA1111;">삭제</a>
+	        		<a th:href="@{#}" class="btn">수정</a>
 					<a th:href="@{/board/freeBoard}" class="btn"> 목록 </a>
 				</div>
 	        </div>
