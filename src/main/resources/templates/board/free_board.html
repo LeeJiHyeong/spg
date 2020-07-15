@@ -75,8 +75,8 @@
 			<a th:href="@{/board/freeBoard(pageNum=${pageInfo.getPrevPageNo()})}" class="btn_arr prev"><span><</span></a>
 			<th:block th:each="num : ${#numbers.sequence(pageInfo.getStartPageNo(), pageInfo.getEndPageNo())}">
 				<!-- D : 활성화페이지일 경우 : on 처리 -->     
-				<a th:if="${pageInfo.getPageNo() == num}" th:href="@{/board/freeBoard(pageNum=${num})}" class="on"><span th:text="${num}"></span></a>
-				<a th:unless="${pageInfo.getPageNo() == num}" th:href="@{/board/freeBoard(pageNum=${num})}"><span th:text="${num}"></span></a><!-- D : 활성화페이지일 경우 : on 처리 -->
+				<a th:if="${pageInfo.getPageNo() == num}" th:href="@{/board/freeBoard(pageNum=${num}, searchKey=${searchKey})}" class="on"><span th:text="${num}"></span></a>
+				<a th:unless="${pageInfo.getPageNo() == num}" th:href="@{/board/freeBoard(pageNum=${num}, searchKey=${searchKey})}"><span th:text="${num}"></span></a><!-- D : 활성화페이지일 경우 : on 처리 -->
 			</th:block>
 			<a th:href="@{/board/freeBoard(pageNum=${pageInfo.getNextPageNo()})}" class="btn_arr next"><span>></span></a>            
 			<a th:href="@{/board/freeBoard(pageNum=${pageInfo.getFinalPageNo()})}" class="btn_arr last"><span>>></span></a> 
@@ -87,8 +87,9 @@
 				<option value="search_all">제목+내용</option>
 				<option value="search_person">작성자</option>
 			</select>
-			<input type="textarea" class="search_text">
-			<input type="button" value="검색" class="btn">
+			<input type="textarea" class="search_text" th:value="${searchKey}" id="search_key">
+			<!-- <input type="button" value="검색" class="btn"> -->
+			<input type="button" onclick="freeBoardSearch()" class="btn" value="검색" />
 		</div>
 		
 	    <!-- Footer -->
@@ -96,4 +97,5 @@
 		    <th:block th:include="footer :: commonFooter"></th:block>
 	    </footer>
     </body>
+    <script src="/js/common.js"></script>
 </html>
