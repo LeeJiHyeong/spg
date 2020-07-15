@@ -41,7 +41,7 @@ CREATE TABLE free_board(
     writer_name varchar(20) NOT NULL,
     create_date DATE DEFAULT (CURRENT_DATE),
     content TEXT NOT NULL,
-    FOREIGN KEY(writer_id) REFERENCES user (id)
+    FOREIGN KEY(writer_id) REFERENCES user (id) ON DELETE SET NULL
 );
 -- user 가 사라지더라도 게시글은 남도록 작성
 
