@@ -19,5 +19,5 @@ public interface FreeBoardRepository extends JpaRepository<FreeBoard, Long> {
 
 	public List<FreeBoard> findByWriterName(String writerName);
 	
-	public int countByTitleContainingOrContentContaining(String aString, String bString);
+	public int countByTitleContainingOrContentContaining(String titleKeyword, String contentKeyword);
 }

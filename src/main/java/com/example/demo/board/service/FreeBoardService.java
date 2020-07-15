@@ -50,14 +50,14 @@ public class FreeBoardService {
 	}
 	
 	@Transactional
-	public List<FreeBoard> findByTitleContainingOrContentContaining(int startNum, String aString) {
+	public List<FreeBoard> findByTitleContainingOrContentContaining(int startNum, String keyword) {
 		Pageable pageable = PageRequest.of(startNum, 10);
-		return this.freeBoardRepository.findByTitleContainingOrContentContaining(aString, aString, pageable).getContent();
+		return this.freeBoardRepository.findByTitleContainingOrContentContaining(keyword, keyword, pageable).getContent();
 	}
 	
 	@Transactional
-	public int getCountByTitleContainingOrContentContaining(String aString) {
-		return this.freeBoardRepository.countByTitleContainingOrContentContaining(aString, aString);
+	public int getCountByTitleContainingOrContentContaining(String keyword) {
+		return this.freeBoardRepository.countByTitleContainingOrContentContaining(keyword, keyword);
 	}
 	
 }
