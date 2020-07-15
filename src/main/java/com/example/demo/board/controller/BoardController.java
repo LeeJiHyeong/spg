@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,17 +41,27 @@ public class BoardController {
     // 자유게시판
     @GetMapping(value = "freeBoard")
     public String goFreeBoard(HttpSession session, Model model,
-                              @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+                              @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                              @RequestParam(value = "searchKey", defaultValue = "") String searchKey) {
 
         // session
         if (session.getAttribute("userName") != null) {
             String userName = (String) session.getAttribute("userName");
             model.addAttribute("userName", userName);
         }
-
-        int totalCount = this.freeBoardService.getTotalCount();
-        List<FreeBoard> pageList = this.freeBoardService.findByPage(pageNum - 1);
+        
+        int totalCount = 0;
+        List<FreeBoard> pageList = new ArrayList<FreeBoard>();
         PageVO pageInfo = new PageVO();
+        
+        if (searchKey.equals("")) { // 검색키워드가 없는 경우
+        	pageList = this.freeBoardService.findByPage(pageNum - 1);
+        	totalCount = this.freeBoardService.getTotalCount();
+        }
+        else {
+        	pageList = this.freeBoardService.findByTitleContainingOrContentContaining(pageNum - 1, searchKey);
+        	totalCount = this.freeBoardService.getCountByTitleContainingOrContentContaining(searchKey);
+        }
 
         if (totalCount > 0) {
             pageInfo.setPageSize(10);
@@ -60,7 +71,8 @@ public class BoardController {
 
         model.addAttribute("pageList", pageList);
         model.addAttribute("pageInfo", pageInfo);
-
+        model.addAttribute("searchKey", searchKey);
+        
         return "/board/free_board";
     }
 

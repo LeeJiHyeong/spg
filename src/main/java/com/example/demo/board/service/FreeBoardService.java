@@ -48,4 +48,16 @@ public class FreeBoardService {
 	public int getTotalCount() {
 		return (int)this.freeBoardRepository.count();
 	}
+	
+	@Transactional
+	public List<FreeBoard> findByTitleContainingOrContentContaining(int startNum, String aString) {
+		Pageable pageable = PageRequest.of(startNum, 10);
+		return this.freeBoardRepository.findByTitleContainingOrContentContaining(aString, aString, pageable).getContent();
+	}
+	
+	@Transactional
+	public int getCountByTitleContainingOrContentContaining(String aString) {
+		return this.freeBoardRepository.countByTitleContainingOrContentContaining(aString, aString);
+	}
+	
 }
