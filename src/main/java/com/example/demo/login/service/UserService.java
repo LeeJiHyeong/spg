@@ -6,6 +6,7 @@ import com.example.demo.login.domain.RoleName;
 import com.example.demo.login.domain.User;
 import com.example.demo.login.repository.RoleRepository;
 import com.example.demo.login.repository.UserRepository;
+import com.example.demo.login.request.ChangingPasswordRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -54,14 +55,15 @@ public class UserService {
     }
 
     @Transactional
-    public User changeUserPassword(String username, String passowrd) {
+    public User changeUserPassword(String username, ChangingPasswordRequest changingPasswordRequest) {
         User oridinaryUser = this.userRepository.findByUserName(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
-        boolean isUserPasswordCorrect = this.bCryptPasswordEncoder.matches(passowrd, oridinaryUser.getPassword());
+        boolean isUserPasswordCorrect = this.bCryptPasswordEncoder.matches(changingPasswordRequest.getBeforePassword()
+                , oridinaryUser.getPassword());
         if (!isUserPasswordCorrect) {
             return null;
         }
-        oridinaryUser.setPassword(this.bCryptPasswordEncoder.encode(passowrd));
+        oridinaryUser.setPassword(this.bCryptPasswordEncoder.encode(changingPasswordRequest.getPassword()));
 
         return this.userRepository.save(oridinaryUser);
     }
