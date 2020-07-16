@@ -16,43 +16,45 @@ import lombok.Setter;
 @Table(name = "free_board")
 public class FreeBoard {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-	@NotBlank
-	@Size(max = 40)
-	@Column(name = "title")
-	private String title;
+    @NotBlank
+    @Size(max = 40)
+    @Column(name = "title")
+    private String title;
 
-	@Column(name = "writer_id")
-	private long writerId;
+    @Column(name = "writer_id")
+    private long writerId;
 
-	@NotBlank
-	@Size(max = 20)
-	@Column(name = "writer_name")
-	private String writerName;
+    @NotBlank
+    @Size(max = 20)
+    @Column(name = "writer_name")
+    private String writerName;
 
-	@NotBlank
-	@Column(name = "content", columnDefinition = "TEXT")
-	private String content;
-	
-	@Column(name = "create_date")
-	private Calendar createDate;
+    @Column(name = "number_of_hit")
+    private short numberOfHit;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "free_board_id")
-	private List<FreeBoardFile> freeBoardFile;
+    @NotBlank
+    @Column(name = "content", columnDefinition = "TEXT")
+    private String content;
 
-	public FreeBoard() {
+    @Column(name = "create_date")
+    private Calendar createDate;
 
-	}
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "free_board_id")
+    private List<FreeBoardFile> freeBoardFile;
 
-	public FreeBoard(String title, long writerId, String writerName, String content) {
-		this.title = title;
-		this.writerId = writerId;
-		this.writerName = writerName;
-		this.content = content;
-	}
+    public FreeBoard() {
+    }
+
+    public FreeBoard(String title, long writerId, String writerName, String content) {
+        this.title = title;
+        this.writerId = writerId;
+        this.writerName = writerName;
+        this.content = content;
+    }
 }

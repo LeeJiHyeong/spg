@@ -33,6 +33,11 @@ INSERT INTO user  VALUES
 (3, 'susan','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K', 'efg', null, "2019-01-01","2019-01-01");
 -- id : john, pw : fun123
 
+-- test code (user_roles)
+INSERT INTO user_roles (user_id, role_id) VALUES (1, 2);
+INSERT INTO user_roles (user_id, role_id) VALUES (2, 3);
+INSERT INTO user_roles (user_id, role_id) VALUES (3, 1);
+
 -- 자유 게시판 table
 CREATE TABLE free_board(
 	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -40,6 +45,7 @@ CREATE TABLE free_board(
     writer_id BIGINT,
     writer_name varchar(20) NOT NULL,
     create_date DATE DEFAULT (CURRENT_DATE),
+    number_of_hit SMALLINT DEFAULT 0,
     content TEXT NOT NULL,
     FOREIGN KEY(writer_id) REFERENCES user (id) ON DELETE SET NULL
 );
@@ -60,7 +66,7 @@ insert into free_board(title, writer_id, writer_name, content) values('test titl
 insert into free_board(title, writer_id, writer_name, content) values('test title 4', 1, '공은배', 'test content 165');
 insert into free_board(title, writer_id, writer_name, content) values('test title 5', 1, '오해인', 'test content 16');
 insert into free_board(title, writer_id, writer_name, content) values('test title 6', 1, '신동택', 'test content 154');
-insert into free_board(title, writer_id, writer_name, content) values('test title 7', 1, '김귀환', 'test content 1654');
+insert into free_board(title, writer_id, writer_name, content) values('test title 7', 1, '김기환', 'test content 1654');
 insert into free_board(title, writer_id, writer_name, content) values('test title 8', 1, '기기괴괴', 'test content 19');
 insert into free_board(title, writer_id, writer_name, content) values('test title 9', 1, '슈렉', 'test content 9');
 insert into free_board(title, writer_id, writer_name, content) values('test title 10', 1, '페이커', 'test content 10');
@@ -75,8 +81,3 @@ insert into free_board(title, writer_id, writer_name, content) values('test titl
 insert into free_board(title, writer_id, writer_name, content) values('test title 19', 1, '맥주', 'test content 19');
 insert into free_board(title, writer_id, writer_name, content) values('test title 20', 1, '소주', 'test content 20');
 insert into free_board(title, writer_id, writer_name, content) values('test title 21', 1, 'mary', 'test content 21');
-
--- test code (user_roles)
-INSERT INTO user_roles (user_id, role_id) VALUES (1, 2);
-INSERT INTO user_roles (user_id, role_id) VALUES (2, 3);
-INSERT INTO user_roles (user_id, role_id) VALUES (3, 1);
