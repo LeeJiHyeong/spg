@@ -146,28 +146,4 @@ public class BoardController {
         return "redirect:/board/freeBoard";
     }
 
-    // 교육게시판
-    @RequestMapping(value = "eduBoard")
-    public String goEducationBoard() {
-
-        return "board/education_board";
-    }
-
-    // 갤러리
-    @RequestMapping(value = "gallery")
-    public String goGallery(HttpSession session, Model model) {
-
-        UserPrincipal user = (UserPrincipal) session.getAttribute("user");
-        model.addAttribute("userName", user.getUsername());
-
-        return "board/gallery";
-    }
-
-    // 공지사항
-    @RequestMapping(value = "notice")
-    public String goNotice() {
-
-        return "admin/notice";
-    }
-
 }
