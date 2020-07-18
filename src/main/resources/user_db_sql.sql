@@ -60,9 +60,9 @@ CREATE TABLE free_board_file(
 -- 자유 게시판 파일 table
 
 -- test code (free_board)
-insert into free_board(title, writer_id, writer_name, content) values('시원스쿨, 과연 신동환은 어떻게될것인가', 1, 'mary', 'test content 1');
-insert into free_board(title, writer_id, writer_name, content) values('test title 2', 1, '권오범', 'test content 212');
-insert into free_board(title, writer_id, writer_name, content) values('test title 3', 1, '이규철', 'test content 166');
+insert into free_board(title, writer_id, writer_name, number_of_hit, content) values('시원스쿨, 과연 신동환은 어떻게될것인가', 1, 'mary', 30, 'test content 1');
+insert into free_board(title, writer_id, writer_name, number_of_hit, content) values('test title 2', 1, '권오범', 100, 'test content 212');
+insert into free_board(title, writer_id, writer_name, number_of_hit, content) values('test title 3', 1, '이규철', 72, 'test content 166');
 insert into free_board(title, writer_id, writer_name, content) values('test title 4', 1, '공은배', 'test content 165');
 insert into free_board(title, writer_id, writer_name, content) values('test title 5', 1, '오해인', 'test content 16');
 insert into free_board(title, writer_id, writer_name, content) values('test title 6', 1, '신동택', 'test content 154');
