@@ -2,7 +2,6 @@ package com.example.demo.board.controller;
 
 import com.example.demo.board.domain.FreeBoard;
 import com.example.demo.board.domain.FreeBoardFile;
-import com.example.demo.board.service.FreeBoardFileService;
 import com.example.demo.board.service.FreeBoardService;
 import com.example.demo.login.domain.User;
 import com.example.demo.login.service.UserPrincipal;
@@ -30,9 +29,6 @@ public class BoardController {
 
     @Autowired
     private FreeBoardService freeBoardService;
-
-    @Autowired
-    private FreeBoardFileService freeBoardFileService;
 
     @Autowired
     private UserService userService;
@@ -135,7 +131,7 @@ public class BoardController {
 
                 Long freeBoardId = this.freeBoardService.save(freeBoard).getId();
                 FreeBoardFile freeBoardfile = new FreeBoardFile(storeFileName, ordinaryFileName, freeBoardId);
-                this.freeBoardFileService.save(freeBoardfile);
+                this.freeBoardService.save(freeBoardfile);
             } catch (Exception e) {
                 e.printStackTrace();
             }

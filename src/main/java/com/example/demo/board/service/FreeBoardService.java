@@ -1,6 +1,7 @@
 package com.example.demo.board.service;
 
 import com.example.demo.board.domain.FreeBoard;
+import com.example.demo.board.domain.FreeBoardFile;
 import com.example.demo.board.reposiroty.FreeBoardFileRepository;
 import com.example.demo.board.reposiroty.FreeBoardRepository;
 import com.example.demo.exception.ResourceNotFoundException;
@@ -59,4 +60,10 @@ public class FreeBoardService {
         freeBoard.setNumberOfHit((short) (freeBoard.getNumberOfHit() + 1));
         return this.freeBoardRepository.save(freeBoard);
     }
+    
+    @Transactional
+	public FreeBoardFile save(FreeBoardFile freeBoardFile) {
+		this.freeBoardFileRepository.save(freeBoardFile);
+		return freeBoardFile;
+	}
 }
