@@ -86,6 +86,7 @@ public class BoardController {
         model.addAttribute("contentTitle", content.getTitle());
         model.addAttribute("writerName", content.getWriterName());
         model.addAttribute("contentText", content.getContent());
+        model.addAttribute("contentId", content.getId());
 
         if (freeBoardFiles != null && freeBoardFiles.size() != 0) {
             model.addAttribute("fileName", freeBoardFiles.get(0).getOrdinaryFileName());
@@ -141,5 +142,12 @@ public class BoardController {
 
         return "redirect:/board/freeBoard";
     }
-
+    
+    @GetMapping(value = "freeBoard/doDelete")
+    public String doFreeBoardDelete(@RequestParam(value = "contentId") int contentId) {
+    	this.freeBoardService.deleteById(contentId);
+    	
+    	return "redirect:/board/freeBoard";
+    }
+    
 }
