@@ -150,4 +150,19 @@ public class BoardController {
     	return "redirect:/board/freeBoard";
     }
     
+    @GetMapping(value = "freeBoard/modify")
+    public String goFreeBoardModify(@RequestParam(value = "contentId") int contentId,
+    								HttpSession session, Model model) {
+    	
+        if (session.getAttribute("userName") != null) {
+            String userName = (String) session.getAttribute("userName");
+            User user = this.userService.findByUserName(userName);
+            Long writerId = user.getId();
+
+            model.addAttribute("userName", userName);
+            model.addAttribute("writerId", writerId);
+        }
+        
+    	return "/board/free-board-modify";
+    }
 }
