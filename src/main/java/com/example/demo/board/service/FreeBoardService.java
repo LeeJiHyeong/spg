@@ -66,4 +66,9 @@ public class FreeBoardService {
 		this.freeBoardFileRepository.save(freeBoardFile);
 		return freeBoardFile;
 	}
+    
+    @Transactional
+    public void deleteById(long contentId) {
+    	this.freeBoardRepository.deleteById(contentId);
+    }
 }
