@@ -19,7 +19,7 @@
         <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
-		
+		<input type="hidden" id="content-id" th:value="${contentId}">
 		<!-- Header -->
        <div class="Header">
           <th:block th:include="header :: commonHeader"></th:block>
@@ -90,7 +90,8 @@
 					</div>
 	        	</div>
 	        	<div class="right_button">
-	        		<a th:href="@{/board/freeBoard/doDelete(contentId=${contentId})}" class="btn" style="background: none repeat scroll 0 0 #DA1111;">삭제</a>
+	        		<!-- <a th:href="@{/board/freeBoard/doDelete(contentId=${contentId})}" class="btn" style="background: none repeat scroll 0 0 #DA1111;">삭제</a> -->
+	        		<input type="button" id="delete-button" value="삭제" class="btn" style="background: none repeat scroll 0 0 #DA1111;" />
 	        		<a th:href="@{#}" class="btn">수정</a>
 					<a th:href="@{/board/freeBoard}" class="btn"> 목록 </a>
 				</div>
@@ -104,13 +105,6 @@
         <script src="js/jquery.sequence-min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/jquery-1.9.1.min.js"><\/script>')</script>
-        <!-- 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>        
-        <script src="js/jquery.fitvids.js"></script>
-        <script src="js/jquery.bxslider.js"></script>
-        <script src="js/main-menu.js"></script>
-        <script src="js/template.js"></script>
-		 -->
+		<script src="/js/freeboard.js"></script>
     </body>
 </html>
