@@ -163,6 +163,16 @@ public class BoardController {
             model.addAttribute("writerId", writerId);
         }
         
+        FreeBoard content = this.freeBoardService.getFreeBoardDetail((long)contentId);
+        List<FreeBoardFile> freeBoardFiles = content.getFreeBoardFile();
+
+        if (freeBoardFiles != null && freeBoardFiles.size() != 0) {
+        	// 1게시물 1파일이기때문에 get(0)
+        	// 다수파일 추가하도록 변경하게되면 수정 필요
+            model.addAttribute("fileName", freeBoardFiles.get(0).getOrdinaryFileName());
+        }
+
+        model.addAttribute("content", content);
     	return "/board/free-board-modify";
     }
 }

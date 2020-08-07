@@ -35,22 +35,22 @@
 							<!-- 글작성 데이터 -->
 							<div class="single-post-title">
 								<b>★Title</b> <input type="text" name="title" class="form-control"
-									placeholder="글 제목을 입력하세요." id="content-title">
+									placeholder="글 제목을 입력하세요." id="content-title" th:value="${content.getTitle()}">
 							</div>
 							<hr>
-							<input type="file" name="upload" /> <br>
+							<input type="file" name="upload" id="upload-file"/> <br>
 							<div class="form-group">
 								<label for="comment-name"><i
 									class="glyphicon glyphicon-user"></i> <b>Your name</b></label> <input
 									class="form-control" id="content_writer" type="text"
-									placeholder="" th:value="${userName}" readonly="readonly"
+									placeholder="" th:value="${content.getWriterName()}" readonly="readonly"
 									name="writerName">
 							</div>
 							<div class="form-group">
 								<label for="comment-message"><i
 									class="glyphicon glyphicon-comment"></i> <b>Content</b></label>
 								<textarea class="form-control" name="content" rows="20"
-									id="comment-message"></textarea>
+									id="comment-message" th:text="${content.getContent()}"></textarea>
 							</div>
 		
 							<div class="post-more" id="save-btn">
