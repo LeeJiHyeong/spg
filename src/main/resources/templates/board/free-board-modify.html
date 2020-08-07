@@ -26,7 +26,7 @@
 					<th:block th:include="header :: commonHeader"></th:block>
 				</div>
 				<!-- Post -->
-				<form th:action="@{doWrite}" method="post" enctype="multipart/form-data" onsubmit="return checkContent();">
+				<form th:action="@{doModifyFreeBoardDetail}" method="post" enctype="multipart/form-data" onsubmit="return checkContent();">
 					<input type="hidden" name="writerId" th:value="${writerId}">
 					<div class="blog-post blog-single-post">
 						<div class="col-sm-81">

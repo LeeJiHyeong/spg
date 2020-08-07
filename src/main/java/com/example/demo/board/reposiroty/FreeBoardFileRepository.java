@@ -1,14 +1,17 @@
 package com.example.demo.board.reposiroty;
 
+import java.util.List;
 import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.board.domain.FreeBoardFile;
 
 public interface FreeBoardFileRepository extends JpaRepository<FreeBoardFile, String> {
+    List<FreeBoardFile> findAllByFreeBoardId(Long freeBoardId);
 
-	public Optional<FreeBoardFile> findByStoreFileName(String storeFileName);
+    Optional<FreeBoardFile> findByStoreFileName(String storeFileName);
 
-	public Optional<FreeBoardFile> findByOrdinaryFileName(String ordinaryFileName);
+    Optional<FreeBoardFile> findByOrdinaryFileName(String ordinaryFileName);
 
-	public Optional<FreeBoardFile> findByFreeBoardId(Long freeBoardId);
+    Optional<FreeBoardFile> findByFreeBoardId(Long freeBoardId);
 }
