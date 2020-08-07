@@ -28,4 +28,3 @@ function checkContent() {
 	return true;
 }
 
-
