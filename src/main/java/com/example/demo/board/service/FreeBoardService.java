@@ -5,6 +5,7 @@ import com.example.demo.board.domain.FreeBoardFile;
 import com.example.demo.board.reposiroty.FreeBoardFileRepository;
 import com.example.demo.board.reposiroty.FreeBoardRepository;
 import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.utils.FilePath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.File;
 import java.util.List;
 
 @Service
@@ -60,15 +62,44 @@ public class FreeBoardService {
         freeBoard.setNumberOfHit((short) (freeBoard.getNumberOfHit() + 1));
         return this.freeBoardRepository.save(freeBoard);
     }
-    
+
     @Transactional
-	public FreeBoardFile save(FreeBoardFile freeBoardFile) {
-		this.freeBoardFileRepository.save(freeBoardFile);
-		return freeBoardFile;
-	}
-    
+    public FreeBoardFile save(FreeBoardFile freeBoardFile) {
+        this.freeBoardFileRepository.save(freeBoardFile);
+        return freeBoardFile;
+    }
+
     @Transactional
-    public void deleteById(long contentId) {
-    	this.freeBoardRepository.deleteById(contentId);
+    public void deleteFilesAndFreeBoardDataByContentId(long contentId) {
+        // todo kkh : what will we handle this
+        boolean result = this.deleteFilesInList(this.freeBoardFileRepository.findAllByFreeBoardId(contentId));
+        this.freeBoardRepository.deleteById(contentId);
+    }
+
+    @Transactional
+    public boolean modifyFreeBoardDetail(FreeBoard newFreeBoard) {
+        boolean isDeleteWell = this.deleteFilesInList(this.freeBoardFileRepository.findAllByFreeBoardId(newFreeBoard.getId()));
+        this.freeBoardRepository.save(newFreeBoard);
+        return isDeleteWell;
+    }
+
+    private boolean deleteFile(String filename) {
+        File file = new File(FilePath.FreeBoard.getFilePath() + filename);
+        if (file.exists()) {
+            return file.delete();
+        }
+
+        return false;
+    }
+
+    private boolean deleteFilesInList(List<FreeBoardFile> freeBoardFileList) {
+        boolean isDeleteError = false;
+        for (FreeBoardFile freeBoardFile : freeBoardFileList) {
+            if (!this.deleteFile(freeBoardFile.getStoreFileName())) {
+                isDeleteError = true;
+            }
+        }
+
+        return isDeleteError;
     }
 }

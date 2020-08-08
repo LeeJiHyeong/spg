@@ -4,8 +4,8 @@ import com.example.demo.board.domain.FreeBoard;
 import com.example.demo.board.domain.FreeBoardFile;
 import com.example.demo.board.service.FreeBoardService;
 import com.example.demo.login.domain.User;
-import com.example.demo.login.service.UserPrincipal;
 import com.example.demo.login.service.UserService;
+import com.example.demo.utils.FilePath;
 import com.example.demo.utils.PageVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,6 +111,16 @@ public class BoardController {
         return "/board/free_board_write";
     }
 
+    @PostMapping("/freeBoard/doModifyFreeBoardDetail")
+    public String doModifyData(@ModelAttribute @Valid FreeBoard freeBoard
+            , @RequestParam("upload") MultipartFile uploadFile) {
+        boolean result = this.freeBoardService.modifyFreeBoardDetail(freeBoard);
+        if (result) {
+            // todo :ljh -> files store in here and write next page direction
+        }
+        return "";
+    }
+
     @PostMapping(value = "freeBoard/doWrite")
     public String doWrite(@ModelAttribute @Valid FreeBoard freeBoard
             , @RequestParam("upload") MultipartFile uploadFile) {
@@ -127,7 +137,7 @@ public class BoardController {
             String fileExt = ordinaryFileName.substring(ordinaryFileName.lastIndexOf(".") + 1);
 
             try {
-                File file = new File("C:/spg_file/" + storeFileName);
+                File file = new File(FilePath.FreeBoard.getFilePath() + storeFileName);
                 uploadFile.transferTo(file);
 
                 Long freeBoardId = this.freeBoardService.save(freeBoard).getId();
@@ -142,18 +152,18 @@ public class BoardController {
 
         return "redirect:/board/freeBoard";
     }
-    
+
     @GetMapping(value = "freeBoard/doDelete")
     public String doFreeBoardDelete(@RequestParam(value = "contentId") int contentId) {
-    	this.freeBoardService.deleteById(contentId);
-    	
-    	return "redirect:/board/freeBoard";
+        this.freeBoardService.deleteFilesAndFreeBoardDataByContentId(contentId);
+
+        return "redirect:/board/freeBoard";
     }
-    
+
     @GetMapping(value = "freeBoard/modify")
     public String goFreeBoardModify(@RequestParam(value = "contentId") int contentId,
-    								HttpSession session, Model model) {
-    	
+                                    HttpSession session, Model model) {
+
         if (session.getAttribute("userName") != null) {
             String userName = (String) session.getAttribute("userName");
             User user = this.userService.findByUserName(userName);
@@ -162,17 +172,17 @@ public class BoardController {
             model.addAttribute("userName", userName);
             model.addAttribute("writerId", writerId);
         }
-        
-        FreeBoard content = this.freeBoardService.getFreeBoardDetail((long)contentId);
+
+        FreeBoard content = this.freeBoardService.getFreeBoardDetail(contentId);
         List<FreeBoardFile> freeBoardFiles = content.getFreeBoardFile();
 
         if (freeBoardFiles != null && freeBoardFiles.size() != 0) {
-        	// 1게시물 1파일이기때문에 get(0)
-        	// 다수파일 추가하도록 변경하게되면 수정 필요
+            // 1게시물 1파일이기때문에 get(0)
+            // 다수파일 추가하도록 변경하게되면 수정 필요
             model.addAttribute("fileName", freeBoardFiles.get(0).getOrdinaryFileName());
         }
 
         model.addAttribute("content", content);
-    	return "/board/free-board-modify";
+        return "/board/free-board-modify";
     }
 }
