@@ -59,6 +59,16 @@ CREATE TABLE free_board_file(
 );
 -- 자유 게시판 파일 table
 
+CREATE TABLE db_test.free_board_comment (
+   id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    username CHAR(20),
+    content TEXT NOT NULL,
+    create_date DATE DEFAULT (CURRENT_DATE),
+    content_id BIGINT,
+    FOREIGN KEY(content_id) REFERENCES free_board (id) ON DELETE CASCADE
+);
+-- 자유 게시판 댓글 table
+
 -- test code (free_board)
 insert into free_board(title, writer_id, writer_name, number_of_hit, content) values('시원스쿨, 과연 신동환은 어떻게될것인가', 1, 'mary', 30, 'test content 1');
 insert into free_board(title, writer_id, writer_name, number_of_hit, content) values('test title 2', 1, '권오범', 100, 'test content 212');
