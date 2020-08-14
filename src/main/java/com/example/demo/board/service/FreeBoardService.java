@@ -79,7 +79,7 @@ public class FreeBoardService {
     @Transactional
     public boolean modifyFreeBoardDetail(FreeBoard newFreeBoard) {
         boolean isDeleteWell = this.deleteFilesInList(this.freeBoardFileRepository.findAllByFreeBoardId(newFreeBoard.getId()));
-        this.freeBoardRepository.save(newFreeBoard);
+        if (isDeleteWell) this.freeBoardRepository.save(newFreeBoard);
         return isDeleteWell;
     }
 
@@ -93,10 +93,10 @@ public class FreeBoardService {
     }
 
     private boolean deleteFilesInList(List<FreeBoardFile> freeBoardFileList) {
-        boolean isDeleteError = false;
+        boolean isDeleteError = true;
         for (FreeBoardFile freeBoardFile : freeBoardFileList) {
             if (!this.deleteFile(freeBoardFile.getStoreFileName())) {
-                isDeleteError = true;
+                isDeleteError = false;
             }
         }
 

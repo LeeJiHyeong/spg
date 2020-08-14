@@ -27,6 +27,7 @@
 				</div>
 				<!-- Post -->
 				<form th:action="@{doModifyFreeBoardDetail}" method="post" enctype="multipart/form-data" onsubmit="return checkContent();">
+					<input type="hidden" name="id" th:value="${content.getId()}">
 					<input type="hidden" name="writerId" th:value="${writerId}">
 					<div class="blog-post blog-single-post">
 						<div class="col-sm-81">
