@@ -117,8 +117,9 @@ public class BoardController {
         boolean result = this.freeBoardService.modifyFreeBoardDetail(freeBoard);
         if (result) {
             // todo :ljh -> files store in here and write next page direction
+            return ""; // update well
         }
-        return "";
+        return ""; // error
     }
 
     @PostMapping(value = "freeBoard/doWrite")
