@@ -67,7 +67,7 @@ public class BoardController {
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("searchKey", searchKey);
 
-        return "/board/free_board";
+        return "/board/free-board";
     }
 
     // todo: please fix this part with frontend
@@ -92,7 +92,7 @@ public class BoardController {
             model.addAttribute("fileName", freeBoardFiles.get(0).getOrdinaryFileName());
         }
 
-        return "/board/free_board_detail";
+        return "/board/free-board-detail";
     }
 
     // 글작성
@@ -132,7 +132,7 @@ public class BoardController {
 
         String ordinaryFileName = uploadFile.getOriginalFilename();
 
-        if (!ordinaryFileName.equals("")) {
+        if (ordinaryFileName != null && !ordinaryFileName.equals("")) {
             String storeFileName = UUID.randomUUID().toString();
             String fileSize = Long.toString(uploadFile.getSize());
             String fileExt = ordinaryFileName.substring(ordinaryFileName.lastIndexOf(".") + 1);

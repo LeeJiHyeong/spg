@@ -11,6 +11,6 @@ public class EduBoardController {
     @RequestMapping(value = "eduBoard")
     public String goEducationBoard() {
 
-        return "board/education_board";
+        return "/board/education-board";
     }
 }
