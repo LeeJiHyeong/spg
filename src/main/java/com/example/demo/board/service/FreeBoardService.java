@@ -1,7 +1,9 @@
 package com.example.demo.board.service;
 
 import com.example.demo.board.domain.FreeBoard;
+import com.example.demo.board.domain.FreeBoardComment;
 import com.example.demo.board.domain.FreeBoardFile;
+import com.example.demo.board.reposiroty.FreeBoardCommentRepositroy;
 import com.example.demo.board.reposiroty.FreeBoardFileRepository;
 import com.example.demo.board.reposiroty.FreeBoardRepository;
 import com.example.demo.exception.ResourceNotFoundException;
@@ -24,6 +26,9 @@ public class FreeBoardService {
 
     @Autowired
     private FreeBoardFileRepository freeBoardFileRepository;
+    
+    @Autowired
+    private FreeBoardCommentRepositroy freeBoardCommentRepository;
 
     @Transactional
     public FreeBoard save(FreeBoard freeBoard) {
@@ -102,4 +107,11 @@ public class FreeBoardService {
 
         return isDeleteError;
     }
+    
+    // comment
+    public FreeBoardComment save(FreeBoardComment freeBoardComment) {
+    	this.freeBoardCommentRepository.save(freeBoardComment);
+    	return freeBoardComment;
+    }
+    
 }
