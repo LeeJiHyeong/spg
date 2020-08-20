@@ -50,6 +50,10 @@ public class FreeBoard {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "free_board_id")
     private List<FreeBoardFile> freeBoardFile;
+    
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "content_id")
+    private List<FreeBoardComment> freeBoardComment;
 
     public FreeBoard() {
     }
