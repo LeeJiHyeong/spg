@@ -61,7 +61,7 @@ CREATE TABLE free_board_file(
 
 CREATE TABLE db_test.free_board_comment (
    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(20),
+    user_name VARCHAR(20),
     content TEXT NOT NULL,
     create_date DATE DEFAULT (CURRENT_DATE),
     content_id BIGINT,
