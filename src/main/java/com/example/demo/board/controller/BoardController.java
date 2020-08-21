@@ -18,7 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -153,6 +155,15 @@ public class BoardController {
 
         return "redirect:/board/freeBoard";
     }
+    
+    @GetMapping(value = "freeBoard/doWriteComment")
+    @ResponseBody
+    public Map<String, String> doWriteComment(@RequestParam(value = "comment_input") String commentInput) {
+    	
+    	Map<String, String> comment = new HashMap<String, String>();
+    	comment.put("comment", commentInput);
+    	return comment;
+    }
 
     @GetMapping(value = "freeBoard/doDelete")
     public String doFreeBoardDelete(@RequestParam(value = "contentId") int contentId) {
@@ -186,4 +197,5 @@ public class BoardController {
         model.addAttribute("content", content);
         return "/board/free-board-modify";
     }
+    
 }

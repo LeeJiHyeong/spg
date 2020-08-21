@@ -62,9 +62,11 @@
 					<!-- comment -->
 					<div id="form-commentInfo"> 
 						<div id="comment-count">댓글 <span id="count">0</span></div>
-						<input id="comment-input" type="text" placeholder="댓글을 입력해 주세요.">
+						<!-- <form th:action="@{doWriteComment}" method="post" onsubmit="return checkContent();"> -->
+						<input id="comment-input" type="text" placeholder="댓글을 입력해 주세요." name="comment_input">
 						<br />
-						<input type="button" class="btn" value="등록" id="comment_submit">
+						<input type="submit" class="btn" value="등록" id="comment_submit" onclick="checkComment();">
+					<!-- 	</form> -->
 					</div> 
 					<div id=comments> 
 						<div class="eachComment">
