@@ -46,8 +46,8 @@ function checkComment() {
 function writeComment(comment) {
 	
 	var contentId = $('#content-id').val();
-	var allData = { "comment_input": comment, 
-					"content_id" : contentId};
+	var allData = { "content": comment, 
+					"contentId" : contentId};
 	
     $.ajax({
         type:'GET',

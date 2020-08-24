@@ -1,6 +1,7 @@
 package com.example.demo.board.controller;
 
 import com.example.demo.board.domain.FreeBoard;
+import com.example.demo.board.domain.FreeBoardComment;
 import com.example.demo.board.domain.FreeBoardFile;
 import com.example.demo.board.service.FreeBoardService;
 import com.example.demo.login.domain.User;
@@ -158,10 +159,11 @@ public class BoardController {
     
     @GetMapping(value = "freeBoard/doWriteComment")
     @ResponseBody
-    public Map<String, String> doWriteComment(@RequestParam(value = "comment_input") String commentInput) {
+    public Map<String, String> doWriteComment(@ModelAttribute @Valid FreeBoardComment freeBoardComment,
+    										  HttpSession session) {
     	
     	Map<String, String> comment = new HashMap<String, String>();
-    	comment.put("comment", commentInput);
+    	freeBoardComment.setUserName((String)session.getAttribute("userName"));
     	return comment;
     }
 
