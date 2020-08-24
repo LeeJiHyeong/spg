@@ -45,7 +45,9 @@ function checkComment() {
 
 function writeComment(comment) {
 	
-	var allData = { "comment_input": comment};
+	var contentId = $('#content-id').val();
+	var allData = { "comment_input": comment, 
+					"content_id" : contentId};
 	
     $.ajax({
         type:'GET',
