@@ -161,9 +161,16 @@ public class BoardController {
     @ResponseBody
     public Map<String, String> doWriteComment(@ModelAttribute @Valid FreeBoardComment freeBoardComment,
     										  HttpSession session) {
+
+    	String userName = (String)session.getAttribute("userName");
     	
     	Map<String, String> comment = new HashMap<String, String>();
-    	freeBoardComment.setUserName((String)session.getAttribute("userName"));
+    	comment.put("content", freeBoardComment.getContent());
+    	comment.put("contentId", Long.toString(freeBoardComment.getContentId()));
+    	comment.put("userName", userName);
+    	
+    	freeBoardComment.setUserName(userName);
+    	this.freeBoardService.save(freeBoardComment);
     	return comment;
     }
 

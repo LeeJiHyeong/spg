@@ -55,11 +55,25 @@ function writeComment(comment) {
         dataType : "json",
         data : allData,
         success : function(data){
-        	alert("ajax success");
+        	console.log(data);
+        	
+        	var addTag = '<div class="eachComment">'+
+        					'<div class="name">' +
+        						'<span>' + data.userName + '</span>' +
+        						'<a th:href="@{#}"><span class="remove-btn">&times;</span></a>' +
+        					'</div>' +
+        					'<div class="inputValue">' +
+								'<span>' + data.content +
+								'</span>' +
+							'</div>'
+        				'</div>';
+        	
+        	var commentLocation = $('#comments').children().last();
+        	commentLocation.after(addTag);
         },
         error : function(request, status, error){
         	console.log(error);
-            alert("ajax error")
+            alert("댓글 등록에 실패하였습니다.");
        }
     });
 }
