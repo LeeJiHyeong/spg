@@ -8,6 +8,15 @@ $('#delete-button').click(function(){
 	}
 });
 
+function checkDeleteComment(commentId) {
+	if (confirm("댓글을 삭제하시겠습니까?")) {
+		alert(commentId);
+	}
+	else {
+		return;
+	}
+}
+
 function checkContent() {
 	var title = $('#content-title').val();
 	var content = $('#comment-message').val();
@@ -79,4 +88,24 @@ function writeComment(comment) {
             alert("댓글 등록에 실패하였습니다.");
        }
     });
+}
+
+function deleteComment(commentId) {
+	
+	var allData = { "commentId": commentId };
+	
+//	$.ajax({
+//        type:'GET',
+//        url : "/board/freeBoard/doDeleteComment,
+//        dataType : "json",
+//        data : allData,
+//        success : function(data){
+//        	console.log(data);
+//        	console.log(this);
+//        },
+//        error : function(request, status, error){
+//        	console.log(error);
+//            alert("댓글 등록에 실패하였습니다.");
+//       }
+//    });
 }

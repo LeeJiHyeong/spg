@@ -90,11 +90,13 @@ public class BoardController {
         model.addAttribute("writerName", content.getWriterName());
         model.addAttribute("contentText", content.getContent());
         model.addAttribute("contentId", content.getId());
+        model.addAttribute("commentList", content.getFreeBoardComment());
+        model.addAttribute("commentCount", this.freeBoardService.getCommentCountByContentId(contentId));
 
         if (freeBoardFiles != null && freeBoardFiles.size() != 0) {
             model.addAttribute("fileName", freeBoardFiles.get(0).getOrdinaryFileName());
         }
-
+        
         return "/board/free-board-detail";
     }
 
@@ -171,6 +173,7 @@ public class BoardController {
     	
     	freeBoardComment.setUserName(userName);
     	this.freeBoardService.save(freeBoardComment);
+    	comment.put("commentCount", Long.toString(this.freeBoardService.getCommentCountByContentId(freeBoardComment.getContentId())));
     	return comment;
     }
 
@@ -180,7 +183,13 @@ public class BoardController {
 
         return "redirect:/board/freeBoard";
     }
-
+    
+    @GetMapping(value = "freeBoard/doDeleteComment")
+    @ResponseBody
+    public Map<String, String> doFreeBoardCommentDelete(@RequestParam(value = "commentId") int comment) {
+    	return null;
+    }
+    
     @GetMapping(value = "freeBoard/modify")
     public String goFreeBoardModify(@RequestParam(value = "contentId") int contentId,
                                     HttpSession session, Model model) {

@@ -60,36 +60,30 @@
 						<br /><br />
 					</div>
 					<!-- comment -->
+					<div id="comment-count">댓글 <span id="count" th:text="${commentCount}">0</span></div>
+					<hr style="border-color : #c1bcba;" />
+					<div id=comments> 
+						<div></div>
+						<th:block th:each="comment : ${commentList}">
+							<div class="eachComment">
+								<div class="name">
+									<span th:text="${comment.getUserName()}"></span>
+									<!-- <a th:href="@{/board/freeBoard/doDeleteComment(commentId=${comment.getId()})}"><span class="remove-btn">&times;</span></a> -->
+									<a th:onclick="|javascript:checkDeleteComment('${comment.getId()}')|"><span class="remove-btn">&times;</span></a>
+								</div>
+								<div class="inputValue">
+									<span th:text="${comment.getContent()}">댓글내용</span>
+								</div>
+							</div>
+						</th:block>
+					</div>
+					<br />
 					<div id="form-commentInfo"> 
-						<div id="comment-count">댓글 <span id="count">0</span></div>
 						<!-- <form th:action="@{doWriteComment}" method="post" onsubmit="return checkContent();"> -->
 						<input id="comment-input" type="text" placeholder="댓글을 입력해 주세요." name="comment_input">
 						<br />
 						<input type="submit" class="btn" value="등록" id="comment_submit" onclick="checkComment();">
-					<!-- 	</form> -->
 					</div> 
-					<div id=comments> 
-						<div class="eachComment">
-							<div class="name">
-								<span>포마드권오범</span>
-								<!-- <input type="button" class="btn" value="삭제" style="background: none repeat scroll 0 0 #DA1111;"> -->
-								<a th:href="@{#}"><span class="remove-btn">&times;</span></a>
-							</div>
-							<div class="inputValue">
-								<span>댓글내용</span>
-							</div>
-						</div>
-						<div class="eachComment">
-							<div class="name">
-								<span>포마드신동환</span>
-								<!-- <input type="button" class="btn" value="삭제" style="background: none repeat scroll 0 0 #DA1111;"> -->
-								<a th:href="@{#}"><span class="remove-btn">&times;</span></a>
-							</div>
-							<div class="inputValue">
-								<span>댓글내용</span>
-							</div>
-						</div>
-					</div>
 	        	</div>
 	        	<div class="right_button">
 	        		<!-- <a th:href="@{/board/freeBoard/doDelete(contentId=${contentId})}" class="btn" style="background: none repeat scroll 0 0 #DA1111;">삭제</a> -->
