@@ -70,6 +70,9 @@ function writeComment(comment) {
         	
         	var commentLocation = $('#comments').children().last();
         	commentLocation.after(addTag);
+        	$('#comment-input').val('');
+        	$('#count').text(data.commentCount);
+        	console.log($('#count').text());
         },
         error : function(request, status, error){
         	console.log(error);
