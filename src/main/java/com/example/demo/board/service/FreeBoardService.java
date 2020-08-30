@@ -109,9 +109,15 @@ public class FreeBoardService {
     }
     
     // comment
+    @Transactional
     public FreeBoardComment save(FreeBoardComment freeBoardComment) {
     	this.freeBoardCommentRepository.save(freeBoardComment);
     	return freeBoardComment;
+    }
+    
+    @Transactional
+    public int getCommentCountByContentId(Long contentId) {
+    	return this.freeBoardCommentRepository.countByContentId(contentId);
     }
     
 }
