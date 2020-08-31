@@ -69,6 +69,9 @@ public class BoardController {
         model.addAttribute("pageList", pageList);
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("searchKey", searchKey);
+//        model.addAttribute("commentCount", this.freeBoardService.getCommentCountByContentId(contentId));
+//        pageList.get(0).get
+//        pageList.get(0).getFreeBoardComment().size();
 
         return "/board/free-board";
     }
