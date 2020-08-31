@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>자유게시판</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/icomoon-social.css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="/css/leaflet.css">
+		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/board/board_common.css">
+		<link rel="stylesheet" href="/css/writePage.css">
+
+        <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+		<input type="hidden" id="content-id" th:value="${contentId}">
+		<!-- Header -->
+       <div class="Header">
+          <th:block th:include="header :: commonHeader"></th:block>
+       </div>
+		
+        <!-- Page Title -->
+		<div class="section section-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1>자유게시판</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+        
+        <div class="section">
+	        <div class="container">
+	        	<div class="blog-post blog-single-post">
+					<div class="single-post-title">
+						<!-- <h3>Post Title</h3> -->
+						<b>제목</b>
+						<input type="text" class="form-control" th:value="${contentTitle}" disabled="disabled">
+					</div>
+					<hr>
+					<div class="form-group">
+						<label for="comment-name"><i class="glyphicon glyphicon-user"></i> <b>작성자</b></label>
+						<input class="form-control" id="comment-name" type="text" th:value="${writerName}" disabled="disabled">
+					</div>
+					<div class="form-group">
+						<label for="comment-message"><i class="glyphicon glyphicon-comment"></i> <b>Content</b></label>
+						<textarea class="form-control" rows="20" id="comment-message" disabled="disabled" th:text="${contentText}">내용내용내용</textarea>
+					</div>
+					<div class="single-post-title">
+						<!-- <h3>Post Title</h3> -->
+						<b>첨부파일</b>
+						<a th:href="@{#}"><span th:text="${fileName}"></span></a>
+						<br /><br />
+					</div>
+					<!-- comment -->
+					<div id="comment-count">댓글 <span id="count" th:text="${commentCount}">0</span></div>
+					<hr style="border-color : #c1bcba;" />
+					<div id=comments> 
+						<div></div>
+						<th:block th:each="comment : ${commentList}">
+							<div class="eachComment" th:id="${comment.getId()}">
+								<div class="name">
+									<span th:text="${comment.getUserName()}"></span>
+									<!-- <a th:href="@{/board/freeBoard/doDeleteComment(commentId=${comment.getId()})}"><span class="remove-btn">&times;</span></a> -->
+									<a th:onclick="|javascript:checkDeleteComment('${comment.getId()}')|"><span class="remove-btn">&times;</span></a>
+								</div>
+								<div class="inputValue">
+									<span th:text="${comment.getContent()}">댓글내용</span>
+								</div>
+							</div>
+						</th:block>
+					</div>
+					<br />
+					<div id="form-commentInfo"> 
+						<!-- <form th:action="@{doWriteComment}" method="post" onsubmit="return checkContent();"> -->
+						<input id="comment-input" type="text" placeholder="댓글을 입력해 주세요." name="comment_input">
+						<br />
+						<input type="submit" class="btn" value="등록" id="comment_submit" onclick="checkComment();">
+					</div> 
+	        	</div>
+	        	<div class="right_button">
+	        		<!-- <a th:href="@{/board/freeBoard/doDelete(contentId=${contentId})}" class="btn" style="background: none repeat scroll 0 0 #DA1111;">삭제</a> -->
+	        		<input type="button" id="delete-button" value="삭제" class="btn" style="background: none repeat scroll 0 0 #DA1111;" />
+	        		<a th:href="@{/board/freeBoard/modify(contentId=${contentId})}" class="btn">수정</a>
+					<a th:href="@{/board/freeBoard}" class="btn"> 목록 </a>
+				</div>
+	        </div>
+	    </div>
+	     <!-- Footer -->
+       <footer>
+          <th:block th:include="footer :: commonFooter"></th:block>
+       </footer>
+        <!-- Javascripts -->
+        <script src="js/jquery.sequence-min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/jquery-1.9.1.min.js"><\/script>')</script>
+		<script src="/js/freeboard.js"></script>
+    </body>
+</html>

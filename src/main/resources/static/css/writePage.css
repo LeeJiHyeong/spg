@@ -23,3 +23,7 @@ input[type="text"]:disabled {
 	background: white;
 }
 
+.remove-btn {
+	font-size: 1.5em;
+}
+

@@ -1,12 +1,12 @@
 package com.example.demo.board.controller;
 
 import com.example.demo.board.domain.FreeBoard;
+import com.example.demo.board.domain.FreeBoardComment;
 import com.example.demo.board.domain.FreeBoardFile;
-import com.example.demo.board.service.FreeBoardFileService;
 import com.example.demo.board.service.FreeBoardService;
 import com.example.demo.login.domain.User;
-import com.example.demo.login.service.UserPrincipal;
 import com.example.demo.login.service.UserService;
+import com.example.demo.utils.FilePath;
 import com.example.demo.utils.PageVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -32,15 +34,13 @@ public class BoardController {
     private FreeBoardService freeBoardService;
 
     @Autowired
-    private FreeBoardFileService freeBoardFileService;
-
-    @Autowired
     private UserService userService;
 
     // 자유게시판
     @GetMapping(value = "freeBoard")
     public String goFreeBoard(HttpSession session, Model model,
-                              @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+                              @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                              @RequestParam(value = "searchKey", defaultValue = "") String searchKey) {
 
         // session
         if (session.getAttribute("userName") != null) {
@@ -48,9 +48,17 @@ public class BoardController {
             model.addAttribute("userName", userName);
         }
 
-        int totalCount = this.freeBoardService.getTotalCount();
-        List<FreeBoard> pageList = this.freeBoardService.findByPage(pageNum - 1);
+        int totalCount;
+        List<FreeBoard> pageList;
         PageVO pageInfo = new PageVO();
+
+        if (searchKey.equals("")) { // 검색키워드가 없는 경우
+            pageList = this.freeBoardService.findByPage(pageNum - 1);
+            totalCount = this.freeBoardService.getTotalCount();
+        } else {
+            pageList = this.freeBoardService.findByTitleContainingOrContentContaining(pageNum - 1, searchKey);
+            totalCount = this.freeBoardService.getCountByTitleContainingOrContentContaining(searchKey);
+        }
 
         if (totalCount > 0) {
             pageInfo.setPageSize(10);
@@ -60,33 +68,36 @@ public class BoardController {
 
         model.addAttribute("pageList", pageList);
         model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("searchKey", searchKey);
 
-        return "/board/free_board";
+        return "/board/free-board";
     }
 
+    // todo: please fix this part with frontend
     @GetMapping(value = "freeBoard/detail")
     public String goFreeBoardDetail(HttpSession session, Model model,
-                                    @RequestParam("contentId") Long contentId) {
+                                    @RequestParam("contentId") long contentId) {
 
         if (session.getAttribute("userName") != null) {
             String userName = (String) session.getAttribute("userName");
             model.addAttribute("userName", userName);
         }
 
-        FreeBoard content = this.freeBoardService.findById(contentId);
-        FreeBoardFile fileInContent = this.freeBoardFileService.findByFreeBoardId(contentId);
+        FreeBoard content = this.freeBoardService.getFreeBoardDetail(contentId);
+        List<FreeBoardFile> freeBoardFiles = content.getFreeBoardFile();
 
-        if (content != null) {
-            model.addAttribute("contentTitle", content.getTitle());
-            model.addAttribute("writerName", content.getWriterName());
-            model.addAttribute("contentText", content.getContent());
+        model.addAttribute("contentTitle", content.getTitle());
+        model.addAttribute("writerName", content.getWriterName());
+        model.addAttribute("contentText", content.getContent());
+        model.addAttribute("contentId", content.getId());
+        model.addAttribute("commentList", content.getFreeBoardComment());
+        model.addAttribute("commentCount", this.freeBoardService.getCommentCountByContentId(contentId));
+
+        if (freeBoardFiles != null && freeBoardFiles.size() != 0) {
+            model.addAttribute("fileName", freeBoardFiles.get(0).getOrdinaryFileName());
         }
-
-        if (fileInContent != null) {
-            model.addAttribute("fileName", fileInContent.getOrdinaryFileName());
-        }
-
-        return "/board/free_board_detail";
+        
+        return "/board/free-board-detail";
     }
 
     // 글작성
@@ -105,6 +116,17 @@ public class BoardController {
         return "/board/free_board_write";
     }
 
+    @PostMapping("/freeBoard/doModifyFreeBoardDetail")
+    public String doModifyData(@ModelAttribute @Valid FreeBoard freeBoard
+            , @RequestParam("upload") MultipartFile uploadFile) {
+        boolean result = this.freeBoardService.modifyFreeBoardDetail(freeBoard);
+        if (result) {
+            // todo :ljh -> files store in here and write next page direction
+            return ""; // update well
+        }
+        return ""; // error
+    }
+
     @PostMapping(value = "freeBoard/doWrite")
     public String doWrite(@ModelAttribute @Valid FreeBoard freeBoard
             , @RequestParam("upload") MultipartFile uploadFile) {
@@ -115,18 +137,18 @@ public class BoardController {
 
         String ordinaryFileName = uploadFile.getOriginalFilename();
 
-        if (!ordinaryFileName.equals("")) {
+        if (ordinaryFileName != null && !ordinaryFileName.equals("")) {
             String storeFileName = UUID.randomUUID().toString();
             String fileSize = Long.toString(uploadFile.getSize());
             String fileExt = ordinaryFileName.substring(ordinaryFileName.lastIndexOf(".") + 1);
 
             try {
-                File file = new File("C:/spg_file/" + storeFileName);
+                File file = new File(FilePath.FreeBoard.getFilePath() + storeFileName);
                 uploadFile.transferTo(file);
 
                 Long freeBoardId = this.freeBoardService.save(freeBoard).getId();
-                FreeBoardFile freeBoardfile = new FreeBoardFile(storeFileName, ordinaryFileName, freeBoardId.longValue());
-                this.freeBoardFileService.save(freeBoardfile);
+                FreeBoardFile freeBoardfile = new FreeBoardFile(storeFileName, ordinaryFileName, freeBoardId);
+                this.freeBoardService.save(freeBoardfile);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -136,29 +158,69 @@ public class BoardController {
 
         return "redirect:/board/freeBoard";
     }
+    
+    @GetMapping(value = "freeBoard/doWriteComment")
+    @ResponseBody
+    public Map<String, String> doWriteComment(@ModelAttribute @Valid FreeBoardComment freeBoardComment,
+    										  HttpSession session) {
 
-    // 교육게시판
-    @RequestMapping(value = "eduBoard")
-    public String goEducationBoard() {
-
-        return "board/education_board";
+    	String userName = (String)session.getAttribute("userName");
+    	
+    	Map<String, String> comment = new HashMap<String, String>();
+    	comment.put("content", freeBoardComment.getContent());
+    	comment.put("contentId", Long.toString(freeBoardComment.getContentId()));
+    	comment.put("userName", userName);
+    	
+    	freeBoardComment.setUserName(userName);
+    	comment.put("commentId", Long.toString(this.freeBoardService.save(freeBoardComment).getId()));
+    	comment.put("commentCount", Long.toString(this.freeBoardService.getCommentCountByContentId(freeBoardComment.getContentId())));
+    	
+    	return comment;
     }
 
-    // 갤러리
-    @RequestMapping(value = "gallery")
-    public String goGallery(HttpSession session, Model model) {
+    @GetMapping(value = "freeBoard/doDelete")
+    public String doDeleteFreeBoard(@RequestParam(value = "contentId") int contentId) {
+        this.freeBoardService.deleteFilesAndFreeBoardDataByContentId(contentId);
 
-        UserPrincipal user = (UserPrincipal) session.getAttribute("user");
-        model.addAttribute("userName", user.getUsername());
-
-        return "board/gallery";
+        return "redirect:/board/freeBoard";
     }
-
-    // 공지사항
-    @RequestMapping(value = "notice")
-    public String goNotice() {
-
-        return "admin/notice";
+    
+    @GetMapping(value = "freeBoard/doDeleteComment")
+    @ResponseBody
+    public Map<String, String> doDeleteFreeBoardComment(@RequestParam(value = "commentId") Long commentId,
+    													@RequestParam(value = "contentId") Long contentId) {
+    	this.freeBoardService.deleteComment(commentId);
+    	
+    	Map<String, String> deletedComment = new HashMap<String, String>();
+    	deletedComment.put("commentId", Long.toString(commentId));
+    	deletedComment.put("commentCount", Long.toString(this.freeBoardService.getCommentCountByContentId(contentId)));
+    	return deletedComment;
     }
+    
+    @GetMapping(value = "freeBoard/modify")
+    public String goFreeBoardModify(@RequestParam(value = "contentId") int contentId,
+                                    HttpSession session, Model model) {
 
+        if (session.getAttribute("userName") != null) {
+            String userName = (String) session.getAttribute("userName");
+            User user = this.userService.findByUserName(userName);
+            Long writerId = user.getId();
+
+            model.addAttribute("userName", userName);
+            model.addAttribute("writerId", writerId);
+        }
+
+        FreeBoard content = this.freeBoardService.getFreeBoardDetail(contentId);
+        List<FreeBoardFile> freeBoardFiles = content.getFreeBoardFile();
+
+        if (freeBoardFiles != null && freeBoardFiles.size() != 0) {
+            // 1게시물 1파일이기때문에 get(0)
+            // 다수파일 추가하도록 변경하게되면 수정 필요
+            model.addAttribute("fileName", freeBoardFiles.get(0).getOrdinaryFileName());
+        }
+
+        model.addAttribute("content", content);
+        return "/board/free-board-modify";
+    }
+    
 }
