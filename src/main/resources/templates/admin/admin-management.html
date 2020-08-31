@@ -5,6 +5,7 @@
 
     <link rel="stylesheet" href="/css/admin/admin-common.css">
     <link rel="shortcut icon" href="../img_beom/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="/css/board/board_common.css">
 
 </head>
 
@@ -36,16 +37,19 @@
         <div class="content">
             <div class="co-board type2">
                 <div class="bn-login01">
-                    <!-- -->
-                    <table>
+                    <!-- User Info Management -->
+                    <table class="info-table">
                         <thead>
                         <tr>
-                            <th>No</th>
-                            <th>학번</th>
-                            <th>이름</th>
-                            <th>권한</th>
-                            <th>수정</th>
-                            <th>삭제</th>
+                        	<td colspan="6"><h3>회원 명부</h3></td>
+                        </tr>
+                        <tr>
+                            <th>No.</th>
+                            <th>학 번</th>
+                            <th>이 름</th>
+                            <th>권 한</th>
+                            <th>수 정</th>
+                            <th>삭 제</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -57,37 +61,47 @@
                                     <!-- school id -->
                                     <td th:text="${page.getUsername()}"></td>
                                     <td th:text="${page.getName()}"></td>
-                                    <!-- 수정 modal 부분 -->
-                                    <!-- 삭제 submit 넣기 -->
+                                    <td>
+                                    	<input type="checkbox" class="auth" name="auth" value="UNAUTH">미인증
+                                    	<input type="checkbox" class="auth"  name="auth" value="STUDENT">학 생
+                                    	<input type="checkbox" class="auth"  name="auth" value="ADMIN">관리자
+                                    </td>
+                                    <td>
+                                    	<button type="submit">수 정</button>
+                                    </td>
+                                    <td>
+                                    	<button type="submit">삭 제</button>
+                                    </td>
                                 </form>
+
                             </tr>
                         </th:block>
                         </tbody>
                     </table>
+                    <!-- Paging -->
+					<div class="paging">
+					    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getFirstPageNo()})}"
+					       class="btn_arr first"><span><<</span></a>
+					    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getPrevPageNo()})}"
+					       class="btn_arr prev"><span><</span></a>
+					    <th:block th:each="num : ${#numbers.sequence(pageInfo.getStartPageNo(), pageInfo.getEndPageNo())}">
+					        <!-- D : 활성화페이지일 경우 : on 처리 -->
+					        <a th:if="${pageInfo.getPageNo() == num}" th:href="@{/admin/goModifyUserDataPage(pageNumber=${num})}"
+					           class="on"><span th:text="${num}"></span></a>
+					        <a th:unless="${pageInfo.getPageNo() == num}" th:href="@{/admin/goModifyUserDataPage(pageNumber=${num})}"><span
+					                th:text="${num}"></span></a>
+					    </th:block>
+					    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getNextPageNo()})}"
+					       class="btn_arr next"><span>></span></a>
+					    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getFinalPageNo()})}"
+					       class="btn_arr last"><span>>></span></a>
+					</div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Paging -->
-<div class="paging">
-    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getFirstPageNo()})}"
-       class="btn_arr first"><span><<</span></a>
-    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getPrevPageNo()})}"
-       class="btn_arr prev"><span><</span></a>
-    <th:block th:each="num : ${#numbers.sequence(pageInfo.getStartPageNo(), pageInfo.getEndPageNo())}">
-        <!-- D : 활성화페이지일 경우 : on 처리 -->
-        <a th:if="${pageInfo.getPageNo() == num}" th:href="@{/admin/goModifyUserDataPage(pageNumber=${num})}"
-           class="on"><span th:text="${num}"></span></a>
-        <a th:unless="${pageInfo.getPageNo() == num}" th:href="@{/admin/goModifyUserDataPage(pageNumber=${num})}"><span
-                th:text="${num}"></span></a>
-    </th:block>
-    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getNextPageNo()})}"
-       class="btn_arr next"><span>></span></a>
-    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getFinalPageNo()})}"
-       class="btn_arr last"><span>>></span></a>
-</div>
 
 <footer>
     <th:block th:include="footer :: commonFooter"></th:block>
