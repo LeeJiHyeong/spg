@@ -10,7 +10,7 @@ $('#delete-button').click(function(){
 
 function checkDeleteComment(commentId) {
 	if (confirm("댓글을 삭제하시겠습니까?")) {
-		alert(commentId);
+		deleteComment(commentId);
 	}
 	else {
 		return;
@@ -66,15 +66,15 @@ function writeComment(comment) {
         success : function(data){
         	console.log(data);
         	
-        	var addTag = '<div class="eachComment">'+
+        	var addTag = '<div class="eachComment" id="'+ data.commentId +'">'+
         					'<div class="name">' +
         						'<span>' + data.userName + '</span>' +
-        						'<a th:href="@{#}"><span class="remove-btn">&times;</span></a>' +
+        						'<a onclick="checkDeleteComment(' + data.commentId + ')"><span class="remove-btn">&times;</span></a>' +
         					'</div>' +
         					'<div class="inputValue">' +
 								'<span>' + data.content +
 								'</span>' +
-							'</div>'
+							'</div>' +
         				'</div>';
         	
         	var commentLocation = $('#comments').children().last();
@@ -94,18 +94,16 @@ function deleteComment(commentId) {
 	
 	var allData = { "commentId": commentId };
 	
-//	$.ajax({
-//        type:'GET',
-//        url : "/board/freeBoard/doDeleteComment,
-//        dataType : "json",
-//        data : allData,
-//        success : function(data){
-//        	console.log(data);
-//        	console.log(this);
-//        },
-//        error : function(request, status, error){
-//        	console.log(error);
-//            alert("댓글 등록에 실패하였습니다.");
-//       }
-//    });
+	$.ajax({
+        type:'GET',
+        url : "/board/freeBoard/doDeleteComment",
+        dataType : "json",
+        data : allData,
+        success : function(data){
+        	$('#' + commentId).remove();
+        },
+        error : function(request, status, error){
+            alert("댓글 삭제에 실패하였습니다.");
+       }
+    });
 }

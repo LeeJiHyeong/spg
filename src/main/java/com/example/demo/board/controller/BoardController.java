@@ -172,8 +172,9 @@ public class BoardController {
     	comment.put("userName", userName);
     	
     	freeBoardComment.setUserName(userName);
-    	this.freeBoardService.save(freeBoardComment);
+    	comment.put("commentId", Long.toString(this.freeBoardService.save(freeBoardComment).getId()));
     	comment.put("commentCount", Long.toString(this.freeBoardService.getCommentCountByContentId(freeBoardComment.getContentId())));
+    	
     	return comment;
     }
 
@@ -186,8 +187,12 @@ public class BoardController {
     
     @GetMapping(value = "freeBoard/doDeleteComment")
     @ResponseBody
-    public Map<String, String> doDeleteFreeBoardComment(@RequestParam(value = "commentId") int comment) {
-    	return null;
+    public Map<String, String> doDeleteFreeBoardComment(@RequestParam(value = "commentId") Long commentId) {
+    	this.freeBoardService.deleteComment(commentId);
+    	
+    	Map<String, String> deletedComment = new HashMap<String, String>();
+    	deletedComment.put("commentId", Long.toString(commentId));
+    	return deletedComment;
     }
     
     @GetMapping(value = "freeBoard/modify")
