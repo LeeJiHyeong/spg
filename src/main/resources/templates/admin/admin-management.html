@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>관리자 페이지 - 회원 정보 관리</title>
+
+    <link rel="stylesheet" href="/css/admin/admin-common.css">
+    <link rel="shortcut icon" href="../img_beom/favicon.ico" type="image/x-icon">
+
+</head>
+
+<body>
+
+<!-- Header -->
+<div class="Header">
+    <th:block th:include="header :: commonHeader"></th:block>
+</div>
+
+<div class="sub-visual-wrap"></div>
+
+<div class="sub-container">
+    <div class="lnb-wrap">
+        <div class="lnb">
+            <div class="lnb-title-box">
+                <div>
+                    <h2>관리자 페이지</h2>
+                </div>
+            </div>
+            <ul class="lnb-menu">
+                <li class="active"><a class="active" th:href="@{/}">회원 정보 관리</a></li>
+                <li><a class="" th:href="@{/admin/adminNotice}">공지사항 작성</a></li>               
+            </ul>
+        </div>
+    </div>
+    <div class="content-wrap">
+        <div class="tab"></div>
+        <div class="content">
+            <div class="co-board type2">
+                <div class="bn-login01">
+ 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer>
+    <th:block th:include="footer :: commonFooter"></th:block>
+</footer>
+
+</body>
+</html>
