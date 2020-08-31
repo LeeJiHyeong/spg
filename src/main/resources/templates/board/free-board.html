@@ -47,16 +47,21 @@
 	    					</tr>
 	    					<th:block th:each="page : ${pageList}">
 		    					<tr>
-		    						<!-- No -->
-		    						<td class="job-position" th:text="${page.getId()}">1</td>
-		    						<!-- 제목 -->
-		    						<td class="job-position"><a th:href="@{freeBoard/detail(contentId=${page.getId()})}"><span th:text="${page.getTitle()}"></span></a></td>
-		    						<!-- 작성자 -->
-		    						<td class="job-position" th:text="${page.getWriterName()}"></td>
-		    						<!-- 작성일 -->
-		    						<td class="job-position" th:text="${#dates.format(page.getCreateDate(), 'yyyy-MM-dd')}"></td>
-		    						<!-- 조회 -->
-		    						<td class="job-position" th:text="${page.getNumberOfHit()}"></td>
+		                            <!-- No -->
+		                            <td class="job-position-no" th:text="${page.getId()}">1</td>
+		                            <!-- 제목 -->
+		                            <td class="job-position-title">
+		                            	<a th:href="@{freeBoard/detail(contentId=${page.getId()})}">
+		                            		<span th:if="${#strings.length(page.getTitle()) < 30}" class="content-title"  th:text="${page.getTitle() + ' '}"></span><span th:if="${#strings.length(page.getTitle()) < 30}" class="comment-count" th:text="${'[' + page.getFreeBoardComment().size() + ']'}"></span>
+		                            		<span th:unless="${#strings.length(page.getTitle()) < 27}" class="content-title" th:text="${#strings.substring(page.getTitle(), 0, 27) + ' .....'}"></span><span th:unless="${#strings.length(page.getTitle()) < 30}" class="comment-count" th:text="${' ' + '[' + page.getFreeBoardComment().size() + ']'}"></span>
+		                            	</a>
+		                            </td>
+		                            <!-- 작성자 -->
+		                            <td class="job-position-name" th:text="${page.getWriterName()}"></td>
+		                            <!-- 작성일 -->
+		                            <td class="job-position-date" th:text="${#dates.format(page.getCreateDate(), 'yyyy-MM-dd')}"></td>
+		                            <!-- 조회 -->
+		                            <td class="job-position-views" th:text="${page.getNumberOfHit()}">123</td>
 		    					</tr>
 	    					</th:block>
 	    				</table>
