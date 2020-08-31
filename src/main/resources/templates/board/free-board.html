@@ -61,7 +61,7 @@
 		                            <!-- 작성일 -->
 		                            <td class="job-position-date" th:text="${#dates.format(page.getCreateDate(), 'yyyy-MM-dd')}"></td>
 		                            <!-- 조회 -->
-		                            <td class="job-position-views">123</td>
+		                            <td class="job-position-views" th:text="${page.getNumberOfHit()}">123</td>
 		    					</tr>
 	    					</th:block>
 	    				</table>
