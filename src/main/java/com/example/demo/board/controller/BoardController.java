@@ -187,11 +187,13 @@ public class BoardController {
     
     @GetMapping(value = "freeBoard/doDeleteComment")
     @ResponseBody
-    public Map<String, String> doDeleteFreeBoardComment(@RequestParam(value = "commentId") Long commentId) {
+    public Map<String, String> doDeleteFreeBoardComment(@RequestParam(value = "commentId") Long commentId,
+    													@RequestParam(value = "contentId") Long contentId) {
     	this.freeBoardService.deleteComment(commentId);
     	
     	Map<String, String> deletedComment = new HashMap<String, String>();
     	deletedComment.put("commentId", Long.toString(commentId));
+    	deletedComment.put("commentCount", Long.toString(this.freeBoardService.getCommentCountByContentId(contentId)));
     	return deletedComment;
     }
     

@@ -65,7 +65,7 @@
 					<div id=comments> 
 						<div></div>
 						<th:block th:each="comment : ${commentList}">
-							<div class="eachComment" id="${comment.getId()}">
+							<div class="eachComment" th:id="${comment.getId()}">
 								<div class="name">
 									<span th:text="${comment.getUserName()}"></span>
 									<!-- <a th:href="@{/board/freeBoard/doDeleteComment(commentId=${comment.getId()})}"><span class="remove-btn">&times;</span></a> -->

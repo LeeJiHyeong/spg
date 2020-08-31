@@ -91,8 +91,9 @@ function writeComment(comment) {
 }
 
 function deleteComment(commentId) {
-	
-	var allData = { "commentId": commentId };
+	var contentId = $('#content-id').val();
+	var allData = { "commentId" : commentId,
+					"contentId" : contentId};
 	
 	$.ajax({
         type:'GET',
@@ -101,6 +102,7 @@ function deleteComment(commentId) {
         data : allData,
         success : function(data){
         	$('#' + commentId).remove();
+        	$('#count').text(data.commentCount);
         },
         error : function(request, status, error){
             alert("댓글 삭제에 실패하였습니다.");
