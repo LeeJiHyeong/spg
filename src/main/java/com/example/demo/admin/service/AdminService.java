@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -48,7 +49,7 @@ public class AdminService {
 
     @Transactional
     public List<User> findUsersByPage(int startPageIndex) {
-        Pageable pageable = PageRequest.of(startPageIndex, 10);
+        Pageable pageable = PageRequest.of(startPageIndex, 10 , Sort.by(Sort.Direction.DESC, "id"));
         Page<User> userPage = this.userRepository.findAll(pageable);
 
         return userPage.getContent();
