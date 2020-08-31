@@ -1,5 +1,6 @@
 package com.example.demo.admin.service;
 
+import com.example.demo.admin.reponse.ReponseUserData;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.login.domain.Role;
 import com.example.demo.login.domain.RoleName;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
@@ -48,11 +50,14 @@ public class AdminService {
     }
 
     @Transactional
-    public List<User> findUsersByPage(int startPageIndex) {
-        Pageable pageable = PageRequest.of(startPageIndex, 10 , Sort.by(Sort.Direction.DESC, "id"));
+    public List<ReponseUserData> findUsersByPage(int startPageIndex) {
+        Pageable pageable = PageRequest.of(startPageIndex, 10, Sort.by(Sort.Direction.DESC, "id"));
         Page<User> userPage = this.userRepository.findAll(pageable);
+        List<User> userList = userPage.getContent();
+        List<ReponseUserData> resultUserData = new ArrayList<>();
+        userList.forEach(user -> resultUserData.add(new ReponseUserData(user)));
 
-        return userPage.getContent();
+        return resultUserData;
     }
 
     @Transactional
