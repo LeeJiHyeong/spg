@@ -120,4 +120,9 @@ public class FreeBoardService {
     	return this.freeBoardCommentRepository.countByContentId(contentId);
     }
     
+    @Transactional
+    public void deleteComment(Long commentId) {
+    	this.freeBoardCommentRepository.deleteById(commentId);
+    }
+    
 }
