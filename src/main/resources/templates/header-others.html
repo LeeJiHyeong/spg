@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="commonHeader">
+
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="shortcut icon" href="/img_beom/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="/css/headerResponsive.css">
+
+
+	<script src="/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+	<div class="mainmenu-wrapper">
+		<div class="container">
+			<div class="menuextras">
+				<div class="extras">
+					<ul th:if="${userName == null}">
+						<li><a th:href="@{/login/signinPage}" class="log">로그인</a></li>
+						<li><a th:href="@{/register/signUpPage}" class="log">회원가입</a></li>
+					</ul>
+					<ul th:unless="${userName == null}">
+						<li><span th:text="${userName} + '님 환영합니다.'"></span></li>
+						<li><a th:href="@{/user/management}" class="log">마이페이지</a></li>
+						<li><a href="#" onclick="document.getElementById('logout').submit();"  class="log">로그아웃</a></li>
+						<form id="logout" th:action="@{/logout}" method="POST"></form>
+					</ul>
+				</div>
+			</div>
+
+			<nav id="mainmenu" class="mainmenu">
+				<ul>
+					<li class="logo-wrapper" id="container-logo"><a href="/"> <img
+							id="main_logo_img" src="/img_beom/spg_logo3.png"
+							alt=" No Image">
+					</a></li>
+				</ul>
+			</nav>
+			<nav>
+				<th:block th:include="hamburgur :: hamburger-bar"></th:block>
+			</nav>
+		</div>
+	</div>
+
+	<!-- Javascripts -->
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/js/jquery-1.9.1.min.js"><\/script>')</script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+	<script src="/js/jquery.fitvids.js"></script>
+	<script src="/js/jquery.sequence-min.js"></script>
+	<script src="/js/jquery.bxslider.js"></script>
+	<script src="/js/main-menu.js"></script>
+	<script src="/js/template.js"></script>
+
+</th:block>
+</html>
