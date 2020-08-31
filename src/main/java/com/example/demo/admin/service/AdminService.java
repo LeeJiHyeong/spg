@@ -15,10 +15,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AdminService {
@@ -30,16 +28,15 @@ public class AdminService {
     private RoleRepository roleRepository;
 
     @Transactional
-    public boolean changeUserAuthenticated(Long userId, String username, RoleName roleName) {
+    public boolean changeUserAuthenticated(Long userId, String username, Set<Role> roles) {
         User user = this.userRepository.getOne(userId);
         if (user.getUserName().equals(username)) {
             if (user.getRoles().contains(new Role(RoleName.ROLE_UNAUTH))) {
                 user.setActiveDate(Calendar.getInstance());
             }
-
-            Role studentRole = this.roleRepository.findByName(roleName)
-                    .orElseThrow(() -> new ResourceNotFoundException("Role", "name", roleName));
-            user.setRoles(Collections.singleton(studentRole));
+            Set<Role> newRoles = roles.stream().map(role -> this.roleRepository.findByName(role.getName())
+                    .orElseThrow(() -> new ResourceNotFoundException("Role", "name", roles))).collect(Collectors.toSet());
+            user.setRoles(newRoles);
 
             this.userRepository.save(user);
 
@@ -54,10 +51,8 @@ public class AdminService {
         Pageable pageable = PageRequest.of(startPageIndex, 10, Sort.by(Sort.Direction.DESC, "id"));
         Page<User> userPage = this.userRepository.findAll(pageable);
         List<User> userList = userPage.getContent();
-        List<ReponseUserData> resultUserData = new ArrayList<>();
-        userList.forEach(user -> resultUserData.add(new ReponseUserData(user)));
 
-        return resultUserData;
+        return userList.stream().map(ReponseUserData::new).collect(Collectors.toList());
     }
 
     @Transactional
