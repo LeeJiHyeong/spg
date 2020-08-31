@@ -6,273 +6,265 @@
 <html class="no-js">
 <!--<![endif]-->
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>S.P.G - System Programming Group</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width">
-	
-	<link rel="shortcut icon" href="../img_beom/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/css/icomoon-social.css">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
-	
-	<link rel="stylesheet" href="/css/page-blog-post.css">
-	<link rel="stylesheet" href="/css/board/board_common.css">
-	
-	<script src="/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>S.P.G - System Programming Group</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width">
+
+<link rel="shortcut icon" href="../img_beom/favicon.ico"
+	type="image/x-icon">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/icomoon-social.css">
+<link
+	href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800'
+	rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href="/css/page-blog-post.css">
+<link rel="stylesheet" href="/css/board/board_common.css">
+
+<script src="/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 
 <body>
 
-   <!-- Header -->
-   <div class="Header">
-      <th:block th:include="header-others :: commonHeader"></th:block>
-   </div>
+	<!-- Header -->
+	<div class="Header">
+		<th:block th:include="header-others :: commonHeader"></th:block>
+	</div>
 
-   <!-- Page Title
-<div class="section section-breadcrumbs">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h1>Blog Posts</h1>
-      </div>
-    </div>
-  </div>
-</div>
--->
 
-   <!-- Posts List -->
-   <div class="section blog-posts-wrapper">
-      <div class="container">
-         <div class="row">
-            <!-- Post -->
-            <div class="col-md-4 col-sm-6">
-               <div class="blog-post">
-                  <!-- Post Info -->
-                  <div class="post-info">
-                     <div class="post-date">
-                        <div class="date">30 JAN, 2013</div>
-                     </div>
-                     <div class="post-comments-count">
-                        <a href="page-blog-post-right-sidebar.html"
-                           title="Show Comments"><i
-                           class="glyphicon glyphicon-comment icon-white"></i>11</a>
-                     </div>
-                  </div>
-                  <!-- End Post Info -->
-                  <!-- Post Image -->
-                  <a href="page-blog-post-right-sidebar.html"><img
-                     src="img/blog1.jpg" class="post-image" alt="Post Title"></a>
-                  <!-- End Post Image -->
-                  <!-- Post Title & Summary -->
-                  <div class="post-title">
-                     <h3>
-                        <a href="page-blog-post-right-sidebar.html">Post Title</a>
-                     </h3>
-                  </div>
-                  <div class="post-summary">
-                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Suspendisse mattis, nulla id pretium malesuada, dui est laoreet
-                        risus, ac rhoncus eros diam id odio. Duis elementum ligula eu
-                        ipsum condimentum accumsan.</p>
-                  </div>
-                  <!-- End Post Title & Summary -->
-                  <div class="post-more">
-                     <a href="page-blog-post-right-sidebar.html" class="btn btn-small">Read
-                        more</a>
-                  </div>
-               </div>
-            </div>
-            <!-- End Post -->
-            <div class="col-md-4 col-sm-6">
-               <div class="blog-post">
-                  <div class="post-info">
-                     <div class="post-date">
-                        <div class="date">30 JAN, 2013</div>
-                     </div>
-                     <div class="post-comments-count">
-                        <a href="page-blog-post-right-sidebar.html"
-                           title="Show Comments"><i
-                           class="glyphicon glyphicon-comment icon-white"></i>16</a>
-                     </div>
-                  </div>
-                  <a href="page-blog-post-right-sidebar.html"><img
-                     src="img/blog2.jpg" class="post-image" alt="Post Title"></a>
-                  <div class="post-title">
-                     <h3>
-                        <a href="page-blog-post-right-sidebar.html">Another Post
-                           Title</a>
-                     </h3>
-                  </div>
-                  <div class="post-summary">
-                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Suspendisse mattis, nulla id pretium malesuada, dui est laoreet
-                        risus, ac rhoncus eros diam id odio. Duis elementum ligula eu
-                        ipsum condimentum accumsan.</p>
-                  </div>
-                  <div class="post-more">
-                     <a href="page-blog-post-right-sidebar.html" class="btn btn-small">Read
-                        more</a>
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-               <div class="blog-post">
-                  <div class="post-info">
-                     <div class="post-date">
-                        <div class="date">30 JAN, 2013</div>
-                     </div>
-                     <div class="post-comments-count">
-                        <a href="page-blog-post-right-sidebar.html"
-                           title="Show Comments"><i
-                           class="glyphicon glyphicon-comment icon-white"></i>57</a>
-                     </div>
-                  </div>
-                  <a href="page-blog-post-right-sidebar.html"><img
-                     src="img/blog3.jpg" class="post-image" alt="Post Title"></a>
-                  <div class="post-title">
-                     <h3>
-                        <a href="page-blog-post-right-sidebar.html">Yet Another Post
-                           Title</a>
-                     </h3>
-                  </div>
-                  <div class="post-summary">
-                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Suspendisse mattis, nulla id pretium malesuada, dui est laoreet
-                        risus, ac rhoncus eros diam id odio. Duis elementum ligula eu
-                        ipsum condimentum accumsan.</p>
-                  </div>
-                  <div class="post-more">
-                     <a href="page-blog-post-right-sidebar.html" class="btn btn-small">Read
-                        more</a>
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-               <div class="blog-post">
-                  <div class="post-info">
-                     <div class="post-date">
-                        <div class="date">30 JAN, 2013</div>
-                     </div>
-                     <div class="post-comments-count">
-                        <a href="page-blog-post-right-sidebar.html"
-                           title="Show Comments"><i
-                           class="glyphicon glyphicon-comment icon-white"></i>11</a>
-                     </div>
-                  </div>
-                  <a href="page-blog-post-right-sidebar.html"><img
-                     src="img/blog1.jpg" class="post-image" alt="Post Title"></a>
-                  <div class="post-title">
-                     <h3>
-                        <a href="page-blog-post-right-sidebar.html">Post Title</a>
-                     </h3>
-                  </div>
-                  <div class="post-summary">
-                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Suspendisse mattis, nulla id pretium malesuada, dui est laoreet
-                        risus, ac rhoncus eros diam id odio. Duis elementum ligula eu
-                        ipsum condimentum accumsan.</p>
-                  </div>
-                  <div class="post-more">
-                     <a href="page-blog-post-right-sidebar.html" class="btn btn-small">Read
-                        more</a>
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-               <div class="blog-post">
-                  <div class="post-info">
-                     <div class="post-date">
-                        <div class="date">30 JAN, 2013</div>
-                     </div>
-                     <div class="post-comments-count">
-                        <a href="page-blog-post-right-sidebar.html"
-                           title="Show Comments"><i
-                           class="glyphicon glyphicon-comment icon-white"></i>16</a>
-                     </div>
-                  </div>
-                  <a href="page-blog-post-right-sidebar.html"><img
-                     src="img/blog2.jpg" class="post-image" alt="Post Title"></a>
-                  <div class="post-title">
-                     <h3>
-                        <a href="page-blog-post-right-sidebar.html">Another Post
-                           Title</a>
-                     </h3>
-                  </div>
-                  <div class="post-summary">
-                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Suspendisse mattis, nulla id pretium malesuada, dui est laoreet
-                        risus, ac rhoncus eros diam id odio. Duis elementum ligula eu
-                        ipsum condimentum accumsan.</p>
-                  </div>
-                  <div class="post-more">
-                     <a href="page-blog-post-right-sidebar.html" class="btn btn-small">Read
-                        more</a>
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-               <div class="blog-post">
-                  <div class="post-info">
-                     <div class="post-date">
-                        <div class="date">30 JAN, 2013</div>
-                     </div>
-                     <div class="post-comments-count">
-                        <a href="page-blog-post-right-sidebar.html"
-                           title="Show Comments"><i
-                           class="glyphicon glyphicon-comment icon-white"></i>57</a>
-                     </div>
-                  </div>
-                  <a href="page-blog-post-right-sidebar.html"><img
-                     src="img/blog3.jpg" class="post-image" alt="Post Title"></a>
-                  <div class="post-title">
-                     <h3>
-                        <a href="page-blog-post-right-sidebar.html">Yet Another Post
-                           Title</a>
-                     </h3>
-                  </div>
-                  <div class="post-summary">
-                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Suspendisse mattis, nulla id pretium malesuada, dui est laoreet
-                        risus, ac rhoncus eros diam id odio. Duis elementum ligula eu
-                        ipsum condimentum accumsan.</p>
-                  </div>
-                  <div class="post-more">
-                     <a href="page-blog-post-right-sidebar.html" class="btn btn-small">Read
-                        more</a>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="write_button">
-            <input type="button" class="btn" value="작성">
-         </div>
-      </div>
-   </div>
-   <!-- End Posts List -->
-   <!-- Paging -->
-   <div class="paging">
-      <a href="#" class="btn_arr first"><span><<</span></a> <a href="#"
-         class="btn_arr prev"><span><</span></a> <a href="#" class="on">1</a>
-      <!-- D : 활성화페이지일 경우 : on 처리 -->
-      <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a>
-      <a href="#" class="btn_arr next"><span>></span></a> <a href="#"
-         class="btn_arr last"><span>>></span></a>
-   </div>
-   <!-- Search -->
-   <div class="search">
-      <select class="btn">
-         <option value="search_all">제목+내용</option>
-         <option value="search_person">작성자</option>
-      </select> <input type="textarea" class="search_text"> <input
-         type="button" value="검색" class="btn">
-   </div>
-   
-       <!-- Footer -->
-       <footer>
-          <th:block th:include="footer :: commonFooter"></th:block>
-       </footer>
+	<!-- Posts List -->
+	<div class="section blog-posts-wrapper">
+		<div class="container">
+			<div class="row">
+				<!-- Post -->
+				<div class="col-md-4 col-sm-6">
+					<div class="blog-post">
+						<!-- Post Info -->
+						<div class="post-info">
+							<div class="post-date">
+								<div class="date">30 JAN, 2013</div>
+							</div>
+							<div class="post-comments-count">
+								<a href="page-blog-post-right-sidebar.html"
+									title="Show Comments"><i
+									class="glyphicon glyphicon-comment icon-white"></i>11</a>
+							</div>
+						</div>
+						<!-- End Post Info -->
+						<!-- Post Image -->
+						<a href="page-blog-post-right-sidebar.html"><img
+							src="img/blog1.jpg" class="post-image" alt="Post Title"></a>
+						<!-- End Post Image -->
+						<!-- Post Title & Summary -->
+						<div class="post-title">
+							<h3>
+								<a href="page-blog-post-right-sidebar.html">Post Title</a>
+							</h3>
+						</div>
+						<div class="post-summary">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Suspendisse mattis, nulla id pretium malesuada, dui est laoreet
+								risus, ac rhoncus eros diam id odio. Duis elementum ligula eu
+								ipsum condimentum accumsan.</p>
+						</div>
+						<!-- End Post Title & Summary -->
+						<div class="post-more">
+							<a href="page-blog-post-right-sidebar.html" class="btn btn-small">Read
+								more</a>
+						</div>
+					</div>
+				</div>
+				<!-- End Post -->
+				<div class="col-md-4 col-sm-6">
+					<div class="blog-post">
+						<div class="post-info">
+							<div class="post-date">
+								<div class="date">30 JAN, 2013</div>
+							</div>
+							<div class="post-comments-count">
+								<a href="page-blog-post-right-sidebar.html"
+									title="Show Comments"><i
+									class="glyphicon glyphicon-comment icon-white"></i>16</a>
+							</div>
+						</div>
+						<a href="page-blog-post-right-sidebar.html"><img
+							src="img/blog2.jpg" class="post-image" alt="Post Title"></a>
+						<div class="post-title">
+							<h3>
+								<a href="page-blog-post-right-sidebar.html">Another Post
+									Title</a>
+							</h3>
+						</div>
+						<div class="post-summary">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Suspendisse mattis, nulla id pretium malesuada, dui est laoreet
+								risus, ac rhoncus eros diam id odio. Duis elementum ligula eu
+								ipsum condimentum accumsan.</p>
+						</div>
+						<div class="post-more">
+							<a href="page-blog-post-right-sidebar.html" class="btn btn-small">Read
+								more</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="blog-post">
+						<div class="post-info">
+							<div class="post-date">
+								<div class="date">30 JAN, 2013</div>
+							</div>
+							<div class="post-comments-count">
+								<a href="page-blog-post-right-sidebar.html"
+									title="Show Comments"><i
+									class="glyphicon glyphicon-comment icon-white"></i>57</a>
+							</div>
+						</div>
+						<a href="page-blog-post-right-sidebar.html"><img
+							src="img/blog3.jpg" class="post-image" alt="Post Title"></a>
+						<div class="post-title">
+							<h3>
+								<a href="page-blog-post-right-sidebar.html">Yet Another Post
+									Title</a>
+							</h3>
+						</div>
+						<div class="post-summary">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Suspendisse mattis, nulla id pretium malesuada, dui est laoreet
+								risus, ac rhoncus eros diam id odio. Duis elementum ligula eu
+								ipsum condimentum accumsan.</p>
+						</div>
+						<div class="post-more">
+							<a href="page-blog-post-right-sidebar.html" class="btn btn-small">Read
+								more</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="blog-post">
+						<div class="post-info">
+							<div class="post-date">
+								<div class="date">30 JAN, 2013</div>
+							</div>
+							<div class="post-comments-count">
+								<a href="page-blog-post-right-sidebar.html"
+									title="Show Comments"><i
+									class="glyphicon glyphicon-comment icon-white"></i>11</a>
+							</div>
+						</div>
+						<a href="page-blog-post-right-sidebar.html"><img
+							src="img/blog1.jpg" class="post-image" alt="Post Title"></a>
+						<div class="post-title">
+							<h3>
+								<a href="page-blog-post-right-sidebar.html">Post Title</a>
+							</h3>
+						</div>
+						<div class="post-summary">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Suspendisse mattis, nulla id pretium malesuada, dui est laoreet
+								risus, ac rhoncus eros diam id odio. Duis elementum ligula eu
+								ipsum condimentum accumsan.</p>
+						</div>
+						<div class="post-more">
+							<a href="page-blog-post-right-sidebar.html" class="btn btn-small">Read
+								more</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="blog-post">
+						<div class="post-info">
+							<div class="post-date">
+								<div class="date">30 JAN, 2013</div>
+							</div>
+							<div class="post-comments-count">
+								<a href="page-blog-post-right-sidebar.html"
+									title="Show Comments"><i
+									class="glyphicon glyphicon-comment icon-white"></i>16</a>
+							</div>
+						</div>
+						<a href="page-blog-post-right-sidebar.html"><img
+							src="img/blog2.jpg" class="post-image" alt="Post Title"></a>
+						<div class="post-title">
+							<h3>
+								<a href="page-blog-post-right-sidebar.html">Another Post
+									Title</a>
+							</h3>
+						</div>
+						<div class="post-summary">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Suspendisse mattis, nulla id pretium malesuada, dui est laoreet
+								risus, ac rhoncus eros diam id odio. Duis elementum ligula eu
+								ipsum condimentum accumsan.</p>
+						</div>
+						<div class="post-more">
+							<a href="page-blog-post-right-sidebar.html" class="btn btn-small">Read
+								more</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="blog-post">
+						<div class="post-info">
+							<div class="post-date">
+								<div class="date">30 JAN, 2013</div>
+							</div>
+							<div class="post-comments-count">
+								<a href="page-blog-post-right-sidebar.html"
+									title="Show Comments"><i
+									class="glyphicon glyphicon-comment icon-white"></i>57</a>
+							</div>
+						</div>
+						<a href="page-blog-post-right-sidebar.html"><img
+							src="img/blog3.jpg" class="post-image" alt="Post Title"></a>
+						<div class="post-title">
+							<h3>
+								<a href="page-blog-post-right-sidebar.html">Yet Another Post
+									Title</a>
+							</h3>
+						</div>
+						<div class="post-summary">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Suspendisse mattis, nulla id pretium malesuada, dui est laoreet
+								risus, ac rhoncus eros diam id odio. Duis elementum ligula eu
+								ipsum condimentum accumsan.</p>
+						</div>
+						<div class="post-more">
+							<a href="page-blog-post-right-sidebar.html" class="btn btn-small">Read
+								more</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="write_button">
+				<input type="button" class="btn" value="작성">
+			</div>
+		</div>
+	</div>
+	<!-- End Posts List -->
+	<!-- Paging -->
+	<div class="paging">
+		<a href="#" class="btn_arr first"><span><<</span></a> <a href="#"
+			class="btn_arr prev"><span><</span></a> <a href="#" class="on">1</a>
+		<!-- D : 활성화페이지일 경우 : on 처리 -->
+		<a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a>
+		<a href="#" class="btn_arr next"><span>></span></a> <a href="#"
+			class="btn_arr last"><span>>></span></a>
+	</div>
+	<!-- Search -->
+	<div class="search">
+		<select class="btn">
+			<option value="search_all">제목+내용</option>
+			<option value="search_person">작성자</option>
+		</select> <input type="textarea" class="search_text"> <input
+			type="button" value="검색" class="btn">
+	</div>
+
+	<!-- Footer -->
+	<footer>
+		<th:block th:include="footer :: commonFooter"></th:block>
+	</footer>
 
 
 </body>
