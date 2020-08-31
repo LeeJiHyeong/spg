@@ -2710,3 +2710,9 @@ span.color-red {
 .dropdown.open a.dropdown-toggle .caret {
   border-top: 4px solid #FFF;
 }
+
+#administration_img{
+	width: 1em;
+	height: 1em;
+	padding-right: 2px;
+}

@@ -4,12 +4,14 @@ import com.example.demo.admin.request.RequestModifyUserRole;
 import com.example.demo.admin.service.AdminService;
 import com.example.demo.login.domain.RoleName;
 import com.example.demo.login.domain.User;
+import com.example.demo.login.service.UserPrincipal;
 import com.example.demo.utils.PageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -18,6 +20,28 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private AdminService adminService;
+    
+    @RequestMapping(value="adminManagement")
+    public String goManagement(HttpSession session, Model model) {
+        UserPrincipal user = (UserPrincipal) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/";
+        }
+        model.addAttribute("userName", user.getUsername());
+    	
+    	return "admin/admin-management";    	
+    }
+    
+    @RequestMapping(value="adminNotice")
+    public String goNotice(HttpSession session, Model model) {
+        UserPrincipal user = (UserPrincipal) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/";
+        }
+        model.addAttribute("userName", user.getUsername());
+    	
+    	return "admin/admin-notice";    	
+    }   
 
     @PostMapping("/doModifyUserRole")
     public String doModifyUserUserRole(@Valid @ModelAttribute("user") RequestModifyUserRole requestModifyUserRole) {
@@ -50,7 +74,7 @@ public class AdminController {
     public String goModifyUserDataPage(Model model,
                                        @RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber) {
         PageVO pageInfo = new PageVO();
-        List<User> users = this.adminService.findUsersByPage(pageNumber);
+        List<User> users = this.adminService.findUsersByPage(pageNumber - 1);
         long totalCount = this.adminService.getTotalCount();
         if (totalCount > 0) {
             pageInfo.setPageSize(10);

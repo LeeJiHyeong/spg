@@ -19,6 +19,7 @@
 						<li><a th:href="@{/register/signUpPage}" class="log">회원가입</a></li>
 					</ul>
 					<ul th:unless="${userName == null}">
+						<li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin/adminManagement}"><img id="administration_img" src="/img_beom/administration.png">관리</a></li>
 						<li><span th:text="${userName} + '님 환영합니다.'"></span></li>
 						<li><a th:href="@{/user/management}" class="log">마이페이지</a></li>
 						<li><a href="#" onclick="document.getElementById('logout').submit();"  class="log">로그아웃</a></li>
