@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -38,7 +39,7 @@ public class FreeBoardService {
 
     @Transactional
     public List<FreeBoard> findByPage(int startNum) {
-        Pageable pageable = PageRequest.of(startNum, 10);
+    	Pageable pageable = PageRequest.of(startNum, 10, Sort.by("id").descending());
         Page<FreeBoard> page = this.freeBoardRepository.findAll(pageable);
         return page.getContent();
     }
@@ -50,7 +51,7 @@ public class FreeBoardService {
 
     @Transactional
     public List<FreeBoard> findByTitleContainingOrContentContaining(int startNum, String keyword) {
-        Pageable pageable = PageRequest.of(startNum, 10);
+        Pageable pageable = PageRequest.of(startNum, 10, Sort.by("id").descending());
         return this.freeBoardRepository.findByTitleContainingOrContentContaining(keyword, keyword, pageable).getContent();
     }
 
