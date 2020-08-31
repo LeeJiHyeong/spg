@@ -3,6 +3,7 @@ package com.example.demo.admin.controller;
 import com.example.demo.admin.reponse.ReponseUserData;
 import com.example.demo.admin.request.RequestModifyUserRole;
 import com.example.demo.admin.service.AdminService;
+import com.example.demo.login.domain.Role;
 import com.example.demo.login.domain.RoleName;
 import com.example.demo.login.service.UserPrincipal;
 import com.example.demo.utils.PageVO;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -34,15 +37,17 @@ public class AdminController {
 
     @PostMapping("/doModifyUserRole")
     public String doModifyUserUserRole(@Valid @ModelAttribute("user") RequestModifyUserRole requestModifyUserRole) {
-        String roleStr = "ROLE_" + requestModifyUserRole.getRoleStr();
-        RoleName roleName;
+        String roleHeader = "ROLE_";
+        Set<Role> roles = new HashSet<>();
         try {
-            roleName = RoleName.valueOf(roleStr);
+            for (String roleStr : requestModifyUserRole.getRoles()) {
+                roles.add(new Role(RoleName.valueOf(roleHeader + roleStr)));
+            }
         } catch (Exception e) {
             return ""; // fail
         }
 
-        if (this.adminService.changeUserAuthenticated(requestModifyUserRole.getId(), requestModifyUserRole.getUsername(), roleName)) {
+        if (this.adminService.changeUserAuthenticated(requestModifyUserRole.getId(), requestModifyUserRole.getUsername(), roles)) {
             return ""; // change well
         }
 
