@@ -120,8 +120,8 @@ public class PageVO {
 		boolean isNowFirst = pageNo == 1 ? true : false; // 시작 페이지 (전체)
 		boolean isNowFinal = pageNo == finalPage ? true : false; // 마지막 페이지 (전체)
 
-		int startPage = ((pageNo - 1) / 10) * 10 + 1; // 시작 페이지 (페이징 네비 기준)
-		int endPage = startPage + 10 - 1; // 끝 페이지 (페이징 네비 기준)
+		int startPage = ((pageNo - 1) / 5) * 5 + 1; // 시작 페이지 (페이징 네비 기준)
+		int endPage = startPage + 5 - 1; // 끝 페이지 (페이징 네비 기준)
 
 		if (endPage > finalPage) { // [마지막 페이지 (페이징 네비 기준) > 마지막 페이지] 보다 큰 경우
 			endPage = finalPage;

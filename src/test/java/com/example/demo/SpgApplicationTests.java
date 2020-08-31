@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.login.domain.User;
+import com.example.demo.login.request.ChangingPasswordRequest;
 import com.example.demo.login.service.UserService;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -51,10 +52,12 @@ class SpgApplicationTests {
     public void changeUserPasswordTest() throws Exception {
         // given
         String userId = "john";
-        String newPassword = "fun123";
+        ChangingPasswordRequest changingPasswordRequest = new ChangingPasswordRequest();
+        changingPasswordRequest.setBeforePassword("fun123");
+        changingPasswordRequest.setPassword("abc123");
 
         // when
-        User result = userService.changeUserPassword(userId, newPassword);
+        User result = userService.changeUserPassword(userId, changingPasswordRequest);
 
         // then
         Assert.assertThat(result, is(notNullValue()));

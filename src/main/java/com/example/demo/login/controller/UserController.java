@@ -107,7 +107,6 @@ public class UserController {
 
     @GetMapping("/passwordChangePage")
     public String passwordChangePage(Model model) {
-        // todo add authetication for this page
         model.addAttribute("changingPasswordRequest", new ChangingPasswordRequest());
         return "user-password-change";
     }
@@ -124,7 +123,7 @@ public class UserController {
 
             return "user-password-change";
         }
-        if (this.userService.changeUserPassword(userName, changingPasswordRequest.getPassword()) == null) {
+        if (this.userService.changeUserPassword(userName, changingPasswordRequest) == null) {
             model.addAttribute("changeError", "you password is not correct.");
             model.addAttribute("changingPasswordRequest", new ChangingPasswordRequest());
 
