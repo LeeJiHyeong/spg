@@ -1,6 +1,7 @@
 @media (max-width:479px){
 	#container-logo{
 		text-align: center;
+		border: 0px !important;
 	}
 	#container-identity{
 		width: 50%;
@@ -75,5 +76,11 @@
 		width: 50%;
     	border-bottom: 4px solid #4f8db3;
     	text-align: center;
+	}
+}
+
+@media ( min-width: 1023px ){
+	#blank{
+		display:none;
 	}
 }
