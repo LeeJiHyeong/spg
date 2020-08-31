@@ -4,9 +4,10 @@
 
 	<link rel="stylesheet" href="/css/main.css">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
-	<link rel="shortcut icon" href="/img_beom/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="/css/headerResponsive.css">
-
+	<link rel="shortcut icon" href="/img_beom/favicon.ico"
+		type="image/x-icon">
+	<link rel="stylesheet" href="/css/headerResponsiveHamburger.css">
+	<link rel="stylesheet" href="/css/hamburger.css">
 
 	<script src="/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
@@ -21,7 +22,8 @@
 					<ul th:unless="${userName == null}">
 						<li><span th:text="${userName} + '님 환영합니다.'"></span></li>
 						<li><a th:href="@{/user/management}" class="log">마이페이지</a></li>
-						<li><a href="#" onclick="document.getElementById('logout').submit();"  class="log">로그아웃</a></li>
+						<li><a href="#"
+							onclick="document.getElementById('logout').submit();" class="log">로그아웃</a></li>
 						<form id="logout" th:action="@{/logout}" method="POST"></form>
 					</ul>
 				</div>
@@ -29,22 +31,74 @@
 
 			<nav id="mainmenu" class="mainmenu">
 				<ul>
-					<li class="logo-wrapper" id="container-logo"><a href="/"> <img
-							id="main_logo_img" src="/img_beom/spg_logo3.png"
+					<li class="logo-wrapper" id="container-logo"><a href="/">
+							<img id="main_logo_img" src="/img_beom/spg_logo3.png"
 							alt=" No Image">
 					</a></li>
+					<li id="forBlank">&nbsp;&nbsp;</li>
+
+					<div id="blank">
+						<br />
+						<br />
+						<br />
+					</div>
+
+					<li class="active has-submenu" id="container-identity"><a
+						class="homeButton" href="/">S.P.G</a>
+						<div class=mainmenu-submenu>
+							<div class="mainmenu-submenu-inner">
+								<h4>Introduce</h4>
+								<ul>
+									<li><a href="#">동아리 소개</a></li>
+									<li><a href="#">지도교수 소개</a></li>
+									<li><a href="#">임원진 소개</a></li>
+								</ul>
+							</div>
+						</div></li>
+
+					<li id="container-notice"><a th:href="@{/notice}">공지사항</a></li>
+
+					<li id="container-freeBoard"><a th:href="@{/board/freeBoard}">자유게시판</a></li>
+
+					<li id="container-education"><a th:href="@{/board/eduBoard}">교육</a></li>
+
+					<!-- 
+					<li id="container-study"><a th:href="@{/}">스터디</a></li>
+					 -->
+
+					<li id="container-test"><a th:href="@{/}">시험자료</a></li>
+
+					<li id="container-gallery"><a th:href="@{/board/gallery}">갤러리</a></li>
+
 				</ul>
+				<div id="hamburger-wrapper">
+					<div id="beside-hamburger"></div>
+
+					<div id="hamburger-button-container">
+						<div class="hamburger" id="hamburger-button"
+							onclick="openHamburger()">
+							<span class="line"></span> <span class="line"></span> <span
+								class="line"></span>
+						</div>
+					</div>
+
+					<div id="hamburger-container">
+						<ul>
+							<li><a href="#">about</a></li>
+							<li><a href="#">about</a></li>
+							<li><a href="#">about</a></li>
+							<li><a href="#">about</a></li>
+						</ul>
+					</div>
+				</div>
 			</nav>
-			<nav>
-				<th:block th:include="hamburgur :: hamburger-bar"></th:block>
-			</nav>
+
+
 		</div>
 	</div>
 
 	<!-- Javascripts -->
-	<script
-		src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="/js/jquery-1.9.1.min.js"><\/script>')</script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
 	<script src="/js/jquery.fitvids.js"></script>
@@ -52,6 +106,7 @@
 	<script src="/js/jquery.bxslider.js"></script>
 	<script src="/js/main-menu.js"></script>
 	<script src="/js/template.js"></script>
+	<script type="text/javascript" src="/js/hamburger.js"></script>
 
 </th:block>
 </html>
