@@ -178,7 +178,7 @@ public class BoardController {
     }
 
     @GetMapping(value = "freeBoard/doDelete")
-    public String doFreeBoardDelete(@RequestParam(value = "contentId") int contentId) {
+    public String doDeleteFreeBoard(@RequestParam(value = "contentId") int contentId) {
         this.freeBoardService.deleteFilesAndFreeBoardDataByContentId(contentId);
 
         return "redirect:/board/freeBoard";
@@ -186,7 +186,7 @@ public class BoardController {
     
     @GetMapping(value = "freeBoard/doDeleteComment")
     @ResponseBody
-    public Map<String, String> doFreeBoardCommentDelete(@RequestParam(value = "commentId") int comment) {
+    public Map<String, String> doDeleteFreeBoardComment(@RequestParam(value = "commentId") int comment) {
     	return null;
     }
     
