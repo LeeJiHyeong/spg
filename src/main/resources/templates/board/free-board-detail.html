@@ -67,12 +67,14 @@
 						<th:block th:each="comment : ${commentList}">
 							<div class="eachComment" th:id="${comment.getId()}">
 								<div class="name">
+									<!-- <span th:text="${comment.getUserName() + ' (' + #dates.format(comment.getCreateDate(), 'yyyy-MM-dd') + ')'}"></span> -->
 									<span th:text="${comment.getUserName()}"></span>
-									<!-- <a th:href="@{/board/freeBoard/doDeleteComment(commentId=${comment.getId()})}"><span class="remove-btn">&times;</span></a> -->
-									<a th:onclick="|javascript:checkDeleteComment('${comment.getId()}')|"><span class="remove-btn">&times;</span></a>
+									<a th:onclick="|javascript:checkDeleteComment('${comment.getId()}')|"><span th:if="${#strings.equals(userName, comment.getUserName())}" class="remove-btn">&times;</span></a>
 								</div>
 								<div class="inputValue">
-									<span th:text="${comment.getContent()}">댓글내용</span>
+									<p th:text="${comment.getContent()}">댓글내용</p>
+									<!-- <br /><br /> -->
+									<p class="time-stamp" th:text="${'' + #dates.format(comment.getCreateDate(), 'yyyy-MM-dd')}"></p>
 								</div>
 							</div>
 						</th:block>
@@ -87,8 +89,8 @@
 	        	</div>
 	        	<div class="right_button">
 	        		<!-- <a th:href="@{/board/freeBoard/doDelete(contentId=${contentId})}" class="btn" style="background: none repeat scroll 0 0 #DA1111;">삭제</a> -->
-	        		<input th:if="${userName == writerName}" type="button" id="delete-button" value="삭제" class="btn" style="background: none repeat scroll 0 0 #DA1111;" />
-	        		<a th:if="${userName == writerName}" th:href="@{/board/freeBoard/modify(contentId=${contentId})}" class="btn">수정</a>
+	        		<input th:if="${#strings.equals(userName, writerName)}" type="button" id="delete-button" value="삭제" class="btn" style="background: none repeat scroll 0 0 #DA1111;" />
+	        		<a th:if="${#strings.equals(userName, writerName)}" th:href="@{/board/freeBoard/modify(contentId=${contentId})}" class="btn">수정</a>
 					<a th:href="@{/board/freeBoard}" class="btn"> 목록 </a>
 				</div>
 	        </div>

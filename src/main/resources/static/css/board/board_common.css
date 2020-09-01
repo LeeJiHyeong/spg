@@ -129,7 +129,7 @@
 }
 
 .eachComment .name {
-	font-size: 1.0em;
+	font-size: 1.2em;
 	font-weight: bold;
 	color: black;
 	margin-bottom: 0.3em;
@@ -138,7 +138,7 @@
 }
 
 .eachComment .inputValue {
-	font-size: 0.9em;
+	font-size: 1.1em;
 }
 
 .eachComment .time {
@@ -189,4 +189,8 @@ table {
 
 .comment-count {
 	color: red;
+}
+
+.time-stamp {
+	font-size: 0.8em;
 }

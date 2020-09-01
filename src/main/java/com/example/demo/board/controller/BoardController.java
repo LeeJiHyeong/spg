@@ -6,6 +6,7 @@ import com.example.demo.board.domain.FreeBoardFile;
 import com.example.demo.board.service.FreeBoardService;
 import com.example.demo.login.domain.User;
 import com.example.demo.login.service.UserService;
+import com.example.demo.utils.DateFormatter;
 import com.example.demo.utils.FilePath;
 import com.example.demo.utils.PageVO;
 import org.slf4j.Logger;
@@ -92,11 +93,11 @@ public class BoardController {
         model.addAttribute("contentId", content.getId());
         model.addAttribute("commentList", content.getFreeBoardComment());
         model.addAttribute("commentCount", this.freeBoardService.getCommentCountByContentId(contentId));
-
+        
         if (freeBoardFiles != null && freeBoardFiles.size() != 0) {
             model.addAttribute("fileName", freeBoardFiles.get(0).getOrdinaryFileName());
         }
-        
+
         return "/board/free-board-detail";
     }
 
@@ -166,13 +167,28 @@ public class BoardController {
 
     	String userName = (String)session.getAttribute("userName");
     	
+//    	Map<String, String> comment = new HashMap<String, String>();
+//    	comment.put("content", freeBoardComment.getContent());
+//    	comment.put("contentId", Long.toString(freeBoardComment.getContentId()));
+//    	comment.put("userName", userName);
+//    	
+//    	freeBoardComment.setUserName(userName);
+//    	comment.put("commentId", Long.toString(this.freeBoardService.save(freeBoardComment).getId()));
+//    	comment.put("commentCount", Long.toString(this.freeBoardService.getCommentCountByContentId(freeBoardComment.getContentId())));
+    	
+    	// 수정코드
     	Map<String, String> comment = new HashMap<String, String>();
     	comment.put("content", freeBoardComment.getContent());
     	comment.put("contentId", Long.toString(freeBoardComment.getContentId()));
     	comment.put("userName", userName);
     	
     	freeBoardComment.setUserName(userName);
-    	comment.put("commentId", Long.toString(this.freeBoardService.save(freeBoardComment).getId()));
+    	FreeBoardComment insertedFreeBoardComment = this.freeBoardService.save(freeBoardComment);
+    	
+    	DateFormatter dfm = new DateFormatter();
+    	
+    	comment.put("createDate", dfm.getDate(insertedFreeBoardComment.getCreateDate()));
+    	comment.put("commentId", Long.toString(insertedFreeBoardComment.getId()));
     	comment.put("commentCount", Long.toString(this.freeBoardService.getCommentCountByContentId(freeBoardComment.getContentId())));
     	
     	return comment;

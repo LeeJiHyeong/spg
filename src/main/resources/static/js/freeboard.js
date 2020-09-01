@@ -72,8 +72,10 @@ function writeComment(comment) {
         						'<a onclick="checkDeleteComment(' + data.commentId + ')"><span class="remove-btn">&times;</span></a>' +
         					'</div>' +
         					'<div class="inputValue">' +
-								'<span>' + data.content +
-								'</span>' +
+								'<p>' + data.content +
+								'</p>' +
+								'<p class="time-stamp">' + data.createDate +
+								'</p>' +
 							'</div>' +
         				'</div>';
         	
