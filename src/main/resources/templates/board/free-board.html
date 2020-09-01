@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="/css/icomoon-social.css">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="/css/board/board_common.css">
-
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     
     <body>
@@ -52,6 +52,7 @@
 		                            <!-- 제목 -->
 		                            <td class="job-position-title">
 		                            	<a th:href="@{freeBoard/detail(contentId=${page.getId()})}">
+		                            		<img th:unless="${page.getFreeBoardFile().isEmpty()}" id="file_img" src="/img/file2.png" alt="No Image">
 		                            		<span th:if="${#strings.length(page.getTitle()) < 30}" class="content-title"  th:text="${page.getTitle() + ' '}"></span><span th:if="${#strings.length(page.getTitle()) < 30}" class="comment-count" th:text="${'[' + page.getFreeBoardComment().size() + ']'}"></span>
 		                            		<span th:unless="${#strings.length(page.getTitle()) < 27}" class="content-title" th:text="${#strings.substring(page.getTitle(), 0, 27) + ' .....'}"></span><span th:unless="${#strings.length(page.getTitle()) < 30}" class="comment-count" th:text="${' ' + '[' + page.getFreeBoardComment().size() + ']'}"></span>
 		                            	</a>
