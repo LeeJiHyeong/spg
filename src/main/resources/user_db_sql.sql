@@ -1,6 +1,6 @@
 -- user part
 
-CREATE TABLE db_test.user (
+CREATE TABLE user (
   id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(20) NOT NULL UNIQUE,
   password VARCHAR(70) NOT NULL,
@@ -10,12 +10,12 @@ CREATE TABLE db_test.user (
   update_date DATETIME DEFAULT NULL
 );
 
-CREATE TABLE db_test.roles (
+CREATE TABLE roles (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) UNIQUE DEFAULT NULL
 );
 
-CREATE TABLE db_test.user_roles (
+CREATE TABLE user_roles (
     user_id BIGINT NOT NULL,
     role_id BIGINT NOT NULL,
     PRIMARY KEY (user_id, role_id),
@@ -59,7 +59,7 @@ CREATE TABLE free_board_file(
 );
 -- 자유 게시판 파일 table
 
-CREATE TABLE db_test.free_board_comment (
+CREATE TABLE free_board_comment (
    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_name VARCHAR(20),
     content TEXT NOT NULL,
