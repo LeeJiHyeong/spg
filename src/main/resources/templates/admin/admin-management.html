@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>관리자 페이지 - 회원 정보 관리</title>
+
+    <link rel="stylesheet" href="/css/admin/admin-common.css">
+    <link rel="shortcut icon" href="../img_beom/favicon.ico" type="image/x-icon">
+
+</head>
+
+<body>
+
+<!-- Header -->
+<div class="Header">
+    <th:block th:include="header :: commonHeader"></th:block>
+</div>
+
+<div class="sub-visual-wrap"></div>
+
+<div class="sub-container">
+    <div class="lnb-wrap">
+        <div class="lnb">
+            <div class="lnb-title-box">
+                <div>
+                    <h2>관리자 페이지</h2>
+                </div>
+            </div>
+            <ul class="lnb-menu">
+                <li class="active"><a class="active" th:href="@{/}">회원 정보 관리</a></li>
+                <li><a class="" th:href="@{/admin/adminNotice}">공지사항 작성</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content-wrap">
+        <div class="tab"></div>
+        <div class="content">
+            <div class="co-board type2">
+                <div class="bn-login01">
+                    <!-- -->
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>학번</th>
+                            <th>이름</th>
+                            <th>권한</th>
+                            <th>수정</th>
+                            <th>삭제</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="page : ${users}">
+                            <tr>
+                                <form>
+                                    <!--No-->
+                                    <td th:text="${page.getId()}"></td>
+                                    <!-- school id -->
+                                    <td th:text="${page.getUsername()}"></td>
+                                    <td th:text="${page.getName()}"></td>
+                                    <!-- 수정 modal 부분 -->
+                                    <!-- 삭제 submit 넣기 -->
+                                </form>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Paging -->
+<div class="paging">
+    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getFirstPageNo()})}"
+       class="btn_arr first"><span><<</span></a>
+    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getPrevPageNo()})}"
+       class="btn_arr prev"><span><</span></a>
+    <th:block th:each="num : ${#numbers.sequence(pageInfo.getStartPageNo(), pageInfo.getEndPageNo())}">
+        <!-- D : 활성화페이지일 경우 : on 처리 -->
+        <a th:if="${pageInfo.getPageNo() == num}" th:href="@{/admin/goModifyUserDataPage(pageNumber=${num})}"
+           class="on"><span th:text="${num}"></span></a>
+        <a th:unless="${pageInfo.getPageNo() == num}" th:href="@{/admin/goModifyUserDataPage(pageNumber=${num})}"><span
+                th:text="${num}"></span></a>
+    </th:block>
+    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getNextPageNo()})}"
+       class="btn_arr next"><span>></span></a>
+    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getFinalPageNo()})}"
+       class="btn_arr last"><span>>></span></a>
+</div>
+
+<footer>
+    <th:block th:include="footer :: commonFooter"></th:block>
+</footer>
+
+</body>
+</html>

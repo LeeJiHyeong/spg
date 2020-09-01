@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="hamburger-bar">
+
+	<link rel="stylesheet" href="/css/hamburger.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	
+	<div id="hamburger-wrapper">
+		<div id="beside-hamburger"></div>
+
+		<div id="hamburger-button-container">
+			<div class="hamburger" id="hamburger-button" onclick="openHamburger()">
+				<span class="line"></span> 
+				<span class="line"></span> 
+				<span class="line"></span>
+			</div>
+		</div>
+
+		<div id="hamburger-container">
+			<ul>
+				<li><a href="#">about</a></li>
+				<li><a href="#">about</a></li>
+				<li><a href="#">about</a></li>
+				<li><a href="#">about</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="/js/hamburger.js"></script>
+</th:block>
+</html>

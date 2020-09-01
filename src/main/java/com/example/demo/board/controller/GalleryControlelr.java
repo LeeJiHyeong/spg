@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.login.service.UserPrincipal;
 
 @Controller
+@RequestMapping("/board")
 public class GalleryControlelr {
 
     // 갤러리

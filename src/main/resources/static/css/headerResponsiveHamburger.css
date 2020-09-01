@@ -41,47 +41,58 @@
 	#forBlank{
 		width: 50%;
 		border: 0px;
+		display: none;
 	}
 	#container-identity{
 		width: 50%;
 		height: 50px;
     	border-bottom: 4px solid #4f8db3;
     	text-align: center;
+    	display: none;
 	}
 	#container-notice{
 		width: 50%;
     	border-bottom: 4px solid #4f8db3;
     	text-align: center;
+    	display: none;
 	}
 	#container-freeBoard{
 		width: 50%;
     	border-bottom: 4px solid #4f8db3;
     	text-align: center;
+    	display: none;
 	}
 	#container-education{
 		width: 50%;
     	border-bottom: 4px solid #4f8db3;
     	text-align: center;
+    	display: none;
 	}
 	#container-study{
 		width: 50%;
     	border-bottom: 4px solid #4f8db3;
     	text-align: center;
+    	display: none;
 	}
 	#container-test{
 		width: 50%;
     	border-bottom: 4px solid #4f8db3;
     	text-align: center;
+    	display: none;
 	}
 	#container-gallery{
 		width: 50%;
     	border-bottom: 4px solid #4f8db3;
     	text-align: center;
+    	display: none;
 	}
 }
 
 @media ( min-width: 1023px ){
 	#blank{
+		display:none;
+	}
+	#hamburger-wrapper{
 		display:none;
 	}
 }

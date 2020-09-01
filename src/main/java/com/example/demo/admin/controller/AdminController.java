@@ -1,17 +1,22 @@
 package com.example.demo.admin.controller;
 
+import com.example.demo.admin.reponse.ReponseUserData;
 import com.example.demo.admin.request.RequestModifyUserRole;
 import com.example.demo.admin.service.AdminService;
+import com.example.demo.login.domain.Role;
 import com.example.demo.login.domain.RoleName;
-import com.example.demo.login.domain.User;
+import com.example.demo.login.service.UserPrincipal;
 import com.example.demo.utils.PageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -19,17 +24,30 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    @RequestMapping(value = "adminNotice")
+    public String goNotice(HttpSession session, Model model) {
+        UserPrincipal user = (UserPrincipal) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/";
+        }
+        model.addAttribute("userName", user.getUsername());
+
+        return "admin/admin-notice";
+    }
+
     @PostMapping("/doModifyUserRole")
     public String doModifyUserUserRole(@Valid @ModelAttribute("user") RequestModifyUserRole requestModifyUserRole) {
-        String roleStr = "ROLE_" + requestModifyUserRole.getRoleStr();
-        RoleName roleName;
+        String roleHeader = "ROLE_";
+        Set<Role> roles = new HashSet<>();
         try {
-            roleName = RoleName.valueOf(roleStr);
+            for (String roleStr : requestModifyUserRole.getRoles()) {
+                roles.add(new Role(RoleName.valueOf(roleHeader + roleStr)));
+            }
         } catch (Exception e) {
             return ""; // fail
         }
 
-        if (this.adminService.changeUserAuthenticated(requestModifyUserRole.getId(), requestModifyUserRole.getUsername(), roleName)) {
+        if (this.adminService.changeUserAuthenticated(requestModifyUserRole.getId(), requestModifyUserRole.getUsername(), roles)) {
             return ""; // change well
         }
 
@@ -47,19 +65,28 @@ public class AdminController {
     }
 
     @GetMapping("/goModifyUserDataPage")
-    public String goModifyUserDataPage(Model model,
+    public String goModifyUserDataPage(HttpSession session, Model model,
                                        @RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber) {
+
+        UserPrincipal user = (UserPrincipal) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/";
+        }
+
         PageVO pageInfo = new PageVO();
-        List<User> users = this.adminService.findUsersByPage(pageNumber);
+        List<ReponseUserData> userList = this.adminService.findUsersByPage(pageNumber - 1);
         long totalCount = this.adminService.getTotalCount();
+
         if (totalCount > 0) {
             pageInfo.setPageSize(10);
             pageInfo.setPageNo(pageNumber);
             pageInfo.setTotalCount((int) totalCount);
         }
-        model.addAttribute("pageInfo", pageInfo);
-        model.addAttribute("users", users);
 
-        return "";
+        model.addAttribute("userName", user.getUsername());
+        model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("users", userList);
+
+        return "admin/admin-management";
     }
 }
