@@ -6,9 +6,11 @@
     <link rel="stylesheet" href="/css/admin/admin-common.css">
     <link rel="shortcut icon" href="../img_beom/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="/css/board/board_common.css">
-
+		
 	<meta id="_csrf" name="_csrf" content="${_csrf.token}" /> 
 	<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+	
+	<script type="text/javascript" src="/js/admin.js"></script>	
 	
 </head>
 
@@ -31,7 +33,6 @@
             </div>
             <ul class="lnb-menu">
                 <li class="active"><a class="active" th:href="@{/}">회원 정보 관리</a></li>
-                <li><a class="" th:href="@{/admin/adminDeleteUser}">회원 정보 삭제</a></li>                
                 <li><a class="" th:href="@{/admin/adminNotice}">공지사항 작성</a></li>
             </ul>
         </div>
@@ -57,48 +58,29 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <form th:object="${requestModifyUserRole}" id="doAdmin" method="POST">
                         <th:block th:each="page : ${users}">
+                        <form th:object="${requestModifyUserRole}" th:id="${page.getId()}" method="POST">                        
                         	<input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                             <tr>
                                     <!--No-->
-                                    <td><input type="text" id="id" name="id" th:value="${page.getId()}" readonly onfocus="this.blur();"/></td>
+                                    <td><input type="text" name="id" th:value="${page.getId()}" readonly onfocus="this.blur();"/></td>
 
                                     <!-- school id -->
-                                    <td><input type="text" id="username" name="username" th:value="${page.getUsername()}" readonly onfocus="this.blur();"/></td>
+                                    <td><input type="text" name="username" th:value="${page.getUsername()}" readonly onfocus="this.blur();"/></td>
                                     
                                     <td th:text="${page.getName()}"></td>
                                     <td th:each="role : ${roles}">
-                                        <input type="checkbox" id="roles" class="auth" name="roles" th:checked="${(page.getRoles()).contains(role)}" th:text="${role.getName().name()}">                     
+                                        <input type="checkbox" th:class="${page.getId()}" name="roles" th:onClick="'onClickCheckBoxEvnetHandler(' + ${page.getId()} +')'" th:checked="${(page.getRoles()).contains(role)}" th:value="${role.getName().name()}" th:text="${role.getName().name()}">                     
                                     </td>
                                     <td>
-                                    	<input type="button" id="modify" onClick="onClickModifySubmitButton()" value="수 정"></input>
+                                    	<input type="button" id="modify" th:onClick="'onClickModifyRoleEventHandler('+${page.getId()}+')'" value="수 정"></input>
                                     </td>
                                     <td>
-                                    	<input type="button" id="delete" value="삭 제"></input>
+                                    	<input type="button" id="delete" th:onClick="'onClickUrlEventHandler('+${page.getId()}+', '+@{/admin/doDeleteUser}+')'" value="삭 제"></input>
                                     </td>
                             </tr>
-                            <script th:inline="javascript">
-								function onClickModifySubmitButton() {
-	                            	var modify = /*[[ @{/admin/doModifyUserRole} ]]*/;
-									document.getElementById("doAdmin").setAttribute("action", modify);
-									document.getElementById("doAdmin").submit();
-								}
-								
-                            	//var modify = /*[[ @{/admin/doModifyUserRole} ]]*/;
-								  //$("#modify").on("click", function(){
-								 //  	$("#doAdmin").attr("action", modify);
-								 //   $("#doAdmin").submit();
-								 // });
-								  
-								  var del = /*[[ @{/admin/doDeleteUser} ]]*/;
-								  $("#delete").on("click", function(){
-								    $("#doAdmin").attr("action", del);
-								    $("#doAdmin").submit();
-								  });
-							</script>
+                        </form>							
                         </th:block>
-                        </form>
                         </tbody>
                     </table>
                     <!-- Paging -->
@@ -128,7 +110,7 @@
 
 <footer>
     <th:block th:include="footer :: commonFooter"></th:block>
-</footer>
-
+</footer>  
+            
 </body>
 </html>

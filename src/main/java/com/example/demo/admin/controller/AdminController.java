@@ -3,14 +3,11 @@ package com.example.demo.admin.controller;
 import com.example.demo.admin.reponse.ReponseUserData;
 import com.example.demo.admin.request.RequestModifyUserRole;
 import com.example.demo.admin.service.AdminService;
-import com.example.demo.login.controller.LoginController;
 import com.example.demo.login.domain.Role;
 import com.example.demo.login.domain.RoleName;
 import com.example.demo.login.service.UserPrincipal;
 import com.example.demo.utils.PageVO;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +18,6 @@ import javax.validation.Valid;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -32,7 +28,6 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    private Logger logger = LoggerFactory.getLogger(LoginController.class);    
     
     @RequestMapping(value = "adminNotice")
     public String goNotice(HttpSession session, Model model) {
@@ -56,63 +51,39 @@ public class AdminController {
         return "admin/admin-delete-user";
     }
 
-//    @PostMapping("/doModifyUserRole")
-//    public String doModifyUserUserRole(@RequestBody RequestModifyUserRole requestModifyUserRole) {
-//    	    	
-//    	System.out.println(requestModifyUserRole.getUsername());
-//    	System.out.println(requestModifyUserRole.getId());
-//    	
-//    	Iterator<String> iter = requestModifyUserRole.getRoles().iterator();
-//    	while(iter.hasNext()) {
-//    		System.out.println(iter.next());
-//    	}
-//    	
-//        return ""; // change fail
-//        
-//    }
     @PostMapping("/doModifyUserRole")
     public String doModifyUserUserRole(@Valid @ModelAttribute("requestModifyUserRole") RequestModifyUserRole requestModifyUserRole) {
     	
-    	System.out.println(requestModifyUserRole.getId());
-    	System.out.println(requestModifyUserRole.getUserName());
-    	Iterator<String> iter = requestModifyUserRole.getRoles().iterator();
-    	
-    	while(iter.hasNext()) {
-    		System.out.println(iter.next());
-    	}
-    	
-//    	String roleHeader = "ROLE_";
-//        Set<Role> roles = new HashSet<>();
-//        try {
-//            for (String roleStr : requestModifyUserRole.getRoles()) {
-//                roles.add(new Role(RoleName.valueOf(roleHeader + roleStr)));
-//            }
-//        } catch (Exception e) {
-//            return ""; // fail
-//        }
-//
-//        if (this.adminService.changeUserAuthenticated(requestModifyUserRole.getId(), requestModifyUserRole.getUsername(), roles)) {
-//            return ""; // change well
-//        }
+        Set<Role> roles = new HashSet<>();
+        
+        try {
+            for (String roleStr : requestModifyUserRole.getRoles()) {
+            	roles.add(new Role(RoleName.valueOf(roleStr)));
+            }
+        } catch (Exception e) {
+            return "redirect:/admin/goModifyUserDataPage"; // fail
+        }
 
-        return "redirect:/"; // change fail
+        if (this.adminService.changeUserAuthenticated(Long.parseLong(requestModifyUserRole.getId()), requestModifyUserRole.getUserName(), roles)) {
+        	System.out.println("check");      	
+            return "redirect:/admin/goModifyUserDataPage"; // change well
+        }
+
+        return "redirect:/admin/goModifyUserDataPage"; // change fail
         
     }
 
     @PostMapping("/doDeleteUser")
     public String doDeleteUser(@Valid @ModelAttribute("requestModifyUserRole") RequestModifyUserRole requestModifyUserRole) {
     	
-    	System.out.println("check : "+requestModifyUserRole.getId());
-    	System.out.println("check2 : "+requestModifyUserRole.getUserName());
+    	Long userId = Long.parseLong(requestModifyUserRole.getId());
+    	String username = requestModifyUserRole.getUserName();
     	
-//    	Long userId = Long.parseLong(requestModifyUserRole.getId());
-//    	String username = requestModifyUserRole.getUserName();
-//    	
-//        if (this.adminService.deleteUserData(userId, username)) {
-//            return "admin/admin-delete-user"; // delete success
-//        }
+        if (this.adminService.deleteUserData(userId, username)) {
+            return "redirect:/admin/goModifyUserDataPage"; // delete success
+        }
 
-        return "redirect:/"; // fail to delete
+        return "redirect:admin/goModifyUserDataPage"; // fail to delete
     }
 
     @GetMapping("/goModifyUserDataPage")
