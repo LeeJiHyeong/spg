@@ -267,20 +267,27 @@ input {
     -webkit-appearance: textfield;
     background-color: -internal-light-dark-color(rgb(255, 255, 255), rgb(59, 59, 59));
     -webkit-rtl-ordering: logical;
-    cursor: text;
+    cursor: cursor;
     font: 400 13.3333px Arial;
 
 }
+/*--------------------------------------------------------------------------
+	Info Table Style
+--------------------------------------------------------------------------*/
 
 .info-table{
 	width: 100%;
+}
+
+.table-header{
+	text-align: center;
 }
 
 tbody{
 	text-align: center;
 }
 
-th, td {
+th, td, tr {
    border-bottom: 1px solid #444444;
    padding: 10px !important;
    height: 2em;
@@ -288,9 +295,26 @@ th, td {
  
  button{
  	width: 70%;
+ 	padding: 0.3em;
+    border: none;
+    background: #4f8db3;
+    font-weight: 300;
+    font-size: 18px;
+    color: #fff !important;
+    text-align: center;
+    vertical-align: top;
+    cursor: pointer;
  }
  
- .auth{
-  	margin-left: 1.5em !important;
+ input[type="text"]{
+ 	border: 0px;
+ 	text-align: center;
  }
  
+ #id{
+ 	width: 20px;
+ }
+ 
+ #userName{
+ 	width: 50px;
+ }
