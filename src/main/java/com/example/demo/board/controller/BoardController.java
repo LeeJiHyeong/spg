@@ -41,7 +41,8 @@ public class BoardController {
     @GetMapping(value = "freeBoard")
     public String goFreeBoard(HttpSession session, Model model,
                               @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
-                              @RequestParam(value = "searchKey", defaultValue = "") String searchKey) {
+                              @RequestParam(value = "searchKey", defaultValue = "") String searchKey,
+                              @RequestParam(value = "searchType", defaultValue = "") String searchType) {
 
         // session
         if (session.getAttribute("userName") != null) {
@@ -57,8 +58,14 @@ public class BoardController {
             pageList = this.freeBoardService.findByPage(pageNum - 1);
             totalCount = this.freeBoardService.getTotalCount();
         } else {
-            pageList = this.freeBoardService.findByTitleContainingOrContentContaining(pageNum - 1, searchKey);
-            totalCount = this.freeBoardService.getCountByTitleContainingOrContentContaining(searchKey);
+        	if (searchType.equals("search_all")) {
+        		pageList = this.freeBoardService.findByTitleContainingOrContentContaining(pageNum - 1, searchKey);
+                totalCount = this.freeBoardService.getCountByTitleContainingOrContentContaining(searchKey);
+        	}
+        	else {
+        		pageList = this.freeBoardService.findByWriterNameContaining(pageNum - 1, searchKey);
+                totalCount = this.freeBoardService.getCountByWriterNameContaining(searchKey);
+        	}
         }
 
         if (totalCount > 0) {
@@ -66,11 +73,11 @@ public class BoardController {
             pageInfo.setPageNo(pageNum);
             pageInfo.setTotalCount(totalCount);
         }
-
+        
         model.addAttribute("pageList", pageList);
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("searchKey", searchKey);
-
+        model.addAttribute("searchType", searchType);
         return "/board/free-board";
     }
 

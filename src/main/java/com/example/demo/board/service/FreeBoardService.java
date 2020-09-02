@@ -59,6 +59,17 @@ public class FreeBoardService {
     public int getCountByTitleContainingOrContentContaining(String keyword) {
         return this.freeBoardRepository.countByTitleContainingOrContentContaining(keyword, keyword);
     }
+    
+    @Transactional
+    public List<FreeBoard> findByWriterNameContaining(int startNum, String keyword) {
+        Pageable pageable = PageRequest.of(startNum, 10, Sort.by("id").descending());
+        return this.freeBoardRepository.findByWriterNameContaining(keyword, pageable).getContent();
+    }
+
+    @Transactional
+    public int getCountByWriterNameContaining(String keyword) {
+        return this.freeBoardRepository.countByWriterNameContaining(keyword);
+    }
 
     @Transactional
     public FreeBoard getFreeBoardDetail(long freeBoardId) {

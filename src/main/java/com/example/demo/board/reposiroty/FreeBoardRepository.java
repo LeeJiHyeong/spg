@@ -15,9 +15,11 @@ public interface FreeBoardRepository extends JpaRepository<FreeBoard, Long> {
 
 	public Optional<FreeBoard> findById(Long id);
 
-	public Page<FreeBoard> findByTitleContainingOrContentContaining(String aString, String bString, Pageable pageable);
-
-	public List<FreeBoard> findByWriterName(String writerName);
+	public Page<FreeBoard> findByTitleContainingOrContentContaining(String titleKeyword, String contentKeyWord, Pageable pageable);
+	
+	public Page<FreeBoard> findByWriterNameContaining(String keyWord, Pageable pageable);
 	
 	public int countByTitleContainingOrContentContaining(String titleKeyword, String contentKeyword);
+	
+	public int countByWriterNameContaining(String keyWord);
 }

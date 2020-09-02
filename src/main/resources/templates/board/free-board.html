@@ -77,20 +77,20 @@
 		
 		<!-- Paging -->
 		<div class="paging">
-			<a th:href="@{/board/freeBoard(pageNum=${pageInfo.getFirstPageNo()})}" class="btn_arr first"><span><<</span></a>            
-			<a th:href="@{/board/freeBoard(pageNum=${pageInfo.getPrevPageNo()})}" class="btn_arr prev"><span><</span></a>
+			<a th:href="@{/board/freeBoard(pageNum=${pageInfo.getFirstPageNo()}, searchKey=${searchKey}, searchType=${searchType})}" class="btn_arr first"><span><<</span></a>            
+			<a th:href="@{/board/freeBoard(pageNum=${pageInfo.getPrevPageNo()}, searchKey=${searchKey}, searchType=${searchType})}" class="btn_arr prev"><span><</span></a>
 			<!-- <th:block th:each="num : ${#numbers.sequence(pageInfo.getStartPageNo(), pageInfo.getEndPageNo())}"> -->
 			<th:block th:each="num : ${#numbers.sequence(pageInfo.getStartPageNo(), pageInfo.getEndPageNo())}">
 				<!-- D : 활성화페이지일 경우 : on 처리 -->     
-				<a th:if="${pageInfo.getPageNo() == num}" th:href="@{/board/freeBoard(pageNum=${num}, searchKey=${searchKey})}" class="on"><span th:text="${num}"></span></a>
-				<a th:unless="${pageInfo.getPageNo() == num}" th:href="@{/board/freeBoard(pageNum=${num}, searchKey=${searchKey})}"><span th:text="${num}"></span></a><!-- D : 활성화페이지일 경우 : on 처리 -->
+				<a th:if="${pageInfo.getPageNo() == num}" th:href="@{/board/freeBoard(pageNum=${num}, searchKey=${searchKey}, searchType=${searchType})}" class="on"><span th:text="${num}"></span></a>
+				<a th:unless="${pageInfo.getPageNo() == num}" th:href="@{/board/freeBoard(pageNum=${num}, searchKey=${searchKey}, searchType=${searchType})}"><span th:text="${num}"></span></a><!-- D : 활성화페이지일 경우 : on 처리 -->
 			</th:block>
-			<a th:href="@{/board/freeBoard(pageNum=${pageInfo.getNextPageNo()})}" class="btn_arr next"><span>></span></a>            
-			<a th:href="@{/board/freeBoard(pageNum=${pageInfo.getFinalPageNo()})}" class="btn_arr last"><span>>></span></a> 
+			<a th:href="@{/board/freeBoard(pageNum=${pageInfo.getNextPageNo()}, searchKey=${searchKey}, searchType=${searchType})}" class="btn_arr next"><span>></span></a>            
+			<a th:href="@{/board/freeBoard(pageNum=${pageInfo.getFinalPageNo()}, searchKey=${searchKey}, searchType=${searchType})}" class="btn_arr last"><span>>></span></a> 
 		</div>
 		<!-- Search -->
 		<div class="search">
-			<select class="btn">
+			<select class="btn" id="search-type" th:value="${searchType}">
 				<option value="search_all">제목+내용</option>
 				<option value="search_person">작성자</option>
 			</select>

@@ -1,4 +1,8 @@
 function freeBoardSearch() {
+	var searchType = $('#search-type').val();
 	var searchKey = $('#search_key').val();
-	location.href = "/board/freeBoard?searchKey=" + searchKey;
+	
+	// 셀렉 옵션 고정
+	// 검색 키워드 고정
+	location.href = "/board/freeBoard?searchKey=" + searchKey + "&searchType=" + searchType;
 }
