@@ -5,7 +5,11 @@
 
     <link rel="stylesheet" href="/css/admin/admin-common.css">
     <link rel="shortcut icon" href="../img_beom/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="/css/board/board_common.css">
 
+	<meta id="_csrf" name="_csrf" content="${_csrf.token}" /> 
+	<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+	
 </head>
 
 <body>
@@ -27,6 +31,7 @@
             </div>
             <ul class="lnb-menu">
                 <li class="active"><a class="active" th:href="@{/}">회원 정보 관리</a></li>
+                <li><a class="" th:href="@{/admin/adminDeleteUser}">회원 정보 삭제</a></li>                
                 <li><a class="" th:href="@{/admin/adminNotice}">공지사항 작성</a></li>
             </ul>
         </div>
@@ -36,58 +41,90 @@
         <div class="content">
             <div class="co-board type2">
                 <div class="bn-login01">
-                    <!-- -->
-                    <table>
+                    <!-- User Info Management -->
+                    <table class="info-table">
                         <thead>
                         <tr>
-                            <th>No</th>
-                            <th>학번</th>
-                            <th>이름</th>
-                            <th>권한</th>
-                            <th>수정</th>
-                            <th>삭제</th>
+                        	<td colspan="9"><h3>회원 명부</h3></td>
+                        </tr>
+                        <tr class="table-header">
+                            <td>No.</td>
+                            <td>학 번</td>
+                            <td>이 름</td>
+                            <td colspan="3">권 한</td>
+                            <td>수 정</td>
+                            <td>삭 제</td>
                         </tr>
                         </thead>
                         <tbody>
+                        <form th:object="${requestModifyUserRole}" id="doAdmin" method="POST">
                         <th:block th:each="page : ${users}">
+                        	<input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                             <tr>
-                                <form>
                                     <!--No-->
-                                    <td th:text="${page.getId()}"></td>
+                                    <td><input type="text" id="id" name="id" th:value="${page.getId()}" readonly onfocus="this.blur();"/></td>
+
                                     <!-- school id -->
-                                    <td th:text="${page.getUsername()}"></td>
+                                    <td><input type="text" id="username" name="username" th:value="${page.getUsername()}" readonly onfocus="this.blur();"/></td>
+                                    
                                     <td th:text="${page.getName()}"></td>
-                                    <!-- 수정 modal 부분 -->
-                                    <!-- 삭제 submit 넣기 -->
-                                </form>
+                                    <td th:each="role : ${roles}">
+                                        <input type="checkbox" id="roles" class="auth" name="roles" th:checked="${(page.getRoles()).contains(role)}" th:text="${role.getName().name()}">                     
+                                    </td>
+                                    <td>
+                                    	<input type="button" id="modify" onClick="onClickModifySubmitButton()" value="수 정"></input>
+                                    </td>
+                                    <td>
+                                    	<input type="button" id="delete" value="삭 제"></input>
+                                    </td>
                             </tr>
+                            <script th:inline="javascript">
+								function onClickModifySubmitButton() {
+	                            	var modify = /*[[ @{/admin/doModifyUserRole} ]]*/;
+									document.getElementById("doAdmin").setAttribute("action", modify);
+									document.getElementById("doAdmin").submit();
+								}
+								
+                            	//var modify = /*[[ @{/admin/doModifyUserRole} ]]*/;
+								  //$("#modify").on("click", function(){
+								 //  	$("#doAdmin").attr("action", modify);
+								 //   $("#doAdmin").submit();
+								 // });
+								  
+								  var del = /*[[ @{/admin/doDeleteUser} ]]*/;
+								  $("#delete").on("click", function(){
+								    $("#doAdmin").attr("action", del);
+								    $("#doAdmin").submit();
+								  });
+							</script>
                         </th:block>
+                        </form>
                         </tbody>
                     </table>
+                    <!-- Paging -->
+					<div class="paging">
+					    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getFirstPageNo()})}"
+					       class="btn_arr first"><span><<</span></a>
+					    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getPrevPageNo()})}"
+					       class="btn_arr prev"><span><</span></a>
+					    <th:block th:each="num : ${#numbers.sequence(pageInfo.getStartPageNo(), pageInfo.getEndPageNo())}">
+					        <!-- D : 활성화페이지일 경우 : on 처리 -->
+					        <a th:if="${pageInfo.getPageNo() == num}" th:href="@{/admin/goModifyUserDataPage(pageNumber=${num})}"
+					           class="on"><span th:text="${num}"></span></a>
+					        <a th:unless="${pageInfo.getPageNo() == num}" th:href="@{/admin/goModifyUserDataPage(pageNumber=${num})}"><span
+					                th:text="${num}"></span></a>
+					    </th:block>
+					    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getNextPageNo()})}"
+					       class="btn_arr next"><span>></span></a>
+					    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getFinalPageNo()})}"
+					       class="btn_arr last"><span>>></span></a>
+					</div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Paging -->
-<div class="paging">
-    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getFirstPageNo()})}"
-       class="btn_arr first"><span><<</span></a>
-    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getPrevPageNo()})}"
-       class="btn_arr prev"><span><</span></a>
-    <th:block th:each="num : ${#numbers.sequence(pageInfo.getStartPageNo(), pageInfo.getEndPageNo())}">
-        <!-- D : 활성화페이지일 경우 : on 처리 -->
-        <a th:if="${pageInfo.getPageNo() == num}" th:href="@{/admin/goModifyUserDataPage(pageNumber=${num})}"
-           class="on"><span th:text="${num}"></span></a>
-        <a th:unless="${pageInfo.getPageNo() == num}" th:href="@{/admin/goModifyUserDataPage(pageNumber=${num})}"><span
-                th:text="${num}"></span></a>
-    </th:block>
-    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getNextPageNo()})}"
-       class="btn_arr next"><span>></span></a>
-    <a th:href="@{/admin/goModifyUserDataPage(pageNumber=${pageInfo.getFinalPageNo()})}"
-       class="btn_arr last"><span>>></span></a>
-</div>
 
 <footer>
     <th:block th:include="footer :: commonFooter"></th:block>
