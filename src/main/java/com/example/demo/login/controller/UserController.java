@@ -116,7 +116,9 @@ public class UserController {
                                      @Valid @ModelAttribute("changingPasswordRequest") ChangingPasswordRequest changingPasswordRequest,
                                      BindingResult bindingResult,
                                      Model model) {
-        String userName = (String) httpSession.getAttribute("userName");
+        
+    	String userName = (String) httpSession.getAttribute("userName");
+        
         if (bindingResult.hasErrors()) {
             model.addAttribute("changeError", "The two passwords do not match or please insert your password.");
             model.addAttribute("changingPasswordRequest", new ChangingPasswordRequest());
