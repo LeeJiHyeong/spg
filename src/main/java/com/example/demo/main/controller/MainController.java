@@ -27,5 +27,10 @@ public class MainController {
 	public String accessDenied(){
 		return "access-deny.html";
 	}
+	
+	@RequestMapping(value = "/ready")
+	public String goReadyPage() {
+		return "ready";
+	}
 
 }

@@ -240,6 +240,6 @@ public class BoardController {
             // todo :ljh -> files store in here and write next page direction
             return "redirect:/board/freeBoard/detail?contentId=" + freeBoard.getId(); // update well
         }
-        return ""; // error
+        return "error"; // error
     }
 }
