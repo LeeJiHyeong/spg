@@ -113,6 +113,7 @@ CREATE TABLE notice_board_file(
 );
 -- 공지 게시판 파일 table
 
+-- 공지 게시판 댓글 table
 CREATE TABLE notice_board_comment (
    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_name VARCHAR(20),
@@ -121,4 +122,6 @@ CREATE TABLE notice_board_comment (
     content_id BIGINT,
     FOREIGN KEY(content_id) REFERENCES notice_board (id) ON DELETE CASCADE
 );
--- 공지 게시판 댓글 table
+
+--공지사항 test code
+insert into notice_board(title, writer_id, writer_name, content) values('test title 21', 1, 'mary', 'test content 21');

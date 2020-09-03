@@ -3,30 +3,46 @@ package com.example.demo.admin.controller;
 import com.example.demo.admin.reponse.ReponseUserData;
 import com.example.demo.admin.request.RequestModifyUserRole;
 import com.example.demo.admin.service.AdminService;
+import com.example.demo.board.domain.NoticeBoard;
+import com.example.demo.board.domain.NoticeBoardFile;
+import com.example.demo.board.service.NoticeBoardService;
 import com.example.demo.login.domain.Role;
 import com.example.demo.login.domain.RoleName;
+import com.example.demo.login.domain.User;
 import com.example.demo.login.service.UserPrincipal;
+import com.example.demo.login.service.UserService;
+import com.example.demo.utils.FilePath;
 import com.example.demo.utils.PageVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	
     @Autowired
     private AdminService adminService;
+    
+    @Autowired
+	private NoticeBoardService noticeBoardService;
+
+	@Autowired
+	private UserService userService;
 
     
     @RequestMapping(value = "adminNotice")
@@ -114,4 +130,103 @@ public class AdminController {
         
         return "admin/admin-management";
     }
+    
+	// 공지글 작성
+	@RequestMapping(value = "noticeBoard/write")
+	public String goWrite(HttpSession session, Model model) {
+
+		if (session.getAttribute("userName") != null) {
+			String userName = (String) session.getAttribute("userName");
+			User user = this.userService.findByUserName(userName);
+			Long writerId = user.getId();
+
+			model.addAttribute("userName", userName);
+			model.addAttribute("writerId", writerId);
+		}
+
+		return "/board/notice-board-write";
+	}
+	
+	// 공지글 등록 프로세스
+	@PostMapping(value = "noticeBoard/doWrite")
+	public String doWrite(@ModelAttribute @Valid NoticeBoard noticeBoard,
+			@RequestParam("upload") MultipartFile uploadFile) {
+
+		System.out.println(">>> 게시글 저장 프로세스");
+
+		// TODO:: 이지형
+
+		String ordinaryFileName = uploadFile.getOriginalFilename();
+
+		if (ordinaryFileName != null && !ordinaryFileName.equals("")) {
+			String storeFileName = UUID.randomUUID().toString();
+			String fileSize = Long.toString(uploadFile.getSize());
+			String fileExt = ordinaryFileName.substring(ordinaryFileName.lastIndexOf(".") + 1);
+
+			try {
+				File file = new File(FilePath.NoticeBoard.getFilePath() + storeFileName);
+				uploadFile.transferTo(file);
+
+				Long NoticeBoardId = this.noticeBoardService.save(noticeBoard).getId();
+				NoticeBoardFile NoticeBoardfile = new NoticeBoardFile(storeFileName, ordinaryFileName, NoticeBoardId);
+				this.noticeBoardService.save(NoticeBoardfile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			this.noticeBoardService.save(noticeBoard);
+		}
+
+		return "redirect:/board/noticeBoard/detail?contentId=" + noticeBoard.getId();
+	}
+	
+	@GetMapping(value = "noticeBoard/doDelete")
+	public String doDeleteNoticeBoard(@RequestParam(value = "contentId") int contentId) {
+		this.noticeBoardService.deleteFilesAndNoticeBoardDataByContentId(contentId);
+
+		return "redirect:/board/noticeBoard";
+	}
+	
+	@GetMapping(value = "noticeBoard/modify")
+	public String goNoticeBoardModify(@RequestParam(value = "contentId") int contentId, HttpSession session,
+			Model model) {
+
+		if (session.getAttribute("userName") != null) {
+			String userName = (String) session.getAttribute("userName");
+			User user = this.userService.findByUserName(userName);
+			Long writerId = user.getId();
+
+			model.addAttribute("userName", userName);
+			model.addAttribute("writerId", writerId);
+		}
+
+		NoticeBoard content = this.noticeBoardService.getNoticeBoardDetail(contentId);
+		List<NoticeBoardFile> noticeBoardFiles = content.getNoticeBoardFile();
+
+		if (noticeBoardFiles != null && noticeBoardFiles.size() != 0) {
+			// 1게시물 1파일이기때문에 get(0)
+			// 다수파일 추가하도록 변경하게되면 수정 필요
+			model.addAttribute("fileName", noticeBoardFiles.get(0).getOrdinaryFileName());
+		}
+
+		model.addAttribute("content", content);
+		return "/board/notice-board-modify";
+	}
+
+	@PostMapping("/noticeBoard/doModifyNoticeBoardDetail")
+	public String doModifyData(@ModelAttribute @Valid NoticeBoard noticeBoard,
+			@RequestParam("upload") MultipartFile uploadFile) {
+
+		// preprocessing update
+		NoticeBoard prevNoticeBoard = this.noticeBoardService.getNoticeBoardDetail(noticeBoard.getId());
+		noticeBoard.setCreateDate(prevNoticeBoard.getCreateDate());
+		noticeBoard.setNumberOfHit(prevNoticeBoard.getNumberOfHit());
+		boolean result = this.noticeBoardService.modifyNoticeBoardDetail(noticeBoard);
+
+		if (result) {
+			// todo :ljh -> files store in here and write next page direction
+			return "redirect:/board/noticeBoard/detail?contentId=" + noticeBoard.getId(); // update well
+		}
+		return ""; // error
+	}
 }

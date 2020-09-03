@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>공지사항</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+  	    <link rel="shortcut icon" href="../img_beom/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/icomoon-social.css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="/css/board/board_common.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    
+    <body>
+	    <!-- Header -->
+	    <div class="Header">
+		    <th:block th:include="header :: commonHeader"></th:block>
+	    </div>
+
+        <!-- Page Title -->
+		<div class="section section-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1>공지사항</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+        
+        <div class="section">
+	    	<div class="container">
+	    		<div class="row">
+	    			<!-- Open Vacancies List -->
+	    			<div class="post_wrap">
+	    				<table class="post_list">
+	    					<tr>
+	    						<th>No</th>
+	    						<th>제목</th>
+	    						<th>작성자</th>
+	    						<th>작성일</th>
+	    						<th>조회</th>
+	    					</tr>
+	    					<th:block th:each="page : ${pageList}">
+		    					<tr>
+		                            <!-- No -->
+		                            <td class="job-position-no" th:text="${page.getId()}">1</td>
+		                            <!-- 제목 -->
+		                            <td class="job-position-title">
+		                            	<a th:href="@{noticeBoard/detail(contentId=${page.getId()})}">
+		                            		<img th:unless="${page.getNoticeBoardFile().isEmpty()}" id="file_img" src="/img/file2.png" alt="No Image">
+		                            		<span th:if="${#strings.length(page.getTitle()) < 30}" class="content-title"  th:text="${page.getTitle() + ' '}"></span><span th:if="${#strings.length(page.getTitle()) < 30}" class="comment-count" th:text="${'[' + page.getNoticeBoardComment().size() + ']'}"></span>
+		                            		<span th:unless="${#strings.length(page.getTitle()) < 27}" class="content-title" th:text="${#strings.substring(page.getTitle(), 0, 27) + ' .....'}"></span><span th:unless="${#strings.length(page.getTitle()) < 30}" class="comment-count" th:text="${' ' + '[' + page.getNoticeBoardComment().size() + ']'}"></span>
+		                            	</a>
+		                            </td>
+		                            <!-- 작성자 -->
+		                            <td class="job-position-name" th:text="${page.getWriterName()}"></td>
+		                            <!-- 작성일 -->
+		                            <td class="job-position-date" th:text="${#dates.format(page.getCreateDate(), 'yyyy-MM-dd')}"></td>
+		                            <!-- 조회 -->
+		                            <td class="job-position-views" th:text="${page.getNumberOfHit()}">123</td>
+		    					</tr>
+	    					</th:block>
+	    				</table>
+	    			</div>
+	    			<!-- End Open Vacancies List -->
+	    		</div>
+	    		<div class="right_button">
+					<a th:href="@{/admin/noticeBoard/write}" class="btn">작성</a>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Paging -->
+		<div class="paging">
+			<a th:href="@{/board/noticeBoard(pageNum=${pageInfo.getFirstPageNo()}, searchKey=${searchKey}, searchType=${searchType})}" class="btn_arr first"><span><<</span></a>            
+			<a th:href="@{/board/noticeBoard(pageNum=${pageInfo.getPrevPageNo()}, searchKey=${searchKey}, searchType=${searchType})}" class="btn_arr prev"><span><</span></a>
+			<!-- <th:block th:each="num : ${#numbers.sequence(pageInfo.getStartPageNo(), pageInfo.getEndPageNo())}"> -->
+			<th:block th:each="num : ${#numbers.sequence(pageInfo.getStartPageNo(), pageInfo.getEndPageNo())}">
+				<!-- D : 활성화페이지일 경우 : on 처리 -->     
+				<a th:if="${pageInfo.getPageNo() == num}" th:href="@{/board/noticeBoard(pageNum=${num}, searchKey=${searchKey}, searchType=${searchType})}" class="on"><span th:text="${num}"></span></a>
+				<a th:unless="${pageInfo.getPageNo() == num}" th:href="@{/board/noticeBoard(pageNum=${num}, searchKey=${searchKey}, searchType=${searchType})}"><span th:text="${num}"></span></a><!-- D : 활성화페이지일 경우 : on 처리 -->
+			</th:block>
+			<a th:href="@{/board/noticeBoard(pageNum=${pageInfo.getNextPageNo()}, searchKey=${searchKey}, searchType=${searchType})}" class="btn_arr next"><span>></span></a>            
+			<a th:href="@{/board/noticeBoard(pageNum=${pageInfo.getFinalPageNo()}, searchKey=${searchKey}, searchType=${searchType})}" class="btn_arr last"><span>>></span></a> 
+		</div>
+		<!-- Search -->
+		<div class="search">
+			<select class="btn" id="search-type" th:value="${searchType}">
+				<option value="search_all">제목+내용</option>
+				<option value="search_person">작성자</option>
+			</select>
+			<input type="textarea" class="search_text" th:value="${searchKey}" id="search_key">
+			<!-- <input type="button" value="검색" class="btn"> -->
+			<input type="button" onclick="noticeBoardSearch()" class="btn" value="검색" />
+		</div>
+		
+	    <!-- Footer -->
+	    <footer>
+		    <th:block th:include="footer :: commonFooter"></th:block>
+	    </footer>
+    </body>
+    <script src="/js/common.js"></script>
+</html>
