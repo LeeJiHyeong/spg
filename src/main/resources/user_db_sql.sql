@@ -156,3 +156,6 @@ CREATE TABLE edu_board_comment (
     content_id BIGINT,
     FOREIGN KEY(content_id) REFERENCES edu_board (id) ON DELETE CASCADE
 );
+
+-- 교육 게시판 test code
+insert into edu_board(title, writer_id, writer_name, content) values('test title 21', 1, 'mary', 'test content 21');
