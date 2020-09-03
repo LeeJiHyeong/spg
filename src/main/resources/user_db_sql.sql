@@ -91,3 +91,34 @@ insert into free_board(title, writer_id, writer_name, content) values('test titl
 insert into free_board(title, writer_id, writer_name, content) values('test title 19', 1, '맥주', 'test content 19');
 insert into free_board(title, writer_id, writer_name, content) values('test title 20', 1, '소주', 'test content 20');
 insert into free_board(title, writer_id, writer_name, content) values('test title 21', 1, 'mary', 'test content 21');
+
+-- 공지사항
+-- 공지 게시판 table
+CREATE TABLE notice_board(
+	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    title varchar(40) NOT NULL,
+    writer_id BIGINT,
+    writer_name varchar(20) NOT NULL,
+    create_date DATE DEFAULT (CURRENT_DATE),
+    number_of_hit SMALLINT DEFAULT 0,
+    content TEXT NOT NULL,
+    FOREIGN KEY(writer_id) REFERENCES user (id) ON DELETE SET NULL
+);
+
+CREATE TABLE notice_board_file(
+	store_filename VARCHAR(60) NOT NULL PRIMARY KEY,
+    ordinary_filename varchar(60) NOT NULL,
+    notice_board_id BIGINT NOT NULL ,
+    FOREIGN KEY(notice_board_id) REFERENCES notice_board(id) ON DELETE CASCADE
+);
+-- 공지 게시판 파일 table
+
+CREATE TABLE notice_board_comment (
+   id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(20),
+    content TEXT NOT NULL,
+    create_date DATE DEFAULT (CURRENT_DATE),
+    content_id BIGINT,
+    FOREIGN KEY(content_id) REFERENCES notice_board (id) ON DELETE CASCADE
+);
+-- 공지 게시판 댓글 table
