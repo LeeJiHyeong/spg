@@ -134,10 +134,6 @@ public class EduBoardController {
 	public String doWrite(@ModelAttribute @Valid EduBoard eduBoard,
 			@RequestParam("upload") MultipartFile uploadFile) {
 
-		System.out.println(">>> 게시글 저장 프로세스");
-
-		// TODO:: 이지형
-
 		String ordinaryFileName = uploadFile.getOriginalFilename();
 
 		if (ordinaryFileName != null && !ordinaryFileName.equals("")) {

@@ -81,7 +81,6 @@ public class AdminController {
         }
 
         if (this.adminService.changeUserAuthenticated(Long.parseLong(requestModifyUserRole.getId()), requestModifyUserRole.getUserName(), roles)) {
-        	System.out.println("check");      	
             return "redirect:/admin/goModifyUserDataPage"; // change well
         }
 
@@ -151,8 +150,6 @@ public class AdminController {
 	@PostMapping(value = "noticeBoard/doWrite")
 	public String doWrite(@ModelAttribute @Valid NoticeBoard noticeBoard,
 			@RequestParam("upload") MultipartFile uploadFile) {
-
-		System.out.println(">>> 게시글 저장 프로세스");
 
 		// TODO:: 이지형
 

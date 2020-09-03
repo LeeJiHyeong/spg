@@ -21,9 +21,6 @@ function checkContent() {
 	var title = $('#content-title').val();
 	var content = $('#comment-message').val();
 	
-	console.log(title);
-	console.log(content);
-	
 	if (title == "") {
 		alert("제목을 입력해주세요.");
 		return false;
@@ -39,8 +36,6 @@ function checkContent() {
 
 function checkComment() {
 	var comment = $('#comment-input').val();
-	
-	console.log(comment);
 	
 	if (comment == "") {
 		alert("내용을 입력해주세요.");
