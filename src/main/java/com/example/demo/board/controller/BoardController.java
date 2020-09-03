@@ -124,17 +124,6 @@ public class BoardController {
         return "/board/free_board_write";
     }
 
-    @PostMapping("/freeBoard/doModifyFreeBoardDetail")
-    public String doModifyData(@ModelAttribute @Valid FreeBoard freeBoard
-            , @RequestParam("upload") MultipartFile uploadFile) {
-        boolean result = this.freeBoardService.modifyFreeBoardDetail(freeBoard);
-        if (result) {
-            // todo :ljh -> files store in here and write next page direction
-            return ""; // update well
-        }
-        return ""; // error
-    }
-
     @PostMapping(value = "freeBoard/doWrite")
     public String doWrite(@ModelAttribute @Valid FreeBoard freeBoard
             , @RequestParam("upload") MultipartFile uploadFile) {
@@ -236,5 +225,21 @@ public class BoardController {
         model.addAttribute("content", content);
         return "/board/free-board-modify";
     }
-    
+
+    @PostMapping("/freeBoard/doModifyFreeBoardDetail")
+    public String doModifyData(@ModelAttribute @Valid FreeBoard freeBoard
+            , @RequestParam("upload") MultipartFile uploadFile) {
+    	
+    	// preprocessing update
+    	FreeBoard prevFreeBoard = this.freeBoardService.getFreeBoardDetail(freeBoard.getId());
+    	freeBoard.setCreateDate(prevFreeBoard.getCreateDate());
+    	freeBoard.setNumberOfHit(prevFreeBoard.getNumberOfHit());
+        boolean result = this.freeBoardService.modifyFreeBoardDetail(freeBoard);
+        
+        if (result) {
+            // todo :ljh -> files store in here and write next page direction
+            return "redirect:/board/freeBoard/detail?contentId=" + freeBoard.getId(); // update well
+        }
+        return ""; // error
+    }
 }

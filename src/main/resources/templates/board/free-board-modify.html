@@ -29,6 +29,7 @@
 				<form th:action="@{doModifyFreeBoardDetail}" method="post" enctype="multipart/form-data" onsubmit="return checkContent();">
 					<input type="hidden" name="id" th:value="${content.getId()}">
 					<input type="hidden" name="writerId" th:value="${writerId}">
+					<!-- <input type="hidden" name="createDate" th:value="${content.getCreateDate()}"> -->
 					<div class="blog-post blog-single-post">
 						<div class="col-sm-81">
 							<h1>게시글 수정</h1>
