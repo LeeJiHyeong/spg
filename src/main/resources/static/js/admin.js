@@ -1,6 +1,7 @@
 function onClickModifyRoleEventHandler(id) {
    document.getElementById(id).setAttribute("action", "/admin/doModifyUserRole");
    document.getElementById(id).submit();
+   alert("권한이 수정되었습니다.");
 }
 
 function onClickUrlEventHandler(id) {
