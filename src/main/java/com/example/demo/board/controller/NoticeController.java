@@ -112,55 +112,7 @@ public class NoticeController {
 
 		return "/board/notice-board-detail";
 	}
-//
-//	// 글작성
-//	@RequestMapping(value = "NoticeBoard/write")
-//	public String goWrite(HttpSession session, Model model) {
-//
-//		if (session.getAttribute("userName") != null) {
-//			String userName = (String) session.getAttribute("userName");
-//			User user = this.userService.findByUserName(userName);
-//			Long writerId = user.getId();
-//
-//			model.addAttribute("userName", userName);
-//			model.addAttribute("writerId", writerId);
-//		}
-//
-//		return "/board/Notice_board_write";
-//	}
-//
-//	@PostMapping(value = "NoticeBoard/doWrite")
-//	public String doWrite(@ModelAttribute @Valid NoticeBoard NoticeBoard,
-//			@RequestParam("upload") MultipartFile uploadFile) {
-//
-//		System.out.println(">>> 게시글 저장 프로세스");
-//
-//		// TODO:: 이지형
-//
-//		String ordinaryFileName = uploadFile.getOriginalFilename();
-//
-//		if (ordinaryFileName != null && !ordinaryFileName.equals("")) {
-//			String storeFileName = UUID.randomUUID().toString();
-//			String fileSize = Long.toString(uploadFile.getSize());
-//			String fileExt = ordinaryFileName.substring(ordinaryFileName.lastIndexOf(".") + 1);
-//
-//			try {
-//				File file = new File(FilePath.NoticeBoard.getFilePath() + storeFileName);
-//				uploadFile.transferTo(file);
-//
-//				Long NoticeBoardId = this.NoticeBoardService.save(NoticeBoard).getId();
-//				NoticeBoardFile NoticeBoardfile = new NoticeBoardFile(storeFileName, ordinaryFileName, NoticeBoardId);
-//				this.NoticeBoardService.save(NoticeBoardfile);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		} else {
-//			this.NoticeBoardService.save(NoticeBoard);
-//		}
-//
-//		return "redirect:/board/NoticeBoard";
-//	}
-//
+
 	@GetMapping(value = "noticeBoard/doWriteComment")
 	@ResponseBody
 	public Map<String, String> doWriteComment(@ModelAttribute @Valid NoticeBoardComment noticeBoardComment,
@@ -186,14 +138,7 @@ public class NoticeController {
 
 		return comment;
 	}
-//
-//	@GetMapping(value = "NoticeBoard/doDelete")
-//	public String doDeleteNoticeBoard(@RequestParam(value = "contentId") int contentId) {
-//		this.NoticeBoardService.deleteFilesAndNoticeBoardDataByContentId(contentId);
-//
-//		return "redirect:/board/NoticeBoard";
-//	}
-//
+
 	@GetMapping(value = "noticeBoard/doDeleteComment")
 	@ResponseBody
 	public Map<String, String> doDeleteNoticeBoardComment(@RequestParam(value = "commentId") Long commentId,
@@ -205,48 +150,5 @@ public class NoticeController {
 		deletedComment.put("commentCount", Long.toString(this.noticeBoardService.getCommentCountByContentId(contentId)));
 		return deletedComment;
 	}
-//
-//	@GetMapping(value = "NoticeBoard/modify")
-//	public String goNoticeBoardModify(@RequestParam(value = "contentId") int contentId, HttpSession session,
-//			Model model) {
-//
-//		if (session.getAttribute("userName") != null) {
-//			String userName = (String) session.getAttribute("userName");
-//			User user = this.userService.findByUserName(userName);
-//			Long writerId = user.getId();
-//
-//			model.addAttribute("userName", userName);
-//			model.addAttribute("writerId", writerId);
-//		}
-//
-//		NoticeBoard content = this.NoticeBoardService.getNoticeBoardDetail(contentId);
-//		List<NoticeBoardFile> NoticeBoardFiles = content.getNoticeBoardFile();
-//
-//		if (NoticeBoardFiles != null && NoticeBoardFiles.size() != 0) {
-//			// 1게시물 1파일이기때문에 get(0)
-//			// 다수파일 추가하도록 변경하게되면 수정 필요
-//			model.addAttribute("fileName", NoticeBoardFiles.get(0).getOrdinaryFileName());
-//		}
-//
-//		model.addAttribute("content", content);
-//		return "/board/Notice-board-modify";
-//	}
-//
-//	@PostMapping("/NoticeBoard/doModifyNoticeBoardDetail")
-//	public String doModifyData(@ModelAttribute @Valid NoticeBoard NoticeBoard,
-//			@RequestParam("upload") MultipartFile uploadFile) {
-//
-//		// preprocessing update
-//		NoticeBoard prevNoticeBoard = this.NoticeBoardService.getNoticeBoardDetail(NoticeBoard.getId());
-//		NoticeBoard.setCreateDate(prevNoticeBoard.getCreateDate());
-//		NoticeBoard.setNumberOfHit(prevNoticeBoard.getNumberOfHit());
-//		boolean result = this.NoticeBoardService.modifyNoticeBoardDetail(NoticeBoard);
-//
-//		if (result) {
-//			// todo :ljh -> files store in here and write next page direction
-//			return "redirect:/board/NoticeBoard/detail?contentId=" + NoticeBoard.getId(); // update well
-//		}
-//		return ""; // error
-//	}
 
 }
