@@ -1,6 +1,8 @@
 package com.example.demo.handler;
 
 import com.example.demo.login.service.UserPrincipal;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -23,15 +25,14 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
     @Qualifier("loginService")
     private UserDetailsService userSerivce;
 
+    private Logger logger = LoggerFactory.getLogger(UserAuthenticationSuccessHandler.class);
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
-
-        System.out.println("\n\nIn customAuthenticationSuccessHandler\n\n");
+        logger.info("logined");
 
         String userName = authentication.getName();
-
-        System.out.println("userName/=" + userName);
 
         UserPrincipal userPrincipal = (UserPrincipal) this.userSerivce.loadUserByUsername(userName);
 
