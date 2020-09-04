@@ -70,7 +70,7 @@
 	    			<!-- End Open Vacancies List -->
 	    		</div>
 	    		<div class="right_button">
-					<a th:href="@{/admin/noticeBoard/write}" class="btn">작성</a>
+					<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/noticeBoard/write}" class="btn">작성</a>
 				</div>
 			</div>
 		</div>
