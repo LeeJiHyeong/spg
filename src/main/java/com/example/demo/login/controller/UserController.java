@@ -106,7 +106,13 @@ public class UserController {
     }
 
     @GetMapping("/passwordChangePage")
-    public String passwordChangePage(Model model) {
+    public String passwordChangePage(Model model, HttpSession session) {
+    	// session
+        if (session.getAttribute("userName") != null) {
+            String userName = (String) session.getAttribute("userName");
+            model.addAttribute("userName", userName);
+        }
+    	
         model.addAttribute("changingPasswordRequest", new ChangingPasswordRequest());
         return "user-password-change";
     }
