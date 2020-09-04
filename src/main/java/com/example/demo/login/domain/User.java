@@ -22,7 +22,7 @@ public class User extends DateAudit { // date type extends 하기
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @NotBlank
     @NaturalId

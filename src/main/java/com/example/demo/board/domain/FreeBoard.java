@@ -30,7 +30,7 @@ public class FreeBoard {
     private String title;
 
     @Column(name = "writer_id")
-    private long writerId;
+    private Long writerId;
 
     @NotBlank
     @Size(max = 20)
