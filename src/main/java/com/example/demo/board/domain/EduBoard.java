@@ -30,7 +30,7 @@ public class EduBoard {
     private String title;
 
     @Column(name = "writer_id")
-    private long writerId;
+    private Long writerId;
 
     @NotBlank
     @Size(max = 20)
@@ -58,7 +58,7 @@ public class EduBoard {
     public EduBoard() {
     }
 
-    public EduBoard(String title, long writerId, String writerName, String content) {
+    public EduBoard(String title, Long writerId, String writerName, String content) {
         this.title = title;
         this.writerId = writerId;
         this.writerName = writerName;
