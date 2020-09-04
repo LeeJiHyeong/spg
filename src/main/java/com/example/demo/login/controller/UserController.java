@@ -44,7 +44,6 @@ public class UserController {
         }
 
         boolean checkNowUserPassword = this.userService.checkNowPassword(userName, password);
-        System.out.println(checkNowUserPassword);
 
         if (checkNowUserPassword) {
             this.userService.deleteByUserName(userName); // delete user
