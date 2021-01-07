@@ -13,6 +13,7 @@
 개발진이 겪은 시행 착오 및 회고를 기재하고 있습니다.
 
 kihwankim - https://kihwankim.github.io/2020/10/18/spg-01-log/
+
 LeeJiHyeong - https://easybrother0103.tistory.com/30
 
 # 개발진
