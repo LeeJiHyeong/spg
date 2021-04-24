@@ -38,7 +38,7 @@ spring:
     cache: false
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db_test?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/dev?serverTimezone=UTC
     username: root
     password: root
 
@@ -49,7 +49,7 @@ spring:
       ddl-auto: update
 
 server:
-  port: 8021
+  port: 8000
 
 # real
 ---
@@ -57,7 +57,7 @@ spring:
   profiles: real
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db_test?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/spg?serverTimezone=UTC
     username: root
     password: root
 
@@ -68,4 +68,4 @@ spring:
       ddl-auto: none
 
 server:
-  port: 8022
+  port: 80
