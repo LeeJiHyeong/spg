@@ -21,6 +21,8 @@ spring:
       ddl-auto: update
     properties:
       format: true
+      hibernate:
+        default_batch_fetch_size: 100
 
 server:
   port: 8000
@@ -47,6 +49,9 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        default_batch_fetch_size: 100
 
 server:
   port: 8000
@@ -66,6 +71,9 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
+    properties:
+      hibernate:
+        default_batch_fetch_size: 100
 
 server:
   port: 80
