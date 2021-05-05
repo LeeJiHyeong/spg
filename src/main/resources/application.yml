@@ -22,6 +22,7 @@ spring:
     properties:
       format: true
       hibernate:
+        format_sql: true
         default_batch_fetch_size: 100
 
 server:
@@ -51,6 +52,7 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
+        format_sql: true
         default_batch_fetch_size: 100
 
 server:
