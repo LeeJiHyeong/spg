@@ -7,28 +7,22 @@ import com.example.demo.login.domain.User;
 import com.example.demo.login.repository.RoleRepository;
 import com.example.demo.login.repository.UserRepository;
 import com.example.demo.login.request.ChangingPasswordRequest;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.RollbackException;
-import javax.transaction.Transactional;
 import java.util.Collections;
 
 @Service
-@Slf4j
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Transactional(rollbackOn = RollbackException.class)
+    @Transactional
     public boolean save(User user) {
         if (this.userRepository.existsByUserName(user.getUserName())) {
             return false;
@@ -43,13 +37,12 @@ public class UserService {
         return true;
     }
 
-    @Transactional(rollbackOn = RollbackException.class)
     public User findByUserName(String userName) {
         return this.userRepository.findByUserName(userName)
-                .orElse(null);
+                .orElseThrow(() -> new ResourceNotFoundException("User", "user name", userName));
     }
 
-    @Transactional(rollbackOn = Exception.class)
+    @Transactional
     public void deleteByUserName(String username) {
         this.userRepository.deleteByUserName(username);
     }
@@ -65,10 +58,9 @@ public class UserService {
         }
         oridinaryUser.setPassword(this.bCryptPasswordEncoder.encode(changingPasswordRequest.getPassword()));
 
-        return this.userRepository.save(oridinaryUser);
+        return oridinaryUser;
     }
 
-    @Transactional
     public boolean checkNowPassword(String username, String passowrd) {
         User user = this.userRepository.findByUserName(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
@@ -83,6 +75,6 @@ public class UserService {
         user.setUserName(username);
         user.setName(name);
 
-        return this.userRepository.save(user);
+        return user;
     }
 }

@@ -5,7 +5,7 @@ import com.example.demo.login.request.ChangingPasswordRequest;
 import com.example.demo.login.request.UserDataRequest;
 import com.example.demo.login.service.UserPrincipal;
 import com.example.demo.login.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,10 +19,9 @@ import java.io.PrintWriter;
 
 @Controller
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
-
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @RequestMapping("/withdrawalPage")
     public String withdrawalPage(HttpSession session, Model model) {
@@ -106,12 +105,12 @@ public class UserController {
 
     @GetMapping("/passwordChangePage")
     public String passwordChangePage(Model model, HttpSession session) {
-    	// session
+        // session
         if (session.getAttribute("userName") != null) {
             String userName = (String) session.getAttribute("userName");
             model.addAttribute("userName", userName);
         }
-    	
+
         model.addAttribute("changingPasswordRequest", new ChangingPasswordRequest());
         return "user-password-change";
     }
@@ -121,9 +120,9 @@ public class UserController {
                                      @Valid @ModelAttribute("changingPasswordRequest") ChangingPasswordRequest changingPasswordRequest,
                                      BindingResult bindingResult,
                                      Model model) {
-        
-    	String userName = (String) httpSession.getAttribute("userName");
-        
+
+        String userName = (String) httpSession.getAttribute("userName");
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("changeError", "The two passwords do not match or please insert your password.");
             model.addAttribute("changingPasswordRequest", new ChangingPasswordRequest());
