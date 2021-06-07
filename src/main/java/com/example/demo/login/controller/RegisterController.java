@@ -3,9 +3,8 @@ package com.example.demo.login.controller;
 import com.example.demo.login.domain.User;
 import com.example.demo.login.request.RegisterRequest;
 import com.example.demo.login.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,13 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+@Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/register")
 public class RegisterController {
-    @Autowired
-    private UserService userService;
-
-    private Logger logger = LoggerFactory.getLogger(RegisterController.class);
+    private final UserService userService;
 
     @RequestMapping(value = "signUpPage")
     public String registerPage(Model model) {
@@ -44,11 +42,11 @@ public class RegisterController {
             model.addAttribute("user", new User());
             model.addAttribute("registrationError", "User name already exists.");
 
-            this.logger.warn("User name already exists.");
+            log.warn("User name already exists.");
             return "register";
         }
 
-        this.logger.info("Successfully created user: " + username);
+        log.info("Successfully created user: " + username);
 
         return "redirect:/login/signInPage";
     }
