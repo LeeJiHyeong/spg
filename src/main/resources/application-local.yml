@@ -1,0 +1,29 @@
+# local 환경
+spring:
+  profiles: local
+  thymeleaf:
+    cache: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_test?serverTimezone=UTC
+    username: root
+    password: root
+
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      format: true
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+
+server:
+  port: 8000
+
+logging:
+  level:
+#    org.hibernate.SQL: debug
+    org.hibernate.type: trace

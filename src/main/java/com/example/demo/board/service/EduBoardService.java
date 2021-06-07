@@ -6,33 +6,27 @@ import com.example.demo.board.domain.EduBoardFile;
 import com.example.demo.board.reposiroty.EduBoardCommentRepository;
 import com.example.demo.board.reposiroty.EduBoardFileRepository;
 import com.example.demo.board.reposiroty.EduBoardRepository;
-import com.example.demo.board.reposiroty.EduBoardCommentRepository;
-import com.example.demo.board.reposiroty.EduBoardFileRepository;
-import com.example.demo.board.reposiroty.EduBoardRepository;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.utils.FilePath;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.io.File;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class EduBoardService {
 
-    @Autowired
-    private EduBoardRepository eduBoardRepository;
-
-    @Autowired
-    private EduBoardFileRepository eduBoardFileRepository;
-    
-    @Autowired
-    private EduBoardCommentRepository eduBoardCommentRepository;
+    private final EduBoardRepository eduBoardRepository;
+    private final EduBoardFileRepository eduBoardFileRepository;
+    private final EduBoardCommentRepository eduBoardCommentRepository;
 
     @Transactional
     public EduBoard save(EduBoard eduBoard) {
@@ -40,19 +34,16 @@ public class EduBoardService {
         return eduBoard;
     }
 
-    @Transactional
     public List<EduBoard> findByPage(int startNum) {
-    	Pageable pageable = PageRequest.of(startNum, 10, Sort.by("id").descending());
+        Pageable pageable = PageRequest.of(startNum, 10, Sort.by("id").descending());
         Page<EduBoard> page = this.eduBoardRepository.findAll(pageable);
         return page.getContent();
     }
 
-    @Transactional
     public int getTotalCount() {
         return (int) this.eduBoardRepository.count();
     }
 
-    @Transactional
     public List<EduBoard> findByTitleContainingOrContentContaining(int startNum, String keyword) {
         Pageable pageable = PageRequest.of(startNum, 10, Sort.by("id").descending());
         return this.eduBoardRepository.findByTitleContainingOrContentContaining(keyword, keyword, pageable).getContent();
@@ -62,19 +53,16 @@ public class EduBoardService {
     public int getCountByTitleContainingOrContentContaining(String keyword) {
         return this.eduBoardRepository.countByTitleContainingOrContentContaining(keyword, keyword);
     }
-    
-    @Transactional
+
     public List<EduBoard> findByWriterNameContaining(int startNum, String keyword) {
         Pageable pageable = PageRequest.of(startNum, 10, Sort.by("id").descending());
         return this.eduBoardRepository.findByWriterNameContaining(keyword, pageable).getContent();
     }
 
-    @Transactional
     public int getCountByWriterNameContaining(String keyword) {
         return this.eduBoardRepository.countByWriterNameContaining(keyword);
     }
 
-    @Transactional
     public EduBoard getEduBoardDetail(long EduBoardId) {
         EduBoard EduBoard = this.eduBoardRepository.findById(EduBoardId)
                 .orElseThrow(() -> new ResourceNotFoundException("EduBoard", "id", "it can not find Edu board data"));
@@ -91,7 +79,6 @@ public class EduBoardService {
 
     @Transactional
     public void deleteFilesAndEduBoardDataByContentId(long contentId) {
-        // todo kkh : what will we handle this
         boolean result = this.deleteFilesInList(this.eduBoardFileRepository.findAllByEduBoardId(contentId));
         this.eduBoardRepository.deleteById(contentId);
     }
@@ -122,22 +109,21 @@ public class EduBoardService {
 
         return isDeleteError;
     }
-    
+
     // comment
     @Transactional
     public EduBoardComment save(EduBoardComment eduBoardComment) {
-    	this.eduBoardCommentRepository.save(eduBoardComment);
-    	return eduBoardComment;
+        this.eduBoardCommentRepository.save(eduBoardComment);
+        return eduBoardComment;
     }
-    
-    @Transactional
+
     public int getCommentCountByContentId(Long contentId) {
-    	return this.eduBoardCommentRepository.countByContentId(contentId);
+        return this.eduBoardCommentRepository.countByContentId(contentId);
     }
-    
+
     @Transactional
     public void deleteComment(Long commentId) {
-    	this.eduBoardCommentRepository.deleteById(commentId);
+        this.eduBoardCommentRepository.deleteById(commentId);
     }
-    
+
 }
