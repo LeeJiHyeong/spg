@@ -3,7 +3,7 @@ package com.cnu.spg.login.controller;
 import com.cnu.spg.login.domain.User;
 import com.cnu.spg.login.request.ChangingPasswordRequest;
 import com.cnu.spg.login.request.UserDataRequest;
-import com.cnu.spg.login.service.UserPrincipal;
+import com.cnu.spg.login.domain.UserPrincipal;
 import com.cnu.spg.login.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

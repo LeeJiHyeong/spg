@@ -12,7 +12,7 @@ import com.cnu.spg.login.domain.User;
 import com.cnu.spg.login.service.UserService;
 import com.cnu.spg.utils.FilePath;
 import com.cnu.spg.utils.PageVO;
-import com.cnu.spg.login.service.UserPrincipal;
+import com.cnu.spg.login.domain.UserPrincipal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

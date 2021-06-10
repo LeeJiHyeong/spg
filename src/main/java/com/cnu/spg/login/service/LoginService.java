@@ -1,34 +1,31 @@
 package com.cnu.spg.login.service;
 
-import com.cnu.spg.login.domain.User;
-import com.cnu.spg.login.repository.UserRepository;
 import com.cnu.spg.exception.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.cnu.spg.login.domain.User;
+import com.cnu.spg.login.domain.UserPrincipal;
+import com.cnu.spg.login.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.RollbackException;
-import javax.transaction.Transactional;
-
-@Component
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class LoginService implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
-    @Transactional(rollbackOn = RollbackException.class)
     public UserDetails loadUserByUsername(String userName) {
         User user = this.userRepository.findByUserName(userName)
-                .orElseThrow(
-                        () -> new UsernameNotFoundException("I can not found user data" + userName)
-                );
+                .orElseThrow(() -> new UsernameNotFoundException("I can not found user data" + userName));
+
         return UserPrincipal.create(user);
     }
 
-    @Transactional(rollbackOn = RollbackException.class)
     public UserDetails loadUserById(Long id) {
         User user = this.userRepository.findById(id).orElseThrow( // get the id
                 () -> new ResourceNotFoundException("User", "id", id)

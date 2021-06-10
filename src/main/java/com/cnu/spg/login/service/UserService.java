@@ -1,11 +1,11 @@
 package com.cnu.spg.login.service;
 
+import com.cnu.spg.exception.ResourceNotFoundException;
 import com.cnu.spg.login.domain.Role;
 import com.cnu.spg.login.domain.RoleName;
 import com.cnu.spg.login.domain.User;
 import com.cnu.spg.login.repository.RoleRepository;
 import com.cnu.spg.login.repository.UserRepository;
-import com.cnu.spg.exception.ResourceNotFoundException;
 import com.cnu.spg.login.request.ChangingPasswordRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,9 +32,9 @@ public class UserService {
         Role unAuthUserRole = this.roleRepository.findByName(RoleName.ROLE_UNAUTH)
                 .orElseThrow(() -> new ResourceNotFoundException("Role", "roleName", RoleName.ROLE_UNAUTH));
         user.setRoles(Collections.singleton(unAuthUserRole));
-        this.userRepository.save(user);
+        User savedUser = this.userRepository.save(user);
 
-        return true;
+        return savedUser.getId() != null;
     }
 
     public User findByUserName(String userName) {

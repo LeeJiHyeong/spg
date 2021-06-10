@@ -1,6 +1,6 @@
 package com.cnu.spg.config;
 
-import com.cnu.spg.login.service.UserPrincipal;
+import com.cnu.spg.login.domain.UserPrincipal;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;

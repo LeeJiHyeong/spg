@@ -1,10 +1,8 @@
 package com.cnu.spg.handler;
 
-import com.cnu.spg.login.service.UserPrincipal;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.cnu.spg.login.domain.UserPrincipal;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -19,18 +17,16 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Component
+@Slf4j
+@RequiredArgsConstructor
 public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    @Autowired
-    @Qualifier("loginService")
-    private UserDetailsService userSerivce;
-
-    private Logger logger = LoggerFactory.getLogger(UserAuthenticationSuccessHandler.class);
+    private final UserDetailsService userSerivce;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
-        logger.info("logined");
+        log.info("logined");
 
         String userName = authentication.getName();
 
