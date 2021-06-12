@@ -1,1 +1,3 @@
 rootProject.name = 'SPG'
+
+include 'app:main-service', 'app:common'
