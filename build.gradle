@@ -32,15 +32,3 @@ subprojects {
         annotationProcessor 'org.projectlombok:lombok'
     }
 }
-
-project(':app:main-service') {
-    dependencies {
-        compile project(':app:main-service')
-    }
-}
-
-project(':app:common') {
-    dependencies {
-        compile project(':app:common')
-    }
-}
