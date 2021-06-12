@@ -1,58 +1,34 @@
-plugins {
-    id 'org.springframework.boot' version '2.4.6'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
-    id 'java'
-}
-
-group = 'com.spg'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
+buildscript {
+    ext {
+        springBootVersion = '2.4.6'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
     }
 }
 
-repositories {
-    mavenCentral()
+allprojects {
+    group 'com.cnu.spg'
+    version '0.0.1-SNAPSHOT'
 }
 
-dependencies {
-    implementation 'com.querydsl:querydsl-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    compile("com.navercorp.lucy:lucy-xss-servlet:2.0.0")
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'com.h2database:h2'
-    runtimeOnly 'mysql:mysql-connector-java'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
-}
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
-test {
-    useJUnitPlatform()
-}
+    sourceCompatibility = 11
 
-def querydslDir = "$buildDir/generated/querydsl"
+    repositories {
+        mavenCentral()
+    }
 
-querydsl {
-    jpa = true
-    querydslSourcesDir = querydslDir
-}
-sourceSets {
-    main.java.srcDir querydslDir
-}
-configurations {
-    querydsl.extendsFrom compileClasspath
-}
-compileQuerydsl {
-    options.annotationProcessorPath = configurations.querydsl
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+    }
 }

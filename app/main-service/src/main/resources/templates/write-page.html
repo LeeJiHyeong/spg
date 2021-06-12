@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>SPG - 게시글 작성</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/icomoon-social.css">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="css/leaflet.css" />
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/writePage.css">
+
+  <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
+<body>
+	<div class="col-sm-12">
+		<!-- Header -->
+		<div class="Header">
+		<th:block th:include="header :: commonHeader"></th:block>
+	</div>
+		<!-- Post -->
+		<form th:action="@{/do_write}" method="post">
+		
+	
+		  <div class="blog-post blog-single-post">
+		  <div class="col-sm-81">
+		    <h1>게시글 작성</h1>
+		    <hr>
+		    <!-- 글작성 데이터 -->
+		    <div class="single-post-title">
+		      <b>★Title</b>
+		      <input type="text" name="contentTitle" class="form-control" placeholder="글 제목을 입력하세요.">
+		    </div>
+		    <hr>
+		    <input type="file">
+		    <br>
+		    <div class="form-group">
+		      <label for="comment-name"><i class="glyphicon glyphicon-user"></i> <b>Your name</b></label>
+		      <input class="form-control" id="content_writer" type="text" placeholder="" th:value="${content_writer}" readonly="readonly">
+		    </div>
+		    <div class="form-group">
+		      <label for="comment-message"><i class="glyphicon glyphicon-comment"></i> <b>Content</b></label>
+		      <textarea class="form-control" name="contents" rows="20" id="comment-message"></textarea>
+		    </div>
+		
+		    <div class="post-more" id="save-btn">
+		      <a href="page-blog-posts.html" class="btn btn-small"> 저장 </a>
+		    </div>
+		    <!-- 글작성 데이터 끝-->
+		  </div>
+		  </div>
+	</form>
+	  <!-- Footer -->
+       <footer>
+          <th:block th:include="footer :: commonFooter"></th:block>
+       </footer>
+	</div>
+	<!-- End Post -->
+</body>
+</html>
