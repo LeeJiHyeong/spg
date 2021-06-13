@@ -2,11 +2,11 @@ package com.cnu.spg.admin.service;
 
 import com.cnu.spg.admin.reponse.ReponseUserData;
 import com.cnu.spg.exception.ResourceNotFoundException;
-import com.cnu.spg.login.Role;
-import com.cnu.spg.login.RoleName;
-import com.cnu.spg.login.User;
-import com.cnu.spg.login.repository.RoleRepository;
-import com.cnu.spg.login.repository.UserRepository;
+import com.cnu.spg.domain.login.Role;
+import com.cnu.spg.domain.login.RoleName;
+import com.cnu.spg.domain.login.User;
+import com.cnu.spg.repository.user.RoleRepository;
+import com.cnu.spg.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
