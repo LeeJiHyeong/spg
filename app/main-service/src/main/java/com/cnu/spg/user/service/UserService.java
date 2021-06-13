@@ -46,8 +46,9 @@ public class UserService {
         }
 
         String cryptPassword = bCryptPasswordEncoder.encode(userRegisterDto.getPassword());
-        User user = User.createUser(userRegisterDto.getName(), userRegisterDto.getUserName(), cryptPassword);
-
+        Role unauthRole = roleRepository.findByName(RoleName.ROLE_UNAUTH)
+                .orElseThrow(() -> new ResourceNotFoundException("Role", "roleName", RoleName.ROLE_UNAUTH));
+        User user = User.createUser(userRegisterDto.getName(), userRegisterDto.getUserName(), cryptPassword, unauthRole);
         User savedUser = userRepository.save(user);
 
         return savedUser.getId();
