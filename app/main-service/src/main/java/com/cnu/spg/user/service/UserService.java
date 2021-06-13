@@ -1,4 +1,4 @@
-package com.cnu.spg.domain.login.service;
+package com.cnu.spg.user.service;
 
 import com.cnu.spg.exception.ResourceNotFoundException;
 import com.cnu.spg.domain.login.Role;

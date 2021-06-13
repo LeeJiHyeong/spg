@@ -1,5 +1,6 @@
 package com.cnu.spg.domain.login;
 
+import com.cnu.spg.domain.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
@@ -18,7 +19,7 @@ import java.util.Set;
                 "username"
         })
 })
-public class User extends DateAudit { // date type extends 하기
+public class User extends BaseEntity { // date type extends 하기
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
