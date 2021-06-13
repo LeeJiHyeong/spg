@@ -1,7 +1,9 @@
 package com.cnu.spg.domain.login;
 
 import com.cnu.spg.domain.BaseEntity;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 
@@ -9,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -19,6 +22,7 @@ import java.util.Set;
                 "username"
         })
 })
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseEntity { // date type extends 하기
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,14 +51,18 @@ public class User extends BaseEntity { // date type extends 하기
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
-    public User(String name, String username, String password) {
+    protected User(String name, String username, String password) {
         this.name = name;
         this.userName = username;
         this.password = password;
     }
 
-    public User() {
+    public static User createUser(String name, String username, String password) {
+        User user = new User(name, username, password);
+        user.getRoles().add(new Role(RoleName.ROLE_UNAUTH));
+
+        return user;
     }
 }
