@@ -40,7 +40,7 @@
                 <div class="bn-login01">
                     <h3>개인정보 변경</h3>
                     <form method="POST" th:action="@{/user/changeUserData}"
-                          th:object="${userDataRequest}">
+                          th:object="${userInfoDto}">
                         <!-- <input type="hidden" id="crsfData" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
                         <div class="form-group col-xs-15">
 <!--                            <div>-->

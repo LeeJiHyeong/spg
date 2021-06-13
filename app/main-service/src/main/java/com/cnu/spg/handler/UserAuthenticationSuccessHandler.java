@@ -1,6 +1,6 @@
 package com.cnu.spg.handler;
 
-import com.cnu.spg.login.domain.UserPrincipal;
+import com.cnu.spg.domain.login.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
