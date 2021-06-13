@@ -1,6 +1,5 @@
 # local 환경
 spring:
-  profiles: local
   thymeleaf:
     cache: false
   datasource:
@@ -13,7 +12,7 @@ spring:
     database: mysql
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       format: true
       hibernate:
@@ -25,5 +24,5 @@ server:
 
 logging:
   level:
-#    org.hibernate.SQL: debug
+    #    org.hibernate.SQL: debug
     org.hibernate.type: trace

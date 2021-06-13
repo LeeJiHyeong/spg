@@ -74,7 +74,7 @@ public class AdminController {
             return "redirect:/admin/goModifyUserDataPage"; // fail
         }
 
-        if (this.adminService.changeUserAuthenticated(Long.parseLong(requestModifyUserRole.getId()), requestModifyUserRole.getUserName(), roles)) {
+        if (this.adminService.changeUserAuthenticated(Long.parseLong(requestModifyUserRole.getId()), requestModifyUserRole.getUsername(), roles)) {
             return "redirect:/admin/goModifyUserDataPage"; // change well
         }
 
@@ -86,7 +86,7 @@ public class AdminController {
     public String doDeleteUser(@Valid @ModelAttribute("requestModifyUserRole") RequestModifyUserRole requestModifyUserRole) {
 
         Long userId = Long.parseLong(requestModifyUserRole.getId());
-        String username = requestModifyUserRole.getUserName();
+        String username = requestModifyUserRole.getUsername();
 
         if (this.adminService.deleteUserData(userId, username)) {
             return "redirect:/admin/goModifyUserDataPage"; // delete success

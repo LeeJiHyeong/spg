@@ -69,8 +69,8 @@ public class UserController {
             return "redirect:/";
         }
         UserInfoDto userInfoDto = new UserInfoDto(user.getUsername(), user.getName());
-        model.addAttribute("userDataRequest", userInfoDto);
-        model.addAttribute("userName", user.getUsername());
+        model.addAttribute("userInfoDto", userInfoDto);
+        model.addAttribute("username", user.getUsername());
 
         return "user-management";
     }
@@ -87,7 +87,7 @@ public class UserController {
         }
 
         String pastUsername = (String) httpSession.getAttribute("userName");
-        User user = this.userService.updateUsernameAndName(pastUsername, userInfoDto.getUserName(), userInfoDto.getName());
+        User user = this.userService.updateUsernameAndName(pastUsername, userInfoDto.getUsername(), userInfoDto.getName());
 
         if (user == null) {
             model.addAttribute("changeError", "Sorry It is not changed.");
