@@ -1,4 +1,4 @@
-package com.cnu.spg.domain.board.controller;
+package com.cnu.spg.board.controller;
 
 import javax.servlet.http.HttpSession;
 

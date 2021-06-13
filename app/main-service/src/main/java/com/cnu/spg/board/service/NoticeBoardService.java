@@ -1,4 +1,4 @@
-package com.cnu.spg.domain.board.service;
+package com.cnu.spg.board.service;
 
 import com.cnu.spg.domain.board.NoticeBoard;
 import com.cnu.spg.domain.board.NoticeBoardComment;

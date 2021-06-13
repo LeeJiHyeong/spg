@@ -1,4 +1,4 @@
-package com.cnu.spg.domain.login.controller;
+package com.cnu.spg.user.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,12 +1,14 @@
-package com.cnu.spg.domain.login.service;
+package com.cnu.spg.user.service;
 
-import com.cnu.spg.exception.ResourceNotFoundException;
 import com.cnu.spg.domain.login.Role;
 import com.cnu.spg.domain.login.RoleName;
 import com.cnu.spg.domain.login.User;
+import com.cnu.spg.dto.user.UserPasswordChangingDto;
+import com.cnu.spg.dto.user.UserRegisterDto;
+import com.cnu.spg.exception.ResourceNotFoundException;
+import com.cnu.spg.exception.UsernameAlreadyExistException;
 import com.cnu.spg.repository.user.RoleRepository;
 import com.cnu.spg.repository.user.UserRepository;
-import com.cnu.spg.dto.user.UserPasswordChangingDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,6 +37,20 @@ public class UserService {
         User savedUser = this.userRepository.save(user);
 
         return savedUser.getId() != null;
+    }
+
+    @Transactional
+    public Long signUp(UserRegisterDto userRegisterDto) {
+        if (userRepository.existsByUserName(userRegisterDto.getUserName())) {
+            throw new UsernameAlreadyExistException(userRegisterDto.getUserName());
+        }
+
+        String cryptPassword = bCryptPasswordEncoder.encode(userRegisterDto.getPassword());
+        User user = User.createUser(userRegisterDto.getName(), userRegisterDto.getUserName(), cryptPassword);
+
+        User savedUser = userRepository.save(user);
+
+        return savedUser.getId();
     }
 
     public User findByUserName(String userName) {

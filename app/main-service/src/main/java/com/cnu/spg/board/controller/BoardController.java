@@ -1,11 +1,11 @@
-package com.cnu.spg.domain.board.controller;
+package com.cnu.spg.board.controller;
 
 import com.cnu.spg.domain.board.FreeBoard;
 import com.cnu.spg.domain.board.FreeBoardComment;
 import com.cnu.spg.domain.board.FreeBoardFile;
-import com.cnu.spg.domain.board.service.FreeBoardService;
+import com.cnu.spg.board.service.FreeBoardService;
 import com.cnu.spg.domain.login.User;
-import com.cnu.spg.domain.login.service.UserService;
+import com.cnu.spg.user.service.UserService;
 import com.cnu.spg.utils.DateFormatter;
 import com.cnu.spg.utils.FilePath;
 import com.cnu.spg.utils.PageVO;
