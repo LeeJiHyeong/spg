@@ -32,14 +32,14 @@ public class User extends BaseEntity { // date type extends 하기
     private String userName;
 
     @NotBlank
-    @Column(name = "password")
+    @Column
     @Size(max = 70)
     private String password;
 
-    @Column(name = "name")
+    @Column
     private String name;
 
-    @Column(name = "active_date")
+    @Column
     private Calendar activeDate;
 
     @ManyToMany(fetch = FetchType.LAZY,
