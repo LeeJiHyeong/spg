@@ -5,11 +5,11 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan({
-        "com.example.demo.login",
-        "com.example.demo.admin",
-        "com.example.demo.main",
-        "com.example.demo.board",
-        "com.example.demo"
+        "com.cnu.spg.domain.login",
+        "com.cnu.spg.admin",
+        "com.cnu.spg.main",
+        "com.cnu.spg.domain.board",
+        "com.cnu.spg"
 })
 public class AppConfig {
 }
