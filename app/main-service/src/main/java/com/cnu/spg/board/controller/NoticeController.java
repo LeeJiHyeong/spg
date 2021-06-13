@@ -1,4 +1,4 @@
-package com.cnu.spg.domain.board.controller;
+package com.cnu.spg.board.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +10,7 @@ import javax.validation.Valid;
 import com.cnu.spg.domain.board.NoticeBoard;
 import com.cnu.spg.domain.board.NoticeBoardComment;
 import com.cnu.spg.domain.board.NoticeBoardFile;
-import com.cnu.spg.domain.board.service.NoticeBoardService;
+import com.cnu.spg.board.service.NoticeBoardService;
 import com.cnu.spg.utils.DateFormatter;
 import com.cnu.spg.utils.PageVO;
 import org.slf4j.Logger;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cnu.spg.domain.login.service.UserService;
+import com.cnu.spg.user.service.UserService;
 
 @Controller
 @RequestMapping("/board")

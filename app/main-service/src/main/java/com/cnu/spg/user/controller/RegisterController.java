@@ -1,8 +1,7 @@
-package com.cnu.spg.domain.login.controller;
+package com.cnu.spg.user.controller;
 
-import com.cnu.spg.domain.login.User;
 import com.cnu.spg.dto.user.UserRegisterDto;
-import com.cnu.spg.domain.login.service.UserService;
+import com.cnu.spg.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -29,24 +28,14 @@ public class RegisterController {
     }
 
     @PostMapping("/registration")
-    public String registration(@Valid @ModelAttribute("user") UserRegisterDto user,
-                               BindingResult bindingResult,
-                               Model model) {
+    public String registration(@Valid @ModelAttribute("user") UserRegisterDto userRegisterDto,
+                               BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "register";
         }
-        String username = user.getUserName();
-        User exitUser = this.userService.findByUserName(username);
-        User userForSave = new User(user.getName(), user.getUserName(), user.getPassword());
-        if (exitUser != null || !this.userService.save(userForSave)) {
-            model.addAttribute("user", new User());
-            model.addAttribute("registrationError", "User name already exists.");
 
-            log.warn("User name already exists.");
-            return "register";
-        }
-
-        log.info("Successfully created user: " + username);
+        Long createdUserId = userService.signUp(userRegisterDto);
+        log.info("Successfully created userId: " + createdUserId);
 
         return "redirect:/login/signInPage";
     }

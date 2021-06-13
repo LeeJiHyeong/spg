@@ -1,4 +1,4 @@
-package com.cnu.spg.domain.board.controller;
+package com.cnu.spg.board.controller;
 
 import java.io.File;
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.cnu.spg.domain.board.EduBoardComment;
-import com.cnu.spg.domain.board.service.EduBoardService;
+import com.cnu.spg.board.service.EduBoardService;
 import com.cnu.spg.domain.login.User;
 import com.cnu.spg.utils.DateFormatter;
 import com.cnu.spg.utils.FilePath;
@@ -30,7 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cnu.spg.domain.board.EduBoard;
 import com.cnu.spg.domain.board.EduBoardFile;
-import com.cnu.spg.domain.login.service.UserService;
+import com.cnu.spg.user.service.UserService;
 
 @Controller
 @RequestMapping("/board")
