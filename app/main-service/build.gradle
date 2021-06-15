@@ -6,6 +6,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
     compile("com.navercorp.lucy:lucy-xss-servlet:2.0.0")
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'
