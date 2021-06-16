@@ -39,17 +39,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity webSecurity) throws Exception {
-        webSecurity.ignoring().antMatchers(
-                "/resources/**",
-                "/static/**",
-                "/css/**",
-                "/fonts/**",
-                "/js/**",
-                "/fonts/**",
-                "/img_beom/**",
-                "/img/**"
-        );
+    public void configure(WebSecurity webSecurity) {
+        webSecurity.ignoring()
+                .antMatchers(
+                        "/resources/**",
+                        "/static/**",
+                        "/css/**",
+                        "/fonts/**",
+                        "/js/**",
+                        "/fonts/**",
+                        "/img_beom/**",
+                        "/img/**")
+                .antMatchers(
+                        "/v3/api-docs",
+                        "/configuration/**",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/swagger*/**",
+                        "/webjars/**");
     }
 
     @Override
