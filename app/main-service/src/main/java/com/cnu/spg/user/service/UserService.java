@@ -26,7 +26,7 @@ public class UserService {
 
     @Transactional
     public boolean save(User user) {
-        if (this.userRepository.existsByUserName(user.getUserName())) {
+        if (this.userRepository.existsByUsername(user.getUsername())) {
             return false;
         }
 
@@ -41,7 +41,7 @@ public class UserService {
 
     @Transactional
     public Long signUp(UserRegisterDto userRegisterDto) {
-        if (userRepository.existsByUserName(userRegisterDto.getUserName())) {
+        if (userRepository.existsByUsername(userRegisterDto.getUserName())) {
             throw new UsernameAlreadyExistException(userRegisterDto.getUserName());
         }
 
@@ -55,18 +55,18 @@ public class UserService {
     }
 
     public User findByUserName(String userName) {
-        return this.userRepository.findByUserName(userName)
+        return this.userRepository.findByUsername(userName)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "user name", userName));
     }
 
     @Transactional
     public void deleteByUserName(String username) {
-        this.userRepository.deleteByUserName(username);
+        this.userRepository.deleteByUsername(username);
     }
 
     @Transactional
     public User changeUserPassword(String username, UserPasswordChangingDto userPasswordChangingDto) {
-        User oridinaryUser = this.userRepository.findByUserName(username)
+        User oridinaryUser = this.userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
         boolean isUserPasswordCorrect = this.bCryptPasswordEncoder.matches(userPasswordChangingDto.getBeforePassword()
                 , oridinaryUser.getPassword());
@@ -79,7 +79,7 @@ public class UserService {
     }
 
     public boolean checkNowPassword(String username, String passowrd) {
-        User user = this.userRepository.findByUserName(username)
+        User user = this.userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
         return this.bCryptPasswordEncoder.matches(passowrd, user.getPassword());
@@ -87,9 +87,9 @@ public class UserService {
 
     @Transactional
     public User updateUsernameAndName(String pastUserName, String username, String name) {
-        User user = this.userRepository.findByUserName(pastUserName)
+        User user = this.userRepository.findByUsername(pastUserName)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
-        user.setUserName(username);
+        user.setUsername(username);
         user.setName(name);
 
         return user;

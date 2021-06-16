@@ -1,13 +1,13 @@
 package com.cnu.spg.admin.service;
 
 import com.cnu.spg.admin.reponse.ReponseUserData;
-import com.cnu.spg.exception.ResourceNotFoundException;
 import com.cnu.spg.domain.login.Role;
 import com.cnu.spg.domain.login.RoleName;
 import com.cnu.spg.domain.login.User;
+import com.cnu.spg.exception.ResourceNotFoundException;
 import com.cnu.spg.repository.user.RoleRepository;
 import com.cnu.spg.repository.user.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,18 +21,16 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class AdminService {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     @Transactional
     public boolean changeUserAuthenticated(Long userId, String username, Set<Role> roles) {
         User user = this.userRepository.getOne(userId);
-        if (user.getUserName().equals(username)) {
+        if (user.getUsername().equals(username)) {
             if (user.getRoles().contains(new Role(RoleName.ROLE_UNAUTH))) {
                 user.setActiveDate(Calendar.getInstance());
             }
@@ -65,7 +63,7 @@ public class AdminService {
     @Transactional
     public boolean deleteUserData(Long userId, String username) {
         User user = this.userRepository.getOne(userId);
-        if (user.getUserName().equals(username)) {
+        if (user.getUsername().equals(username)) {
             this.userRepository.deleteById(userId);
 
             return true;

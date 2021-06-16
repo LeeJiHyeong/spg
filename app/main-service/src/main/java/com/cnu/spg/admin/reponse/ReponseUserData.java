@@ -17,7 +17,7 @@ public class ReponseUserData {
 
     public ReponseUserData(User user) {
         this.id = user.getId();
-        this.username = user.getUserName();
+        this.username = user.getUsername();
         this.name = user.getName();
         this.roles = user.getRoles();
     }

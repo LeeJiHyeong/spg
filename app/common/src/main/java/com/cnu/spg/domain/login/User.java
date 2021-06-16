@@ -18,38 +18,30 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "user", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {
-                "username"
-        })
-})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends BaseEntity { // date type extends 하기
+public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "user_id")
     private Long id;
 
     @NotBlank
     @NaturalId
     @Size(max = 10)
-    @Column(name = "username")
-    private String userName;
+    @Column(unique = true)
+    private String username;
 
     @NotBlank
-    @Column
     @Size(max = 70)
     private String password;
 
-    @Column
     private String name;
 
-    @Column
     private Calendar activeDate;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    @JoinTable(name = "user_roles",
+    @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
@@ -60,7 +52,7 @@ public class User extends BaseEntity { // date type extends 하기
 
     protected User(String name, String username, String password) {
         this.name = name;
-        this.userName = username;
+        this.username = username;
         this.password = password;
     }
 

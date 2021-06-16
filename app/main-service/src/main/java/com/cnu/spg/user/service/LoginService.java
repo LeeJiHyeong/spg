@@ -20,7 +20,7 @@ public class LoginService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) {
-        User user = this.userRepository.findByUserName(userName)
+        User user = this.userRepository.findByUsername(userName)
                 .orElseThrow(() -> new UsernameNotFoundException("I can not found user data" + userName));
 
         return UserPrincipal.create(user);

@@ -13,7 +13,7 @@ public class UserInfoDto {
     @NotBlank(message = "is required")
     @NotNull(message = "is required")
     @Size(min = 1, message = "too short")
-    private String userName;
+    private String username;
 
     @NotBlank(message = "is required")
     @NotNull(message = "is required")
@@ -23,8 +23,8 @@ public class UserInfoDto {
     public UserInfoDto() {
     }
 
-    public UserInfoDto(String userName, String name) {
-        this.userName = userName;
+    public UserInfoDto(String username, String name) {
+        this.username = username;
         this.name = name;
     }
 }
