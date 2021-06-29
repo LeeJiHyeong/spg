@@ -1,4 +1,4 @@
-package com.cnu.spg.local;
+package com.cnu.spg.config.local;
 
 import com.cnu.spg.domain.login.Role;
 import com.cnu.spg.domain.login.RoleName;
