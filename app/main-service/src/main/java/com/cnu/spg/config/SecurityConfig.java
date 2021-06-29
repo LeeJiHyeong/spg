@@ -57,7 +57,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/configuration/security",
                         "/swagger-ui.html",
                         "/swagger*/**",
-                        "/webjars/**");
+                        "/webjars/**")
+                .antMatchers("/h2-console/**");
     }
 
     @Override
@@ -87,6 +88,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")
+//                .deleteCookies("JSESSIONID")
+//                .invalidateHttpSession(true)
                 .permitAll()
                 .and()
                 .exceptionHandling()
