@@ -33,5 +33,5 @@ LeeJiHyeong - https://easybrother0103.tistory.com/30
 
 ### Dev, Real
 - Session : redis
-- Entity : H2
+- Entity : Mysql
 
